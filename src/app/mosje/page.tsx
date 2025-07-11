@@ -65,11 +65,7 @@ export default function MosjePage() {
               Community based Peer Led Intervention (CPLI)
             </h3>
             <p>
-              Our centre CONCERN will reach out to the community by visiting them. Conduct various
-              awareness programmes to educate the ill effects of substance abuse. Motivate them to
-              form peer groups and lead them to ODCI and IRCA. The main purpose of this scheme is to
-              concentrate on children, Teens and youths for early prevention of substance abuse.
-              &#97c6;Catch them Young&#97c6; is the theme.
+              Our centre CONCERN will reach out to the community by visiting them. Conduct various awareness programmes to educate the ill effects of substance abuse. Motivate them to form peer groups and lead them to ODCI and IRCA. The main purpose of this scheme is to concentrate on children, Teens and youths for early prevention of substance abuse. Catch them Young is the theme.
             </p>
           </div>
 
