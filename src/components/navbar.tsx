@@ -8,6 +8,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle 
 import { Menu, Send } from 'lucide-react';
 import { ConcernLogo } from './logo';
 import { cn } from '@/lib/utils';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -63,28 +64,31 @@ export default function Navbar() {
                 <span className="sr-only">Open navigation menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[80vw]">
+            <SheetContent side="left" className="w-[80vw] flex flex-col">
                 <SheetHeader className="mb-6 text-left border-b pb-4">
                   <SheetTitle>
                     <ConcernLogo className="text-3xl" />
                   </SheetTitle>
                 </SheetHeader>
-              <div className="flex flex-col gap-2">
-                {navLinks.map((link) => (
-                  <SheetClose asChild key={link.href}>
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        "rounded-md px-4 py-3 text-base font-medium",
-                        pathname === link.href
-                          ? "bg-secondary text-primary"
-                          : "text-muted-foreground hover:bg-secondary/50"
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  </SheetClose>
-                ))}
+                <ScrollArea className="flex-grow">
+                  <div className="flex flex-col gap-2 pr-4">
+                    {navLinks.map((link) => (
+                      <SheetClose asChild key={link.href}>
+                        <Link
+                          href={link.href}
+                          className={cn(
+                            "rounded-md px-4 py-3 text-base font-medium",
+                            pathname === link.href
+                              ? "bg-secondary text-primary"
+                              : "text-muted-foreground hover:bg-secondary/50"
+                          )}
+                        >
+                          {link.label}
+                        </Link>
+                      </SheetClose>
+                    ))}
+                  </div>
+                </ScrollArea>
                  <SheetClose asChild>
                     <Button asChild className="mt-4 bg-accent text-accent-foreground hover:bg-accent/90">
                         <Link href="/contact-us">
@@ -93,7 +97,6 @@ export default function Navbar() {
                         </Link>
                     </Button>
                 </SheetClose>
-              </div>
             </SheetContent>
           </Sheet>
         </div>
