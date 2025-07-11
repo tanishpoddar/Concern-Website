@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, X, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { ConcernLogo } from './logo';
 
 export default function Footer() {
@@ -16,8 +16,8 @@ export default function Footer() {
                 <Link href="#" aria-label="Facebook" className="text-muted-foreground hover:text-[#1877F2] transition-colors">
                   <Facebook />
                 </Link>
-                <Link href="#" aria-label="Twitter" className="text-muted-foreground hover:text-[#1DA1F2] transition-colors">
-                  <Twitter />
+                <Link href="#" aria-label="X" className="text-muted-foreground hover:text-black transition-colors">
+                  <X />
                 </Link>
                 <Link href="#" aria-label="Instagram" className="text-muted-foreground hover:text-[#E4405F] transition-colors">
                   <Instagram />
