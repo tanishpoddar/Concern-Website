@@ -2,13 +2,11 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/header';
-import dynamic from 'next/dynamic';
 import PageTransition from '@/components/page-transition';
 import { Inter } from 'next/font/google';
 import ClientNavbar from '@/components/client-navbar';
-
-const Footer = dynamic(() => import('@/components/footer'), { ssr: false });
-const BackToTop = dynamic(() => import('@/components/back-to-top'), { ssr: false });
+import Footer from '@/components/footer';
+import BackToTop from '@/components/back-to-top';
 
 const inter = Inter({
   subsets: ['latin'],
