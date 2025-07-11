@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Stethoscope, Briefcase, Wrench } from 'lucide-react';
 import type { Metadata } from 'next';
@@ -33,7 +34,7 @@ const managementStaff = [
 
 const technicalSupporters = [
   { name: 'Arch. Chamraj Suresh Babu, M.L.A.', role: 'Design Consultant' },
-  { name: 'Tanish Poddar', role: 'Web Developer' },
+  { name: 'Mr. Tanish Poddar, B.Tech CSE (SRMIST)', role: 'Web Developer' },
   { name: 'Mr. Madhavan', role: 'Web Designer' },
 ];
 
