@@ -8,6 +8,7 @@ const navLinks = [
   { href: '/sadd', label: 'SADD' },
   { href: '/therapy', label: 'Therapy' },
   { href: '/training', label: 'Training' },
+  { href: '/mosje', label: 'MoSJE' },
 ];
 
 export default function Navbar() {
