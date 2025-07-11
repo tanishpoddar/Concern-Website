@@ -62,8 +62,8 @@ export default function AlbumPage({ params }: { params: { album: string } }) {
   const images = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
-    <div className="container mx-auto px-4 py-12 md:px-6">
-      <h1 className="mb-8 text-center text-4xl font-bold">{albumDetails.title}</h1>
+    <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
+      <h1 className="mb-8 text-center text-4xl font-bold text-primary">{albumDetails.title}</h1>
       <div className="flex justify-center">
         <Carousel
           setApi={setApi}
@@ -76,7 +76,7 @@ export default function AlbumPage({ params }: { params: { album: string } }) {
           <CarouselContent>
             {images.map((index) => (
               <CarouselItem key={index}>
-                <Card>
+                <Card className="overflow-hidden rounded-xl shadow-lg">
                   <CardContent className="relative flex aspect-video items-center justify-center p-0">
                      <Image
                         src={`https://placehold.co/1280x720.png`}
@@ -84,7 +84,7 @@ export default function AlbumPage({ params }: { params: { album: string } }) {
                         width={1280}
                         height={720}
                         data-ai-hint={albumDetails.hint}
-                        className="rounded-lg object-cover"
+                        className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                   </CardContent>
                 </Card>
@@ -95,7 +95,7 @@ export default function AlbumPage({ params }: { params: { album: string } }) {
           <CarouselNext />
         </Carousel>
       </div>
-       <div className="py-2 text-center text-sm text-muted-foreground">
+       <div className="py-4 text-center text-sm text-muted-foreground">
           Slide {current} of {count}
         </div>
     </div>

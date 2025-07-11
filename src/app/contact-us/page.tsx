@@ -23,6 +23,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Send } from 'lucide-react';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -56,7 +57,6 @@ export default function ContactUsPage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // In a real application, you would send this data to your server
-    // For now, we'll just log it and show a success message.
     console.log(values);
     toast({
       title: 'Form Submitted!',
@@ -66,16 +66,16 @@ export default function ContactUsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12 md:px-6">
+    <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-2xl space-y-8">
         <div className="text-center">
-          <h1 className="text-4xl font-bold">Contact Us</h1>
+          <h1 className="text-4xl font-bold text-primary">Contact Us</h1>
           <p className="mt-2 text-lg text-muted-foreground">
             For Enquiries, Admissions or any other related Information.
           </p>
         </div>
 
-        <Card>
+        <Card className="shadow-lg">
             <CardHeader>
                 <CardTitle>Enquiry Form</CardTitle>
                 <CardDescription>Please fill up and submit</CardDescription>
@@ -152,13 +152,16 @@ export default function ContactUsPage() {
                             <FormItem>
                             <FormLabel>Comments</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Your comments or questions" className="min-h-[100px]" {...field} />
+                                <Textarea placeholder="Your comments or questions" className="min-h-[120px]" {...field} />
                             </FormControl>
                             <FormMessage />
                             </FormItem>
                         )}
                         />
-                        <Button type="submit" className="w-full">Submit</Button>
+                        <Button type="submit" className="w-full">
+                          <Send />
+                          Submit Enquiry
+                        </Button>
                     </form>
                  </Form>
             </CardContent>

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, Stethoscope, Briefcase, Wrench } from 'lucide-react';
+import { Users, Stethoscope, Briefcase, Wrench } from 'lucide-react';
 
 const managementCommittee = [
   { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust' },
@@ -31,16 +31,16 @@ const technicalSupporters = [
 ];
 
 const TeamCard = ({ title, members, icon: Icon }: { title: string; members: { name: string; role: string }[]; icon: React.ElementType }) => (
-  <Card>
+  <Card className="shadow-md transition-shadow hover:shadow-xl">
     <CardHeader className="flex flex-row items-center gap-4">
       <Icon className="h-8 w-8 text-primary" />
-      <CardTitle>{title}</CardTitle>
+      <CardTitle className="text-2xl text-primary">{title}</CardTitle>
     </CardHeader>
     <CardContent>
       <ul className="space-y-4">
         {members.map((member, index) => (
           <li key={index}>
-            <p className="font-semibold">{member.name}</p>
+            <p className="font-semibold text-base">{member.name}</p>
             {member.role && <p className="text-sm text-muted-foreground">{member.role}</p>}
           </li>
         ))}
@@ -51,10 +51,10 @@ const TeamCard = ({ title, members, icon: Icon }: { title: string; members: { na
 
 export default function OurTeamPage() {
   return (
-    <div className="container mx-auto px-4 py-12 md:px-6">
-      <h1 className="mb-8 text-center text-4xl font-bold">Our Team</h1>
+    <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
+      <h1 className="mb-8 text-center text-4xl font-bold text-primary">Our Team</h1>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <TeamCard title="Management Committee" members={managementCommittee} icon={User} />
+        <TeamCard title="Management Committee" members={managementCommittee} icon={Users} />
         <TeamCard title="Medical Team" members={medicalTeam} icon={Stethoscope} />
         <TeamCard title="Management Staff" members={managementStaff} icon={Briefcase} />
         <TeamCard title="Technical Supporters" members={technicalSupporters} icon={Wrench} />

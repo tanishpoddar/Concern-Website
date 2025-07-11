@@ -27,14 +27,14 @@ const albums = [
 
 export default function GalleryPage() {
   return (
-    <div className="container mx-auto px-4 py-12 md:px-6">
-      <h1 className="mb-8 text-center text-4xl font-bold">Gallery</h1>
+    <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
+      <h1 className="mb-8 text-center text-4xl font-bold text-primary">Photo Gallery</h1>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {albums.map((album) => (
-          <Link href={`/gallery/${album.slug}`} key={album.slug}>
-            <Card className="flex h-full transform flex-col items-center justify-center text-center transition-transform hover:scale-105 hover:shadow-lg">
+          <Link href={`/gallery/${album.slug}`} key={album.slug} className="group">
+            <Card className="flex h-full transform flex-col items-center justify-center text-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
               <CardHeader>
-                <ImageIcon className="mx-auto h-12 w-12 text-primary" />
+                <ImageIcon className="mx-auto h-12 w-12 text-primary transition-colors duration-300 group-hover:text-accent" />
               </CardHeader>
               <CardContent>
                 <p className="font-semibold">{album.title}</p>

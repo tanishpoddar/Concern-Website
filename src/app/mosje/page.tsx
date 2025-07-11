@@ -18,10 +18,10 @@ const programs = [
 
 export default function MosjePage() {
   return (
-    <div className="container mx-auto px-4 py-12 md:px-6">
-      <div className="mx-auto max-w-4xl space-y-8">
+    <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
+      <div className="mx-auto max-w-4xl space-y-10">
         <div className="space-y-4 text-center">
-           <h1 className="text-4xl font-bold">Ministry of Social Justice and Empowerment (MoSJE)</h1>
+           <h1 className="text-4xl font-bold text-primary">Ministry of Social Justice and Empowerment (MoSJE)</h1>
            <p className="text-xl text-muted-foreground">National Action Plan for Drug Demand Reduction (NAPDDR)</p>
         </div>
 
@@ -31,40 +31,34 @@ export default function MosjePage() {
                 alt="Ministry of Social Justice and Empowerment"
                 width={800}
                 height={400}
-                data-ai-hint="government building"
-                className="rounded-lg object-cover"
+                data-ai-hint="indian government building"
+                className="rounded-xl object-cover shadow-lg"
             />
         </div>
 
-        <div className="space-y-4 text-center">
-            <p className="text-muted-foreground">
-                We are glad to announce that our centre viz. CONCERN has been approved and sanctioned by MoSJE for the above scheme to launch
+        <div className="space-y-6 text-center">
+            <p className="text-muted-foreground text-lg text-justify">
+                We are glad to announce that our centre viz. CONCERN has been approved and sanctioned by MoSJE for the above scheme to launch the <strong className="text-primary">District De-Addiction Centre (DDAC)</strong> from 1st of January 2024.
             </p>
-            <h2 className="text-3xl font-bold text-primary">
-                District De-Addiction Centre (DDAC)
-            </h2>
-             <p className="text-muted-foreground">
-                From 1st of January 2024.
-            </p>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground text-lg text-justify">
                 DDAC comprises of Integrated Rehabilitation Centre for Addicts (IRCA), Out-Reach Drop-in Centre (ODIC) and Community based Peer Led Intervention (CPLI). All the three facilities are free of any cost.
             </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-1">
+        <div className="grid grid-cols-1 gap-8">
             {programs.map(program => (
-                 <Card key={program.title}>
+                 <Card key={program.title} className="shadow-md transition-shadow hover:shadow-xl">
                     <CardHeader>
-                        <CardTitle>{program.title}</CardTitle>
+                        <CardTitle className="text-2xl text-primary">{program.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <p className="text-muted-foreground">{program.description}</p>
+                        <p className="text-muted-foreground text-justify">{program.description}</p>
                     </CardContent>
                 </Card>
             ))}
         </div>
 
-        <p className="text-center text-lg font-semibold">
+        <p className="text-center text-lg font-semibold text-muted-foreground">
           Avail these facilities to prevent and treat substance abusers. Guide and show the way to your known people who are affected by addiction.
         </p>
 

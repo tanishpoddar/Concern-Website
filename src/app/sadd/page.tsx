@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const questions = [
   'Do you find difficulty in getting the thought of drink out of your mind?',
@@ -23,10 +23,10 @@ const options = ['Never', 'Sometimes', 'Often', 'Always'];
 
 export default function SaddPage() {
   return (
-    <div className="container mx-auto px-4 py-12 md:px-6">
-      <div className="mx-auto max-w-4xl space-y-8">
+    <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
+      <div className="mx-auto max-w-4xl space-y-10">
         <div className="text-center">
-          <h1 className="text-4xl font-bold">Short Alcohol Dependence Data (SADD)</h1>
+          <h1 className="text-4xl font-bold text-primary">Short Alcohol Dependence Data (SADD)</h1>
         </div>
 
         <div className="flex justify-center">
@@ -35,27 +35,27 @@ export default function SaddPage() {
             alt="Drunk person on a table"
             width={600}
             height={400}
-            data-ai-hint="drunk person"
-            className="rounded-lg object-cover"
+            data-ai-hint="despair alcohol bottle"
+            className="rounded-xl object-cover shadow-lg"
           />
         </div>
 
-        <p className="text-center text-muted-foreground">
+        <p className="text-center text-lg text-muted-foreground text-justify">
           To measure physiological dependence and cognitive and behavior events. Respond yourself to the following test questions and answer them as honestly as you can. (If in the end you are unsure, re-answer them with the help of your spouse or the closest member of your family). Remember there is no right or wrong answers.
         </p>
 
-        <Card>
+        <Card className="shadow-md">
           <CardHeader>
-            <CardTitle>SADD Questionnaire</CardTitle>
+            <CardTitle className="text-2xl text-primary">SADD Questionnaire</CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="space-y-6">
               {questions.map((question, index) => (
-                <li key={index}>
-                  <p className="font-semibold">{`${index + 1}) ${question}`}</p>
-                  <div className="mt-2 flex flex-col space-y-1 text-sm text-muted-foreground sm:flex-row sm:space-x-6 sm:space-y-0">
+                <li key={index} className="border-b pb-4 last:border-b-0">
+                  <p className="font-semibold">{`${index + 1}. ${question}`}</p>
+                  <div className="mt-3 flex flex-col space-y-1 text-sm text-muted-foreground sm:flex-row sm:space-x-6 sm:space-y-0">
                     {options.map((option, optIndex) => (
-                      <span key={optIndex}>{`${optIndex}. ${option}`}</span>
+                      <span key={optIndex}>{`${optIndex}) ${option}`}</span>
                     ))}
                   </div>
                 </li>
@@ -64,26 +64,28 @@ export default function SaddPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-muted/40">
+        <Card className="bg-secondary/50 shadow-md">
           <CardHeader>
-            <CardTitle>Scoring Stage of Addiction</CardTitle>
+            <CardTitle className="text-2xl text-primary">Scoring Stage of Addiction</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-2 sm:text-left">
               <div>
+                <p className="font-semibold">Points per Answer</p>
                 <p><span className="font-semibold">Never</span> - 0 points</p>
                 <p><span className="font-semibold">Sometimes</span> - 1 point</p>
                 <p><span className="font-semibold">Often</span> - 2 points</p>
                 <p><span className="font-semibold">Always</span> - 3 points</p>
               </div>
               <div>
+                <p className="font-semibold">Dependence Level</p>
                 <p><span className="font-semibold">Absence of alcohol dependence</span> - 0</p>
                 <p><span className="font-semibold">Low level</span> - 1 to 9</p>
                 <p><span className="font-semibold">Medium level</span> - 10 to 19</p>
                 <p><span className="font-semibold">High level</span> - 20 to 45</p>
               </div>
             </div>
-            <p className="pt-4 text-xs text-muted-foreground">
+            <p className="pt-4 text-xs text-muted-foreground text-justify">
               Courtesy and Reference - Raistrick, Dunbar and R.Davidson. Questionnaire to measure alcohol dependence British Journal of addiction 78.pp. 89-95. 1983.
             </p>
           </CardContent>

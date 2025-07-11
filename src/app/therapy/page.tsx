@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const therapies = [
   {
-    title: 'DETOXIFICATION',
+    title: 'Detoxification',
     points: [
       'A process supervised by medical professionals to treat withdrawals due to chemical abuse.',
       'This process normally takes 3 to 4 days depending on the individual’s impact of addiction.',
@@ -11,7 +11,7 @@ const therapies = [
     ],
   },
   {
-    title: 'PSYCHO THERAPY',
+    title: 'Psycho Therapy',
     points: [
       "It's a systematic application of learning techniques in treatment.",
       "This therapy focuses on the change in patients' overall functioning.",
@@ -21,11 +21,11 @@ const therapies = [
     ],
   },
   {
-    title: 'COGNITIVE THERAPY',
+    title: 'Cognitive Therapy',
     description: "Cognitive Behavior Therapy is a psychotherapeutic approach, a talking therapy that aims to solve problems conveying dysfunctional behavior. It's a systematic procedure done with professionalism, making the person do their own inventory and accept their behaviors.",
   },
   {
-    title: 'GROUP THERAPY',
+    title: 'Group Therapy',
     points: [
       'Is a technique in treating patients in a group.',
       'This therapy breaks denial syndrome and acceptance of self is mooted.',
@@ -36,7 +36,7 @@ const therapies = [
     ],
   },
   {
-    title: 'INDIVIDUAL COUNSELING',
+    title: 'Individual Counseling',
     points: [
       'Involves insight to see the problems realistically.',
       'Helps the patient to maintain abstinence and needs are assessed with coping skills on an ongoing basis.',
@@ -45,7 +45,7 @@ const therapies = [
     ],
   },
   {
-    title: 'FAMILY THERAPY',
+    title: 'Family Therapy',
     points: [
       'While treating the chemical dependent, the entire family is brought together to discuss the related issues.',
       'This also helps the person to maintain abstinence and improve family situations and relationships.',
@@ -54,7 +54,7 @@ const therapies = [
     ],
   },
   {
-    title: 'CHILD COUNSELING',
+    title: 'Child Counseling',
     points: [
       'Children experience challenges and problems associated with their alcoholic parent.',
       'The impact ranges from minimal effect to serious lifelong problems.',
@@ -64,26 +64,26 @@ const therapies = [
     ],
   },
     {
-    title: 'TRANSIT',
+    title: 'Transit',
     description: "Is for our Patients to go to work from CONCERN and be with us and go for the meetings in the evening. This stay is only for three months.",
   },
 ];
 
 export default function TherapyPage() {
   return (
-    <div className="container mx-auto px-4 py-12 md:px-6">
-      <h1 className="mb-8 text-center text-4xl font-bold">Therapy</h1>
+    <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
+      <h1 className="mb-8 text-center text-4xl font-bold text-primary">Therapies We Offer</h1>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {therapies.map((therapy) => (
-          <Card key={therapy.title}>
+          <Card key={therapy.title} className="flex flex-col shadow-md transition-shadow hover:shadow-xl">
             <CardHeader>
-              <CardTitle>{therapy.title}</CardTitle>
+              <CardTitle className="text-2xl text-primary">{therapy.title}</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex-grow">
               {therapy.description ? (
-                <p className="text-muted-foreground">{therapy.description}</p>
+                <p className="text-muted-foreground text-justify">{therapy.description}</p>
               ) : (
-                <ul className="list-disc space-y-2 pl-5 text-muted-foreground">
+                <ul className="list-disc space-y-2 pl-5 text-muted-foreground text-justify">
                   {therapy.points?.map((point, index) => (
                     <li key={index}>{point}</li>
                   ))}

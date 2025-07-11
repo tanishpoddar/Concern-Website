@@ -3,11 +3,11 @@ import { ConcernLogo } from '@/components/logo';
 
 export default function Header() {
   return (
-    <header className="bg-background/95">
-      <div className="container flex h-20 max-w-screen-2xl items-center justify-center">
+    <header className="bg-background/95 py-4">
+      <div className="container flex h-auto max-w-screen-2xl flex-col items-center justify-center text-center">
         <Link href="/" className="flex flex-col items-center gap-2">
-            <ConcernLogo className="text-4xl" />
-            <p className="text-sm text-muted-foreground">where you discover change</p>
+            <ConcernLogo className="text-5xl" />
+            <p className="text-sm tracking-wide text-muted-foreground">where you discover change</p>
         </Link>
       </div>
     </header>
