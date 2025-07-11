@@ -29,7 +29,7 @@ export default function SelfDiagnosisPage() {
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-4xl space-y-10">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-primary">Self Diagnosis</h1>
+          <h1 className="text-3xl font-bold text-primary md:text-4xl">Self Diagnosis</h1>
         </div>
 
         <div className="space-y-4 text-lg text-muted-foreground">
@@ -46,7 +46,7 @@ export default function SelfDiagnosisPage() {
 
         <Card className="shadow-md">
           <CardHeader>
-            <CardTitle className="text-2xl text-primary">Do You Border on Alcoholism?</CardTitle>
+            <CardTitle className="text-xl text-primary md:text-2xl">Do You Border on Alcoholism?</CardTitle>
             <CardDescription className="text-justify">
               To answer the above questions ask yourself the following test questions and answer them as honestly as you can. (If your answers are ‘NO’ to all the question re-answer them with the help of your spouse or the closest member of your family). Remember there are no right or wrong answers.
             </CardDescription>
@@ -65,7 +65,7 @@ export default function SelfDiagnosisPage() {
 
         <Card className="bg-secondary/50 shadow-md">
            <CardHeader>
-            <CardTitle className="text-2xl text-primary">Scoring Stage of addiction</CardTitle>
+            <CardTitle className="text-xl text-primary md:text-2xl">Scoring Stage of addiction</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
              <p><span className="font-bold">If you have answered YES to any one of the questions,</span> there is a definite warning that you may be an alcoholic.</p>

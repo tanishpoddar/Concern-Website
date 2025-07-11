@@ -21,8 +21,8 @@ export default function MosjePage() {
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-4xl space-y-10">
         <div className="space-y-4 text-center">
-           <h1 className="text-4xl font-bold text-primary">Ministry of Social Justice and Empowerment (MoSJE)</h1>
-           <p className="text-xl text-muted-foreground">National Action Plan for Drug Demand Reduction (NAPDDR)</p>
+           <h1 className="text-3xl font-bold text-primary md:text-4xl">Ministry of Social Justice and Empowerment (MoSJE)</h1>
+           <p className="text-lg md:text-xl text-muted-foreground">National Action Plan for Drug Demand Reduction (NAPDDR)</p>
         </div>
 
         <div className="flex justify-center">
@@ -49,7 +49,7 @@ export default function MosjePage() {
             {programs.map(program => (
                  <Card key={program.title} className="shadow-md transition-shadow hover:shadow-xl">
                     <CardHeader>
-                        <CardTitle className="text-2xl text-primary">{program.title}</CardTitle>
+                        <CardTitle className="text-xl md:text-2xl text-primary">{program.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <p className="text-muted-foreground text-justify">{program.description}</p>

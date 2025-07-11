@@ -72,12 +72,12 @@ const therapies = [
 export default function TherapyPage() {
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
-      <h1 className="mb-8 text-center text-4xl font-bold text-primary">Therapies We Offer</h1>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <h1 className="mb-8 text-center text-3xl font-bold text-primary md:text-4xl">Therapies We Offer</h1>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 md:gap-8">
         {therapies.map((therapy) => (
           <Card key={therapy.title} className="flex flex-col shadow-md transition-shadow hover:shadow-xl">
             <CardHeader>
-              <CardTitle className="text-2xl text-primary">{therapy.title}</CardTitle>
+              <CardTitle className="text-xl md:text-2xl text-primary">{therapy.title}</CardTitle>
             </CardHeader>
             <CardContent className="flex-grow">
               {therapy.description ? (

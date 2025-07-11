@@ -26,7 +26,7 @@ export default function SaddPage() {
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-4xl space-y-10">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-primary">Short Alcohol Dependence Data (SADD)</h1>
+          <h1 className="text-3xl font-bold text-primary md:text-4xl">Short Alcohol Dependence Data (SADD)</h1>
         </div>
 
         <div className="flex justify-center">
@@ -46,7 +46,7 @@ export default function SaddPage() {
 
         <Card className="shadow-md">
           <CardHeader>
-            <CardTitle className="text-2xl text-primary">SADD Questionnaire</CardTitle>
+            <CardTitle className="text-xl text-primary md:text-2xl">SADD Questionnaire</CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="space-y-6">
@@ -66,7 +66,7 @@ export default function SaddPage() {
 
         <Card className="bg-secondary/50 shadow-md">
           <CardHeader>
-            <CardTitle className="text-2xl text-primary">Scoring Stage of Addiction</CardTitle>
+            <CardTitle className="text-xl text-primary md:text-2xl">Scoring Stage of Addiction</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-2 sm:text-left">

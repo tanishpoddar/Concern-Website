@@ -63,7 +63,7 @@ export default function AlbumPage({ params }: { params: { album: string } }) {
 
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
-      <h1 className="mb-8 text-center text-4xl font-bold text-primary">{albumDetails.title}</h1>
+      <h1 className="mb-8 text-center text-3xl font-bold text-primary md:text-4xl">{albumDetails.title}</h1>
       <div className="flex justify-center">
         <Carousel
           setApi={setApi}
@@ -71,7 +71,7 @@ export default function AlbumPage({ params }: { params: { album: string } }) {
             align: 'start',
             loop: true,
           }}
-          className="w-full max-w-4xl"
+          className="w-full max-w-sm md:max-w-4xl"
         >
           <CarouselContent>
             {images.map((index) => (
@@ -91,8 +91,8 @@ export default function AlbumPage({ params }: { params: { album: string } }) {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="hidden md:inline-flex"/>
+          <CarouselNext className="hidden md:inline-flex"/>
         </Carousel>
       </div>
        <div className="py-4 text-center text-sm text-muted-foreground">

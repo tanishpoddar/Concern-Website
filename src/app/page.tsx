@@ -67,11 +67,11 @@ export default function Home() {
     <>
       {loading && <SplashScreen />}
       <div className="flex flex-col">
-        <section className="bg-secondary/50 py-16 md:py-24">
+        <section className="bg-secondary/50 py-12 md:py-24">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 md:grid-cols-2 md:gap-16">
               <div className="flex flex-col justify-center space-y-4">
-                <h1 className="text-4xl font-bold tracking-tight text-primary md:text-5xl">
+                <h1 className="text-3xl font-bold tracking-tight text-primary md:text-5xl">
                   About Us
                 </h1>
                 <p className="text-lg text-muted-foreground text-justify">
@@ -95,7 +95,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24">
+        <section className="py-12 md:py-24">
           <div className="container grid gap-12 px-4 md:grid-cols-2 md:px-6">
             <div className="space-y-6">
               <h2 className="text-3xl font-bold text-primary">Facilities</h2>

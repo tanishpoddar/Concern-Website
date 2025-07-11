@@ -34,7 +34,7 @@ const TeamCard = ({ title, members, icon: Icon }: { title: string; members: { na
   <Card className="shadow-md transition-shadow hover:shadow-xl">
     <CardHeader className="flex flex-row items-center gap-4">
       <Icon className="h-8 w-8 text-primary" />
-      <CardTitle className="text-2xl text-primary">{title}</CardTitle>
+      <CardTitle className="text-xl md:text-2xl text-primary">{title}</CardTitle>
     </CardHeader>
     <CardContent>
       <ul className="space-y-4">
@@ -52,7 +52,7 @@ const TeamCard = ({ title, members, icon: Icon }: { title: string; members: { na
 export default function OurTeamPage() {
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
-      <h1 className="mb-8 text-center text-4xl font-bold text-primary">Our Team</h1>
+      <h1 className="mb-8 text-center text-3xl font-bold text-primary md:text-4xl">Our Team</h1>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <TeamCard title="Management Committee" members={managementCommittee} icon={Users} />
         <TeamCard title="Medical Team" members={medicalTeam} icon={Stethoscope} />
