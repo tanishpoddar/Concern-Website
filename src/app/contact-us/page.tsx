@@ -175,7 +175,7 @@ export default function ContactUsPage() {
           <CardContent>
             <div className="aspect-video w-full">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.184202221021!2d80.16922699999999!3d12.895874099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52594b3f02af09%3A0x4fcf3c1d53b75ecf!2sCONCERN%20DDAC%20Rehabilitation%20Center!5e0!3m2!1sen!2sin!4v1752213696055!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.184202221021!2d80.16922699999999!3d12.895874099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52594b3f02af09%3A0x4fcf3c1d53b75ecf!2sCONCERN%20DDAC%20Rehabilitation%20Center!5e3!3m2!1sen!2sin!4v1752213696055!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
