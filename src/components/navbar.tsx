@@ -18,7 +18,7 @@ const navLinks = [
   { href: '/assessments', label: 'Assessments' },
   { href: '/therapy', label: 'Therapy' },
   { href: '/training', label: 'Training' },
-  { href: '/mosje', label: 'MoSJE' },
+  { href: '/mosje', label: 'MoSJE', highlight: true },
 ];
 
 export default function Navbar() {
@@ -38,6 +38,8 @@ export default function Navbar() {
                   "px-3 py-2 rounded-md transition-colors",
                   pathname === link.href
                     ? "bg-secondary text-primary font-semibold"
+                    : link.highlight
+                    ? "text-accent-foreground bg-accent/90 hover:bg-accent font-semibold"
                     : "text-muted-foreground hover:bg-secondary/50 hover:text-primary"
                 )}
               >
@@ -78,6 +80,8 @@ export default function Navbar() {
                             "rounded-md px-4 py-3 text-base font-medium",
                             pathname === link.href
                               ? "bg-secondary text-primary"
+                              : link.highlight
+                              ? "text-accent-foreground bg-accent/90 hover:bg-accent"
                               : "text-muted-foreground hover:bg-secondary/50"
                           )}
                         >
