@@ -4,49 +4,22 @@ import { CheckCircle } from 'lucide-react';
 import {ConcernLogo} from '@/components/logo';
 import Image from 'next/image';
 
-function SplashScreen() {
-  const [phase, setPhase] = useState<'fadeIn' | 'visible' | 'fadeOut'>('fadeIn');
+function SplashScreen({ onComplete }: { onComplete: () => void }) {
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Transition from fadeIn to visible after 1 second
-    const fadeInTimer = setTimeout(() => {
-      setPhase('visible');
-    }, 1000); // 1s fade-in
+    const timer = setTimeout(() => {
+      setVisible(false);
+      onComplete();
+    }, 3000); // Show splash for 3 seconds
 
-    // Transition from visible to fadeOut after another 2.5 seconds
-    const visibleTimer = setTimeout(() => {
-      setPhase('fadeOut');
-    }, 3500); // 1s fade-in + 2.5s visible
-
-    return () => {
-      clearTimeout(fadeInTimer);
-      clearTimeout(visibleTimer);
-    };
-  }, []);
-
-  const getOpacity = () => {
-    switch (phase) {
-      case 'fadeIn':
-        return 'opacity-0';
-      case 'visible':
-        return 'opacity-100';
-      case 'fadeOut':
-        return 'opacity-0';
-      default:
-        return 'opacity-0';
-    }
-  };
-
-  if (phase === 'fadeOut' && typeof window !== 'undefined') {
-     // A bit of a hack to keep the component from disappearing instantly
-     // A better solution would be to use a library like framer-motion for exit animations
-     setTimeout(() => {}, 1000);
-  }
+    return () => clearTimeout(timer);
+  }, [onComplete]);
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-1000 ${getOpacity()} ${
-        phase === 'fadeOut' ? 'pointer-events-none' : ''
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-500 ${
+        visible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
        <Image
@@ -79,22 +52,18 @@ export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    // Check session storage to see if splash has been shown
-    if (sessionStorage.getItem('splashShown')) {
+    if (sessionStorage.getItem('splashShownThisSession')) {
       setShowSplash(false);
-    } else {
-      sessionStorage.setItem('splashShown', 'true');
-      // Hide the splash component from the DOM after the transition is complete
-      const timer = setTimeout(() => {
-        setShowSplash(false);
-      }, 4500); // 1s fade-in + 2.5s visible + 1s fade-out
-      return () => clearTimeout(timer);
     }
   }, []);
 
+  const handleSplashComplete = () => {
+    sessionStorage.setItem('splashShownThisSession', 'true');
+  };
+
   return (
     <>
-      {showSplash && <SplashScreen />}
+      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
       <div className="flex flex-col">
         <section className="bg-secondary/50 py-12 md:py-24">
           <div className="container px-4 md:px-6">
