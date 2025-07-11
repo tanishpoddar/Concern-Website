@@ -2,10 +2,12 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Menu, Send } from 'lucide-react';
 import { ConcernLogo } from './logo';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -20,32 +22,45 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
+    <nav className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         {/* Desktop Navigation */}
-        <div className="hidden flex-wrap items-center justify-center gap-x-6 text-sm font-medium md:flex">
-          {navLinks.map((link) => (
-             <Link
-              key={link.href}
-              href={link.href}
-              className="group relative py-2 text-muted-foreground transition-colors hover:text-primary"
-            >
-              {link.label}
-              <span className="absolute bottom-0 left-0 h-0.5 w-full scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100"></span>
-            </Link>
-          ))}
+        <div className="hidden items-center gap-x-8 md:flex">
+          <Link href="/">
+             <ConcernLogo className='text-2xl' />
+          </Link>
+          <div className="flex items-center gap-x-4 text-sm font-medium">
+            {navLinks.map((link) => (
+               <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "px-3 py-2 rounded-md transition-colors",
+                  pathname === link.href
+                    ? "bg-secondary text-primary font-semibold"
+                    : "text-muted-foreground hover:bg-secondary/50 hover:text-primary"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
         <Button asChild className="hidden md:flex bg-accent text-accent-foreground hover:bg-accent/90">
           <Link href="/contact-us">
             <Send />
-            Contact Us
+            Enquire Now
           </Link>
         </Button>
 
         {/* Mobile Navigation */}
         <div className="flex w-full items-center justify-between md:hidden">
-            <ConcernLogo className='text-2xl' />
+            <Link href="/">
+                <ConcernLogo className='text-2xl' />
+            </Link>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
@@ -53,18 +68,23 @@ export default function Navbar() {
                 <span className="sr-only">Open navigation menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left">
-                <SheetHeader className="mb-4 text-left">
+            <SheetContent side="left" className="w-[80vw]">
+                <SheetHeader className="mb-6 text-left border-b pb-4">
                   <SheetTitle>
                     <ConcernLogo className="text-3xl" />
                   </SheetTitle>
                 </SheetHeader>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
                 {navLinks.map((link) => (
                   <SheetClose asChild key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-lg font-medium text-muted-foreground hover:text-primary"
+                      className={cn(
+                        "rounded-md px-4 py-3 text-base font-medium",
+                        pathname === link.href
+                          ? "bg-secondary text-primary"
+                          : "text-muted-foreground hover:bg-secondary/50"
+                      )}
                     >
                       {link.label}
                     </Link>
