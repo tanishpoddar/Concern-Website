@@ -4,15 +4,16 @@ import { Image as ImageIcon, CalendarDays } from 'lucide-react';
 import type { Metadata } from 'next';
 
 const programmeAlbums = [
-  { slug: 'training-programmes', title: 'Training Programmes' },
-  { slug: 'social-audit', title: 'Social Audit' },
   { slug: 'ministry-of-social-justice-empowerment', title: 'Ministry of social justice & Empowerment' },
+  { slug: 'synopsis', title: 'Synopsis' },
+  { slug: 'training-programmes', title: 'Training Programmes' },
   { slug: 'concern-premises', title: 'Concern Premises' },
   { slug: 'awareness-programmes', title: 'Awareness Programmes' },
   { slug: 'award-recognitions', title: 'Award Recognitions' },
 ];
 
 const yearAlbums = [
+  { slug: '2025', title: '2025' },
   { slug: '2024', title: '2024' },
   { slug: '2023', title: '2023' },
   { slug: '2022', title: '2022' },
