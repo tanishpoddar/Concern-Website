@@ -3,9 +3,9 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
 import BackToTop from '@/components/back-to-top';
 import { PT_Sans } from 'next/font/google';
+import ClientNavbar from '@/components/client-navbar';
 
 const ptSans = PT_Sans({
   subsets: ['latin'],
@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en" className={`!scroll-smooth ${ptSans.variable}`} suppressHydrationWarning>
       <body className="font-body antialiased flex flex-col min-h-screen">
         <Header />
-        <Navbar />
+        <ClientNavbar />
         <main className="flex-grow">
           {children}
         </main>
