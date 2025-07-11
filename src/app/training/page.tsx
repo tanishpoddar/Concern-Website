@@ -51,10 +51,10 @@ export default function TrainingPage() {
             <CardTitle className="text-2xl text-primary">If we can help you, please contact us.</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-muted-foreground">
-            <p><Badge variant="secondary">Registered Trust No. 628 / 08</Badge></p>
-            <p><Badge variant="secondary">IMH License No. RII-1645 Dt. 08/09/2023</Badge></p>
-            <p><Badge variant="secondary">ISO 9001 : 2008 Certified</Badge></p>
-            <p><Badge variant="secondary">Social Audit Network - United Kingdom</Badge></p>
+            <div><Badge variant="secondary">Registered Trust No. 628 / 08</Badge></div>
+            <div><Badge variant="secondary">IMH License No. RII-1645 Dt. 08/09/2023</Badge></div>
+            <div><Badge variant="secondary">ISO 9001 : 2008 Certified</Badge></div>
+            <div><Badge variant="secondary">Social Audit Network - United Kingdom</Badge></div>
             <p className="pt-2 text-sm text-justify">
               (Donations are IT Exempted U/S 80G of IT Act 1961 Vide Approval No. AAATC9995QF20210 Dt. 24.09.2021)
             </p>
