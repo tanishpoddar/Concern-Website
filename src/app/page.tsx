@@ -5,22 +5,43 @@ import {ConcernLogo} from '@/components/logo';
 import Image from 'next/image';
 
 function SplashScreen({ onComplete }: { onComplete: () => void }) {
-  const [visible, setVisible] = useState(true);
+  const [phase, setPhase] = useState('hidden');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(false);
-      onComplete();
-    }, 3000); // Show splash for 3 seconds
+    const fadeInTimer = setTimeout(() => {
+      setPhase('visible');
+    }, 100); 
 
-    return () => clearTimeout(timer);
+    const stayTimer = setTimeout(() => {
+      setPhase('fading-out');
+    }, 2000); // 0.5s fade-in + 1.5s stay
+
+    const completeTimer = setTimeout(() => {
+      onComplete();
+    }, 2500); // Total duration
+
+    return () => {
+      clearTimeout(fadeInTimer);
+      clearTimeout(stayTimer);
+      clearTimeout(completeTimer);
+    };
   }, [onComplete]);
+
+  const getOpacity = () => {
+    switch (phase) {
+      case 'visible':
+        return 'opacity-100';
+      case 'fading-out':
+        return 'opacity-0 pointer-events-none';
+      case 'hidden':
+      default:
+        return 'opacity-0 pointer-events-none';
+    }
+  };
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-500 ${
-        visible ? 'opacity-100' : 'opacity-0 pointer-events-none'
-      }`}
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-500 ${getOpacity()}`}
     >
        <Image
           src="https://cijik.com/uploads/rehabs/1273.jpg"
@@ -116,13 +137,13 @@ export default function Home() {
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold">VISION</h3>
                 <p className="text-muted-foreground italic text-justify">
-                  <span className="text-primary font-semibold">CONCERN’S</span> concern is to Identify, Explore and Guide to Change.
+                  <span className="text-primary font-semibold">CONCERN'S</span> concern is to Identify, Explore and Guide to Change.
                 </p>
               </div>
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold">MISSION</h3>
                 <p className="text-muted-foreground text-justify">
-                  To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of <span className="text-primary font-semibold">CONCERN’S</span> concern in terms of Quality and Quantity.
+                  To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of <span className="text-primary font-semibold">CONCERN'S</span> concern in terms of Quality and Quantity.
                 </p>
               </div>
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
