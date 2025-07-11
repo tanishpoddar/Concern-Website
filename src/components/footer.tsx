@@ -32,7 +32,6 @@ export default function Footer() {
             <h3 className="mb-2 font-semibold text-foreground uppercase tracking-wider">Registered Office</h3>
             <address className="space-y-1 not-italic text-sm">
               <p className="flex items-start text-left">
-                <MapPin className="mr-3 h-4 w-4 flex-shrink-0 mt-1 text-primary" />
                 <span>CONCERN, Plot No 60, First Cross Street, Kanakadhara Nagar, Valasaravakkam, Chennai - 600 087.</span>
               </p>
             </address>
@@ -42,7 +41,6 @@ export default function Footer() {
             <h3 className="mb-2 font-semibold text-foreground uppercase tracking-wider">Rehab Centre</h3>
             <address className="space-y-1 not-italic text-sm">
               <p className="flex items-start text-left">
-                <MapPin className="mr-3 h-4 w-4 flex-shrink-0 mt-1 text-primary" />
                 <span>CONCERN, Zonta Resource Centre, No.5, Manikam nagar, Noothancheri, Madambakam, Chennai - 126.</span>
               </p>
             </address>
