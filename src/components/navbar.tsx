@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Menu, Send } from 'lucide-react';
 import { ConcernLogo } from './logo';
 
@@ -54,8 +54,12 @@ export default function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left">
-              <div className="flex flex-col gap-6 p-6">
-                <ConcernLogo className="mb-4 text-3xl" />
+                <SheetHeader className="mb-4 text-left">
+                  <SheetTitle>
+                    <ConcernLogo className="text-3xl" />
+                  </SheetTitle>
+                </SheetHeader>
+              <div className="flex flex-col gap-6">
                 {navLinks.map((link) => (
                   <SheetClose asChild key={link.href}>
                     <Link
