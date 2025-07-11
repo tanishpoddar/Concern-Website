@@ -19,6 +19,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cijik.com',
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
 };

@@ -13,16 +13,16 @@ export default function Footer() {
               A Non-Governmental Organisation (NGO) working in the field of addiction - rehabilitation.
             </p>
              <div className="mt-4 flex justify-center space-x-4 md:justify-start">
-                <Link href="#" aria-label="Facebook" className="hover:text-primary transition-colors">
+                <Link href="#" aria-label="Facebook" className="text-muted-foreground hover:text-[#1877F2] transition-colors">
                   <Facebook />
                 </Link>
-                <Link href="#" aria-label="Twitter" className="hover:text-primary transition-colors">
+                <Link href="#" aria-label="Twitter" className="text-muted-foreground hover:text-[#1DA1F2] transition-colors">
                   <Twitter />
                 </Link>
-                <Link href="#" aria-label="Instagram" className="hover:text-primary transition-colors">
+                <Link href="#" aria-label="Instagram" className="text-muted-foreground hover:text-[#E4405F] transition-colors">
                   <Instagram />
                 </Link>
-                <Link href="#" aria-label="LinkedIn" className="hover:text-primary transition-colors">
+                <Link href="#" aria-label="LinkedIn" className="text-muted-foreground hover:text-[#0A66C2] transition-colors">
                   <Linkedin />
                 </Link>
             </div>

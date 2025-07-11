@@ -5,38 +5,31 @@ import {ConcernLogo} from '@/components/logo';
 import Image from 'next/image';
 
 function SplashScreen() {
-  const [showTagline, setShowTagline] = useState(false);
   const [hideSplash, setHideSplash] = useState(false);
 
   useEffect(() => {
-    const taglineTimer = setTimeout(() => {
-      setShowTagline(true);
-    }, 1000);
     const hideTimer = setTimeout(() => {
       setHideSplash(true);
     }, 2500);
     return () => {
-      clearTimeout(taglineTimer);
       clearTimeout(hideTimer);
     };
   }, []);
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-background transition-opacity duration-500 ${
-        hideSplash ? 'opacity-0' : 'opacity-100'
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-1000 ${
+        hideSplash ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      <ConcernLogo className="text-6xl md:text-8xl" />
-      <div className="h-8">
-        <p
-          className={`mt-4 text-xl md:text-2xl text-muted-foreground transition-opacity duration-1000 ${
-            showTagline ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          where you discover change
-        </p>
-      </div>
+      <Image
+        src="https://cijik.com/uploads/rehabs/1273.jpg"
+        alt="Concern Building"
+        layout="fill"
+        objectFit="cover"
+        className="transition-opacity duration-1000"
+        priority
+      />
     </div>
   );
 }
@@ -67,6 +60,16 @@ export default function Home() {
     <>
       {loading && <SplashScreen />}
       <div className="flex flex-col">
+        <section className="relative h-96 w-full">
+            <Image
+                src="https://cijik.com/uploads/rehabs/1273.jpg"
+                alt="Concern building front"
+                layout="fill"
+                objectFit="cover"
+                priority
+            />
+        </section>
+
         <section className="bg-secondary/50 py-12 md:py-24">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 md:grid-cols-2 md:gap-16">
