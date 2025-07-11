@@ -5,20 +5,48 @@ import {ConcernLogo} from '@/components/logo';
 import Image from 'next/image';
 
 function SplashScreen() {
-  const [isHiding, setIsHiding] = useState(false);
+  const [phase, setPhase] = useState<'fadeIn' | 'visible' | 'fadeOut'>('fadeIn');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsHiding(true);
-    }, 2500); // Start hiding after 2.5 seconds
+    // Transition from fadeIn to visible after 1 second
+    const fadeInTimer = setTimeout(() => {
+      setPhase('visible');
+    }, 1000); // 1s fade-in
 
-    return () => clearTimeout(timer);
+    // Transition from visible to fadeOut after another 2.5 seconds
+    const visibleTimer = setTimeout(() => {
+      setPhase('fadeOut');
+    }, 3500); // 1s fade-in + 2.5s visible
+
+    return () => {
+      clearTimeout(fadeInTimer);
+      clearTimeout(visibleTimer);
+    };
   }, []);
+
+  const getOpacity = () => {
+    switch (phase) {
+      case 'fadeIn':
+        return 'opacity-0';
+      case 'visible':
+        return 'opacity-100';
+      case 'fadeOut':
+        return 'opacity-0';
+      default:
+        return 'opacity-0';
+    }
+  };
+
+  if (phase === 'fadeOut' && typeof window !== 'undefined') {
+     // A bit of a hack to keep the component from disappearing instantly
+     // A better solution would be to use a library like framer-motion for exit animations
+     setTimeout(() => {}, 1000);
+  }
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-1000 ${
-        isHiding ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-1000 ${getOpacity()} ${
+        phase === 'fadeOut' ? 'pointer-events-none' : ''
       }`}
     >
        <Image
@@ -59,7 +87,7 @@ export default function Home() {
       // Hide the splash component from the DOM after the transition is complete
       const timer = setTimeout(() => {
         setShowSplash(false);
-      }, 3500); // This should be longer than the splash duration + transition
+      }, 4500); // 1s fade-in + 2.5s visible + 1s fade-out
       return () => clearTimeout(timer);
     }
   }, []);

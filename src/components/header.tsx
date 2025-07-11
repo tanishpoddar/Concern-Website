@@ -9,9 +9,9 @@ export default function Header() {
            <Image
               src="https://cijik.com/uploads/rehabs/1273.jpg"
               alt="Concern Logo"
-              width={200}
-              height={50}
-              className="h-auto w-40 object-contain md:w-48"
+              width={400}
+              height={100}
+              className="h-auto w-80 object-contain md:w-96"
               priority
             />
         </Link>
