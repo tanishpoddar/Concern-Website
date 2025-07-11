@@ -8,6 +8,7 @@ function SplashScreen() {
   const [hideSplash, setHideSplash] = useState(false);
 
   useEffect(() => {
+    // Hide splash screen after 2.5 seconds
     const hideTimer = setTimeout(() => {
       setHideSplash(true);
     }, 2500);
@@ -49,16 +50,21 @@ const facilities = [
 ];
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2500);
-    return () => clearTimeout(timer);
+    // Check session storage to see if splash has been shown
+    const splashShown = sessionStorage.getItem('splashShown');
+    if (splashShown) {
+      setShowSplash(false);
+    } else {
+      sessionStorage.setItem('splashShown', 'true');
+    }
   }, []);
 
   return (
     <>
-      {loading && <SplashScreen />}
+      {showSplash && <SplashScreen />}
       <div className="flex flex-col">
         <section className="bg-secondary/50 py-12 md:py-24">
           <div className="container px-4 md:px-6">
