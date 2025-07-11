@@ -28,7 +28,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-x-8 md:flex">
+        <div className="hidden items-center gap-x-8 lg:flex">
           <div className="flex items-center gap-x-4 text-sm font-medium">
             {navLinks.map((link) => (
                <Link
@@ -46,7 +46,7 @@ export default function Navbar() {
             ))}
           </div>
         </div>
-        <Button asChild className="hidden md:flex bg-accent text-accent-foreground hover:bg-accent/90">
+        <Button asChild className="hidden lg:flex bg-accent text-accent-foreground hover:bg-accent/90">
           <Link href="/contact-us">
             <Send />
             Contact Us
@@ -54,7 +54,8 @@ export default function Navbar() {
         </Button>
 
         {/* Mobile Navigation */}
-        <div className="flex w-full items-center justify-end md:hidden">
+        <div className="flex w-full items-center justify-between lg:hidden">
+           <ConcernLogo className="text-2xl" />
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
