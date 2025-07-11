@@ -31,7 +31,7 @@ export default function SaddPage() {
 
         <div className="flex justify-center">
           <Image
-            src="https://placehold.co/600x400.png"
+            src="https://img.freepik.com/premium-photo/men-sit-back-sleep-bar-get-drunk-because-disappointment-life_33370-122.jpg"
             alt="Drunk person on a table"
             width={600}
             height={400}
