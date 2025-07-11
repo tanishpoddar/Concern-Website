@@ -6,6 +6,7 @@ import Footer from '@/components/footer';
 import BackToTop from '@/components/back-to-top';
 import { PT_Sans } from 'next/font/google';
 import ClientNavbar from '@/components/client-navbar';
+import PageTransition from '@/components/page-transition';
 
 const ptSans = PT_Sans({
   subsets: ['latin'],
@@ -30,7 +31,7 @@ export default function RootLayout({
         <Header />
         <ClientNavbar />
         <main className="flex-grow">
-          {children}
+          <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
         <Toaster />
