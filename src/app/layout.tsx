@@ -26,10 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`!scroll-smooth ${ptSans.variable}`} suppressHydrationWarning>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased flex flex-col min-h-screen">
         <Header />
         <Navbar />
-        <main className="flex-1">
+        <main className="flex-grow">
           {children}
         </main>
         <Footer />
