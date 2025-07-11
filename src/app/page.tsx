@@ -52,13 +52,14 @@ export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    if (sessionStorage.getItem('splashShownThisSession')) {
+    if (typeof window !== 'undefined' && sessionStorage.getItem('splashShownThisSession')) {
       setShowSplash(false);
     }
   }, []);
 
   const handleSplashComplete = () => {
     sessionStorage.setItem('splashShownThisSession', 'true');
+    setShowSplash(false);
   };
 
   return (
@@ -73,10 +74,10 @@ export default function Home() {
                   About Us
                 </h1>
                 <p className="text-lg text-muted-foreground text-justify">
-                  We are a Non-Governmental Organisation (NGO) working in the field of addiction - rehabilitation. We wish to share the benefits with other suffering men and women and their families. Members of CONCERN have enormous experience in dealing with addiction at various levels with both men and women. Equipped with academic, professional and practical experience in the area of addiction treatment. We made it our Mission to Share our Very Personal Experience and Success. At CONCERN we perceive the grip of addiction as a specific disorder and treat them in simple, medical and psychological method with Holistic Approach.
+                  We are a Non-Governmental Organisation (NGO) working in the field of addiction - rehabilitation. We wish to share the benefits with other suffering men and women and their families. Members of <span className="text-primary font-semibold">CONCERN</span> have enormous experience in dealing with addiction at various levels with both men and women. Equipped with academic, professional and practical experience in the area of addiction treatment. We made it our Mission to Share our Very Personal Experience and Success. At <span className="text-primary font-semibold">CONCERN</span> we perceive the grip of addiction as a specific disorder and treat them in simple, medical and psychological method with Holistic Approach.
                 </p>
                 <p className="mt-4 text-lg text-muted-foreground text-justify">
-                  Bhanu Suresh Babu Project Director treats with a Dedicated Tailor Made Program to suit individuals' need and people of CONCERN have practical experience with professional training and academics. We walk hand in hand with the clients exploring the problem areas and finding solutions to guide them in the process of recovery.
+                  <span className="text-primary font-semibold">Bhanu Suresh Babu</span> (Project Director) treats with a Dedicated Tailor Made Program to suit individuals' need and people of <span className="text-primary font-semibold">CONCERN</span> have practical experience with professional training and academics. We walk hand in hand with the clients exploring the problem areas and finding solutions to guide them in the process of recovery.
                 </p>
               </div>
               <div className="flex items-center justify-center">
@@ -113,13 +114,13 @@ export default function Home() {
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold">VISION</h3>
                 <p className="text-muted-foreground italic text-justify">
-                  "CONCERN’S concern is to Identify, Explore and Guide to Change."
+                  "<span className="text-primary font-semibold">CONCERN’S</span> concern is to Identify, Explore and Guide to Change."
                 </p>
               </div>
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold">MISSION</h3>
                 <p className="text-muted-foreground text-justify">
-                  "To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of CONCERN’S concern in terms of Quality and Quantity."
+                  "To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of <span className="text-primary font-semibold">CONCERN’S</span> concern in terms of Quality and Quantity."
                 </p>
               </div>
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
