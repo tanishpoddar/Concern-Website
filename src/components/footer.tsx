@@ -56,7 +56,7 @@ export default function Footer() {
             <h3 className="mb-2 font-semibold text-foreground uppercase tracking-wider">Rehab Centre</h3>
             <address className="space-y-1 not-italic text-sm">
               <p className="flex items-start text-left">
-                <span>CONCERN, Zonta Resource Centre, No.5, Manikam nagar, Noothancheri, Madambakam, Chennai - 126.</span>
+                <span>CONCERN, Zonta Resource Centre, No.5, Manikam Nagar, Noothancheri, Madambakam, Chennai - 600 126.</span>
               </p>
             </address>
           </div>
@@ -70,7 +70,7 @@ export default function Footer() {
                 </a>
                 <p className="flex items-center">
                   <Phone className="mr-3 h-4 w-4 text-primary" />
-                  <span>9840800816</span>
+                  <span>+91 9840800816</span>
                 </p>
               </div>
           </div>
