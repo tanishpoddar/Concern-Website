@@ -25,7 +25,7 @@ const medicalTeam = [
 const managementStaff = [
   { name: 'Mr. T. Rajesh, M.S.W.', role: 'Manager cum In-charge' },
   { name: 'Mr. V. Subramani', role: 'Manager' },
-  { name: 'Mrs. Veda V Kumar, B.A.', role: 'Project Coordinator' },
+  { name: 'Mrs. P Lanthangi, B.A., M.Sc. (Yoga)', role: 'Project Coordinator' },
   { name: 'Mr. J. Ethuraj, D.P.T.', role: 'Project Coordinator' },
   { name: 'Honorary Volunteers', role: '' },
   { name: 'Trainer cum supervisors, Outreach Workers, Peer Educators, Cook, House-keepers And Chowkidars', role: '' },
