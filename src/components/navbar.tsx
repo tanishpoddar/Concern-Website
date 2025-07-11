@@ -26,9 +26,9 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
-      <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
+      <div className="container flex h-16 max-w-screen-2xl items-center">
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-x-8 lg:flex">
+        <div className="hidden flex-1 items-center justify-center gap-x-8 lg:flex">
           <div className="flex items-center gap-x-4 text-sm font-medium">
             {navLinks.map((link) => (
                <Link
@@ -45,16 +45,16 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
+           <Button asChild className="ml-8 bg-accent text-accent-foreground hover:bg-accent/90">
+            <Link href="/contact-us">
+                <Send />
+                Contact Us
+            </Link>
+            </Button>
         </div>
-        <Button asChild className="hidden lg:flex bg-accent text-accent-foreground hover:bg-accent/90">
-          <Link href="/contact-us">
-            <Send />
-            Contact Us
-          </Link>
-        </Button>
 
         {/* Mobile Navigation */}
-        <div className="flex w-full items-center justify-end lg:hidden">
+        <div className="flex items-center lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
