@@ -60,16 +60,6 @@ export default function Home() {
     <>
       {loading && <SplashScreen />}
       <div className="flex flex-col">
-        <section className="relative h-96 w-full">
-            <Image
-                src="https://cijik.com/uploads/rehabs/1273.jpg"
-                alt="Concern building front"
-                layout="fill"
-                objectFit="cover"
-                priority
-            />
-        </section>
-
         <section className="bg-secondary/50 py-12 md:py-24">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 md:grid-cols-2 md:gap-16">
