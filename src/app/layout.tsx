@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`!scroll-smooth ${ptSans.variable}`}>
+    <html lang="en" className={`!scroll-smooth ${ptSans.variable}`} suppressHydrationWarning>
       <body className="font-body antialiased">
         <Header />
         <Navbar />
