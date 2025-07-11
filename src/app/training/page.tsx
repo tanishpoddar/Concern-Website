@@ -1,6 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Training Programs',
+  description: 'CONCERN offers training programs for staff, interns, and organizations on addiction issues, de-addiction treatment techniques, and HR policies for employee assessment.',
+};
 
 const trainingSections = [
   {

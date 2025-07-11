@@ -1,4 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Therapies We Offer',
+  description: 'Learn about the various therapies offered at CONCERN, including detoxification, psychotherapy, cognitive therapy, group therapy, and counseling for individuals, families, and children.',
+};
 
 const therapies = [
   {

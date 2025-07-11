@@ -1,5 +1,11 @@
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Short Alcohol Dependence Data (SADD)',
+  description: 'Take the SADD questionnaire to self-assess the level of alcohol dependence. A confidential test to understand your relationship with alcohol.',
+};
 
 const questions = [
   'Do you find difficulty in getting the thought of drink out of your mind?',
@@ -32,7 +38,7 @@ export default function SaddPage() {
         <div className="flex justify-center">
           <Image
             src="https://img.freepik.com/premium-photo/men-sit-back-sleep-bar-get-drunk-because-disappointment-life_33370-122.jpg"
-            alt="Drunk person on a table"
+            alt="A man looking despondent with a bottle of alcohol"
             width={600}
             height={400}
             data-ai-hint="despair alcohol bottle"

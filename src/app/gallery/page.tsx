@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Image as ImageIcon } from 'lucide-react';
+import type { Metadata } from 'next';
 
 const albums = [
   { slug: 'training-programmes', title: 'Training Programmes' },
@@ -24,6 +25,11 @@ const albums = [
   { slug: '2011', title: '2011' },
   { slug: '2009', title: '2009' },
 ];
+
+export const metadata: Metadata = {
+  title: 'Photo Gallery',
+  description: 'Explore photo albums from our events, programs, and premises. See our work in action through the years.',
+};
 
 export default function GalleryPage() {
   return (

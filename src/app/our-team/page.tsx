@@ -1,5 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Stethoscope, Briefcase, Wrench } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Our Team',
+  description: 'Meet the dedicated team behind CONCERN, including our management committee, medical professionals, staff, and technical supporters.',
+};
 
 const managementCommittee = [
   { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust' },

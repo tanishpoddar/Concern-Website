@@ -1,28 +1,30 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { CheckCircle } from 'lucide-react';
-import {ConcernLogo} from '@/components/logo';
 import Image from 'next/image';
 
 function SplashScreen({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState('hidden');
 
   useEffect(() => {
+    // Component mounts, start fade-in
     const fadeInTimer = setTimeout(() => {
       setPhase('visible');
-    }, 100); 
+    }, 100); // Small delay to ensure transition triggers
 
-    const stayTimer = setTimeout(() => {
+    // After 0.5s fade-in + 1.5s stay, start fade-out
+    const fadeOutTimer = setTimeout(() => {
       setPhase('fading-out');
-    }, 2000); // 0.5s fade-in + 1.5s stay
+    }, 2000); // 0.1s + 0.4s fade-in + 1.5s stay = 2s
 
+    // After fade-out, call onComplete
     const completeTimer = setTimeout(() => {
       onComplete();
     }, 2500); // Total duration
 
     return () => {
       clearTimeout(fadeInTimer);
-      clearTimeout(stayTimer);
+      clearTimeout(fadeOutTimer);
       clearTimeout(completeTimer);
     };
   }, [onComplete]);
@@ -32,20 +34,20 @@ function SplashScreen({ onComplete }: { onComplete: () => void }) {
       case 'visible':
         return 'opacity-100';
       case 'fading-out':
-        return 'opacity-0 pointer-events-none';
+        return 'opacity-0';
       case 'hidden':
       default:
-        return 'opacity-0 pointer-events-none';
+        return 'opacity-0';
     }
   };
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-500 ${getOpacity()}`}
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-500 ${getOpacity()} ${phase === 'hidden' || phase === 'fading-out' ? 'pointer-events-none' : ''}`}
     >
        <Image
           src="https://cijik.com/uploads/rehabs/1273.jpg"
-          alt="Concern Building"
+          alt="CONCERN Building"
           width={400}
           height={100}
           className="h-auto w-64 rounded-lg object-contain md:w-80"
@@ -55,33 +57,34 @@ function SplashScreen({ onComplete }: { onComplete: () => void }) {
   );
 }
 
+
 const facilities = [
   'In-Patient / Out-Patient Services',
   'De-Toxification, Psychotherapy, Group Therapy',
-  'Individual, Family, Child, and Marital Counselling',
+  'Individual, Family, Child, And Marital Counselling',
   'Community Awareness Programmes',
-  'Transit Home and Peer Support',
-  'Free Drop-in Counseling Center for Children and Women of Chemical Dependants',
+  'Transit Home And Peer Support',
+  'Free Drop-In Counseling Center For Children And Women Of Chemical Dependants',
   'Life Style Modifications',
-  'Guide to Various Related References',
+  'Guide To Various Related References',
   'In House Kitchen',
-  'Guide to Alcoholics Anonymous (AA), Narcotics Anonymous and Al-Anon',
-  'Free Drop-In Counselling Centre for Children & Women of Chemical Dependants',
+  'Guide To Alcoholics Anonymous (AA), Narcotics Anonymous And Al-Anon',
+  'Free Drop-In Counselling Centre For Children & Women Of Chemical Dependants',
 ];
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
 
+  // This effect runs only once on the client
   useEffect(() => {
-    if (typeof window !== 'undefined' && sessionStorage.getItem('splashShownThisSession')) {
+    if (sessionStorage.getItem('splashShownThisSession')) {
       setShowSplash(false);
     }
   }, []);
 
+
   const handleSplashComplete = () => {
-    if (typeof window !== 'undefined') {
-        sessionStorage.setItem('splashShownThisSession', 'true');
-    }
+    sessionStorage.setItem('splashShownThisSession', 'true');
     setShowSplash(false);
   };
 
@@ -106,7 +109,7 @@ export default function Home() {
               <div className="flex items-center justify-center">
                 <Image
                   src="https://placehold.co/600x400.png"
-                  alt="Group therapy session"
+                  alt="A diverse group of people in a supportive therapy session"
                   width={600}
                   height={400}
                   data-ai-hint="community support group"

@@ -1,5 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Self Diagnosis for Alcoholism',
+  description: 'Answer a series of questions to check for signs of alcoholism. This self-assessment is based on criteria from John Hopkins University Hospital.',
+};
 
 const questions = [
   "Do you lose time from work due to drinking?",

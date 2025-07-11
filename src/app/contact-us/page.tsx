@@ -24,6 +24,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Send } from 'lucide-react';
+import type { Metadata } from 'next';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -175,12 +176,13 @@ export default function ContactUsPage() {
           <CardContent>
             <div className="aspect-video w-full">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.184202221021!2d80.16922699999999!3d12.895874099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52594b3f02af09%3A0x4fcf3c1d53b75ecf!2sCONCERN%20DDAC%20Rehabilitation%20Center!5e3!3m2!1sen!2sin!4v1752213696055!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.184202221021!2d80.16922699999999!3d12.895874099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52594b3f02af09%3A0x4fcf3c1d53b75ecf!2sCONCERN%20DDAC%20Rehabilitation%20Center!5e1!3m2!1sen!2sin!4v1752213696055!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen={true}
                     loading="lazy"
+                    title="CONCERN Location Map"
                     referrerPolicy="no-referrer-when-downgrade"
                     className="rounded-md"
                 ></iframe>
@@ -192,3 +194,8 @@ export default function ContactUsPage() {
     </div>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Contact Us',
+  description: 'Get in touch with CONCERN for enquiries, admissions, or any other information. Fill out our form or find our location on the map.',
+};
