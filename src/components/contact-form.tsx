@@ -23,7 +23,9 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Send } from 'lucide-react';
+import { Loader2, Send } from 'lucide-react';
+import { sendContactEmail } from '@/app/contact-us/actions';
+import React from 'react';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -43,6 +45,7 @@ const formSchema = z.object({
 
 export default function ContactForm() {
   const { toast } = useToast();
+  const [isPending, startTransition] = React.useTransition();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,13 +59,22 @@ export default function ContactForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // In a real application, you would send this data to your server
-    console.log(values);
-    toast({
-      title: 'Form Submitted!',
-      description: 'Thank you for your enquiry. We will get back to you soon.',
+    startTransition(async () => {
+      const result = await sendContactEmail(values);
+      if (result.success) {
+        toast({
+          title: 'Form Submitted!',
+          description: result.message,
+        });
+        form.reset();
+      } else {
+        toast({
+          title: 'Error',
+          description: result.message,
+          variant: 'destructive',
+        });
+      }
     });
-    form.reset();
   }
 
   return (
@@ -89,7 +101,7 @@ export default function ContactForm() {
                         render={({ field }) => (
                             <FormItem>
                             <FormLabel>Title</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                                 <FormControl>
                                 <SelectTrigger>
                                     <SelectValue placeholder="Select a title" />
@@ -113,7 +125,7 @@ export default function ContactForm() {
                             <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input placeholder="Your Name" {...field} />
+                                <Input placeholder="Your Name" {...field} disabled={isPending}/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -126,7 +138,7 @@ export default function ContactForm() {
                             <FormItem>
                             <FormLabel>Phone</FormLabel>
                             <FormControl>
-                                <Input placeholder="Your Phone Number" {...field} />
+                                <Input placeholder="Your Phone Number" {...field} disabled={isPending}/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -139,7 +151,7 @@ export default function ContactForm() {
                             <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                                <Input placeholder="Your Email Address" {...field} />
+                                <Input placeholder="Your Email Address" {...field} disabled={isPending}/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -152,15 +164,24 @@ export default function ContactForm() {
                             <FormItem>
                             <FormLabel>Comments</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Your comments or questions" className="min-h-[120px]" {...field} />
+                                <Textarea placeholder="Your comments or questions" className="min-h-[120px]" {...field} disabled={isPending}/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>
                         )}
                         />
-                        <Button type="submit" className="w-full">
-                          <Send />
-                          Submit Enquiry
+                        <Button type="submit" className="w-full" disabled={isPending}>
+                          {isPending ? (
+                            <>
+                              <Loader2 className="animate-spin" />
+                              Submitting...
+                            </>
+                          ) : (
+                            <>
+                              <Send />
+                              Submit Enquiry
+                            </>
+                          )}
                         </Button>
                     </form>
                  </Form>
