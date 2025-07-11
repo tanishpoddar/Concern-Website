@@ -166,6 +166,28 @@ export default function ContactUsPage() {
                  </Form>
             </CardContent>
         </Card>
+
+        <Card className="shadow-lg">
+          <CardHeader>
+            <CardTitle>Our Location</CardTitle>
+            <CardDescription>Find us on the map</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="aspect-video w-full">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.879717915837!2d80.1709971242337!3d13.04251408728448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526114b3b24f7b%3A0x510f2791461f62b7!2sCONCERN!5e0!3m2!1sen!2sin!4v1720524498308!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="rounded-md"
+                ></iframe>
+            </div>
+          </CardContent>
+        </Card>
+
       </div>
     </div>
   );
