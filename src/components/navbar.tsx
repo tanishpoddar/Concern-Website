@@ -13,6 +13,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/our-team', label: 'Our Team' },
   { href: '/gallery', label: 'Gallery' },
+  { href: '/annual-reports', label: 'Annual Reports' },
   { href: '/events', label: 'Events' },
   { href: '/self-diagnosis', label: 'Self Diagnosis' },
   { href: '/sadd', label: 'SADD' },
