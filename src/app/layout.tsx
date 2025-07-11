@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import Navbar from '@/components/navbar';
 
 export const metadata: Metadata = {
   title: 'CONCERN | Where you discover change',
@@ -26,6 +27,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <Header />
+        <Navbar />
         {children}
         <Footer />
         <Toaster />
