@@ -5,8 +5,8 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 
 export const metadata: Metadata = {
-  title: 'ConcernConnect | NGO for a Better World',
-  description: 'ConcernConnect is a non-governmental organization dedicated to making a tangible impact through global initiatives, events, and community support.',
+  title: 'CONCERN | Where you discover change',
+  description: 'A Non-Governmental Organisation (NGO) working in the field of addiction - rehabilitation.',
 };
 
 export default function RootLayout({

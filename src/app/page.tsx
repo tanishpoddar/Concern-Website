@@ -1,389 +1,116 @@
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+'use client';
+import { useState, useEffect } from 'react';
+import { CheckCircle } from 'lucide-react';
+import {ConcernLogo} from '@/components/logo';
 
-import { Chatbot } from '@/components/chatbot';
-import { ImpactChart } from '@/components/impact-chart';
-import Image from 'next/image';
-import {
-  BookOpen,
-  Droplets,
-  HeartHandshake,
-  Lightbulb,
-  Quote,
-} from 'lucide-react';
+function SplashScreen() {
+  const [showTagline, setShowTagline] = useState(false);
 
-const initiatives = [
-  {
-    icon: Droplets,
-    title: 'Clean Water Access',
-    description:
-      'Providing clean and safe drinking water to communities in need.',
-    image: 'https://placehold.co/600x400',
-    hint: 'water well',
-  },
-  {
-    icon: BookOpen,
-    title: 'Education for All',
-    description:
-      'Building schools and providing educational resources for children.',
-    image: 'https://placehold.co/600x400',
-    hint: 'children classroom',
-  },
-  {
-    icon: HeartHandshake,
-    title: 'Healthcare Support',
-    description: 'Offering medical supplies and support to remote areas.',
-    image: 'https://placehold.co/600x400',
-    hint: 'doctor patient',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Sustainable Energy',
-    description: 'Implementing solar power projects in off-grid villages.',
-    image: 'https://placehold.co/600x400',
-    hint: 'solar panels',
-  },
-];
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowTagline(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
-const events = [
-  {
-    title: 'Annual Charity Gala',
-    date: 'October 26, 2024',
-    description: 'Join us for a night of inspiration and fundraising.',
-    image: 'https://placehold.co/600x400',
-    hint: 'charity event',
-  },
-  {
-    title: 'Community Build Day',
-    date: 'November 12, 2024',
-    description: 'Help us build a new community center. No experience necessary!',
-    image: 'https://placehold.co/600x400',
-    hint: 'volunteers building',
-  },
-  {
-    title: 'Online Awareness Campaign',
-    date: 'December 1-31, 2024',
-    description: 'Spread the word about our clean water initiative.',
-    image: 'https://placehold.co/600x400',
-    hint: 'social media',
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      'ConcernConnect changed my life. The new well in our village means my children are healthier and can attend school instead of fetching water.',
-    author: 'Amina, Village Resident',
-    image: 'https://placehold.co/100x100',
-    hint: 'woman portrait',
-  },
-  {
-    quote:
-      "Volunteering for the school build was an incredibly rewarding experience. Seeing the joy on the children's faces was unforgettable.",
-    author: 'John D., Volunteer',
-    image: 'https://placehold.co/100x100',
-    hint: 'man portrait',
-  },
-  {
-    quote:
-      'The transparency in their impact reporting is what convinced me to become a monthly donor. I know my contribution is making a real difference.',
-    author: 'Sarah L., Donor',
-    image: 'https://placehold.co/100x100',
-    hint: 'person portrait',
-  },
-];
-
-export default function Home() {
   return (
-    <>
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative flex h-[70vh] min-h-[500px] w-full items-center justify-center text-center text-white">
-          <div className="absolute inset-0 z-10 bg-black/50" />
-          <Image
-            src="https://placehold.co/1920x1080"
-            alt="Volunteers working together"
-            data-ai-hint="volunteers community"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="relative z-20 container space-y-4 px-4 md:px-6">
-            <h1 className="font-headline text-4xl font-bold tracking-tighter md:text-6xl">
-              Connecting Concern with Action
-            </h1>
-            <p className="mx-auto max-w-[700px] text-lg text-primary-foreground/90 md:text-xl">
-              We are a global movement of compassionate individuals dedicated to
-              creating sustainable change through community-led initiatives.
-            </p>
-            <Button
-              size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90"
-              asChild
-            >
-              <a href="#donate">Make a Difference</a>
-            </Button>
-          </div>
-        </section>
-
-        {/* Initiatives Section */}
-        <section id="initiatives" className="py-12 md:py-24">
-          <div className="container px-4 md:px-6">
-            <div className="mb-12 space-y-3 text-center">
-              <h2 className="font-headline text-3xl font-bold md:text-4xl">
-                Our Global Initiatives
-              </h2>
-              <p className="mx-auto max-w-2xl text-muted-foreground">
-                From local communities to a global scale, we're committed to
-                projects that create lasting, positive change.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {initiatives.map((item, index) => (
-                <Card
-                  key={index}
-                  className="group flex flex-col overflow-hidden"
-                >
-                  <div className="relative h-40">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      data-ai-hint={item.hint}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <CardHeader className="flex-row items-center gap-4">
-                    <item.icon className="h-8 w-8 text-primary" />
-                    <CardTitle className="font-headline">{item.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex-1">
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Impact Section */}
-        <section id="impact" className="bg-muted/40 py-12 md:py-24">
-          <div className="container px-4 md:px-6">
-            <div className="mb-12 space-y-3 text-center">
-              <h2 className="font-headline text-3xl font-bold md:text-4xl">
-                Our Impact, By the Numbers
-              </h2>
-              <p className="mx-auto max-w-2xl text-muted-foreground">
-                We believe in transparency. Here's a look at what we've
-                achieved together with your support.
-              </p>
-            </div>
-            <ImpactChart />
-          </div>
-        </section>
-
-        {/* Impact Stories Section */}
-        <section id="stories" className="py-12 md:py-24">
-          <div className="container px-4 md:px-6">
-            <div className="mb-12 space-y-3 text-center">
-              <h2 className="font-headline text-3xl font-bold md:text-4xl">
-                Stories of Change
-              </h2>
-              <p className="mx-auto max-w-2xl text-muted-foreground">
-                The real impact of our work is told through the lives we touch.
-              </p>
-            </div>
-            <Carousel
-              opts={{ loop: true }}
-              className="mx-auto w-full max-w-4xl"
-            >
-              <CarouselContent>
-                {testimonials.map((testimonial, index) => (
-                  <CarouselItem key={index}>
-                    <div className="p-1">
-                      <Card className="border-0 bg-muted/40">
-                        <CardContent className="flex aspect-square flex-col items-center justify-center p-6 text-center">
-                          <Quote className="mb-4 h-10 w-10 text-primary" />
-                          <p className="mb-4 text-lg font-medium">
-                            "{testimonial.quote}"
-                          </p>
-                          <div className="flex items-center gap-3">
-                            <Image
-                              src={testimonial.image}
-                              alt={testimonial.author}
-                              data-ai-hint={testimonial.hint}
-                              width={40}
-                              height={40}
-                              className="rounded-full"
-                            />
-                            <span className="font-semibold">
-                              {testimonial.author}
-                            </span>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-          </div>
-        </section>
-
-        {/* Events Section */}
-        <section id="events" className="bg-muted/40 py-12 md:py-24">
-          <div className="container px-4 md:px-6">
-            <div className="mb-12 space-y-3 text-center">
-              <h2 className="font-headline text-3xl font-bold md:text-4xl">
-                Upcoming Events & Campaigns
-              </h2>
-              <p className="mx-auto max-w-2xl text-muted-foreground">
-                Get involved! Join our events to support our causes and connect
-                with our community.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {events.map((event, index) => (
-                <Card key={index} className="group overflow-hidden">
-                  <div className="relative h-48">
-                    <Image
-                      src={event.image}
-                      alt={event.title}
-                      data-ai-hint={event.hint}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="font-headline">
-                      {event.title}
-                    </CardTitle>
-                    <CardDescription>{event.date}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{event.description}</p>
-                  </CardContent>
-                  <CardFooter>
-                    <Button variant="outline">Learn More</Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Donation Section */}
-        <section id="donate" className="py-12 md:py-24">
-          <div className="container">
-            <div className="grid items-center gap-12 md:grid-cols-2">
-              <div className="space-y-4">
-                <h2 className="font-headline text-3xl font-bold md:text-4xl">
-                  Your Contribution Matters
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  Every donation, big or small, empowers communities and fuels
-                  our initiatives. Join us in making a lasting impact today.
-                </p>
-                <div className="relative aspect-video">
-                   <Image
-                    src="https://placehold.co/600x400"
-                    alt="Happy children receiving aid"
-                    data-ai-hint="children smiling"
-                    fill
-                    className="rounded-lg object-cover shadow-md"
-                  />
-                </div>
-              </div>
-              <Card className="p-6 sm:p-8">
-                <CardHeader>
-                  <CardTitle className="font-headline text-2xl">
-                    Secure Donation
-                  </CardTitle>
-                  <CardDescription>
-                    Choose an amount and make a difference.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <Tabs defaultValue="one-time">
-                    <TabsList className="grid w-full grid-cols-2">
-                      <TabsTrigger value="one-time">One-Time</TabsTrigger>
-                      <TabsTrigger value="monthly">Monthly</TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="one-time" className="mt-4">
-                      <DonationForm />
-                    </TabsContent>
-                    <TabsContent value="monthly" className="mt-4">
-                      <DonationForm isMonthly={true} />
-                    </TabsContent>
-                  </Tabs>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Chatbot />
-    </>
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background">
+      <ConcernLogo className="text-6xl md:text-8xl" />
+      <div className="h-8">
+        <p
+          className={`mt-4 text-xl md:text-2xl text-muted-foreground transition-opacity duration-1000 ${
+            showTagline ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          where you discover change
+        </p>
+      </div>
+    </div>
   );
 }
 
-function DonationForm({ isMonthly = false }: { isMonthly?: boolean }) {
-  const amounts = [25, 50, 100, 250];
+const facilities = [
+  'In-Patient / Out-Patient services',
+  'De-toxification, Psychotherapy, Group therapy',
+  'Individual, Family, child, and marital counselling',
+  'Community awareness programmes',
+  'Transit home and peer support',
+  'Free Drop-in counseling center for children and women of chemical dependants',
+  'Life style modifications',
+  'Guide to various related References',
+  'In house kitchen',
+  'Guide to Alcoholics Anonymous (AA), Narcotics Anonymous and Al-Anon',
+  'Free Drop-In Counselling Centre for Children & Women of Chemical Dependants',
+];
+
+export default function Home() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <SplashScreen />;
+  }
+
   return (
-    <div className="space-y-6">
-      <RadioGroup
-        defaultValue="50"
-        className="grid grid-cols-2 gap-4 sm:grid-cols-4"
-      >
-        {amounts.map((amount) => (
-          <div key={amount}>
-            <RadioGroupItem
-              value={String(amount)}
-              id={`amount-${amount}-${isMonthly}`}
-              className="peer sr-only"
-            />
-            <Label
-              htmlFor={`amount-${amount}-${isMonthly}`}
-              className="flex cursor-pointer flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-            >
-              ${amount}
-            </Label>
+    <main className="flex-1">
+      <section className="bg-muted/20 py-12 md:py-24">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-5xl">
+              About Us
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              We are, a Non-Governmental Organisation (NGO) working in the field of addiction - rehabilitation. We wish to share the benefits with other suffering men and women and their families. Members of CONCERN have enormous experience in dealing with addiction at various levels with both men and women. Equipped with academic, professional and practical experience in the area of addiction treatment. We made it our Mission to Share our Very Personal Experience and Success. At CONCERN we perceive the grip of addiction as a specific disorder and treat them in simple, medical and psychological method with Holistic Approach.
+            </p>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Bhanu Suresh Babu Project Director treats with a Dedicated Tailor Made Program to suit individuals' need and people of CONCERN have practical experience with professional training and academics. We walk hand in hand with the clients exploring the problem areas and finding solutions to guide them in the process of recovery.
+            </p>
           </div>
-        ))}
-      </RadioGroup>
-      <div className="flex">
-        <span className="inline-flex h-10 items-center rounded-l-md border border-r-0 bg-muted px-3">
-          $
-        </span>
-        <Input
-          type="number"
-          placeholder="Custom Amount"
-          className="rounded-l-none"
-        />
-      </div>
-      <Button className="w-full" size="lg">
-        Donate {isMonthly ? 'Monthly' : 'Now'}
-      </Button>
-    </div>
+        </div>
+      </section>
+
+      <section className="py-12 md:py-24">
+        <div className="container grid gap-12 px-4 md:grid-cols-2 md:px-6">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold">Facilities</h2>
+            <ul className="space-y-3">
+              {facilities.map((facility, index) => (
+                <li key={index} className="flex items-start">
+                  <CheckCircle className="mr-3 mt-1 h-5 w-5 flex-shrink-0 text-green-600" />
+                  <span>{facility}</span>
+                </li>
+              ))}
+            </ul>
+             <p className="text-muted-foreground">
+              The Comprehensive care with coping skills in our rehabilitation program guides the individual to cope up with the demands of daily living without addictive substance. The Holistic approach of our protocol is adapted to these special individuals' needs.
+            </p>
+          </div>
+          <div className="space-y-8">
+            <div className="rounded-lg border bg-card p-6 shadow-sm">
+              <h3 className="mb-2 text-2xl font-bold">VISION</h3>
+              <p className="text-muted-foreground italic">
+                "CONCERN’S concern is to Identify, Explore and Guide to Change."
+              </p>
+            </div>
+            <div className="rounded-lg border bg-card p-6 shadow-sm">
+              <h3 className="mb-2 text-2xl font-bold">MISSION</h3>
+              <p className="text-muted-foreground">
+                "To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of CONCERN’S concern in terms of Quality and Quantity."
+              </p>
+            </div>
+            <div className="rounded-lg border bg-card p-6 shadow-sm">
+              <h3 className="mb-2 text-2xl font-bold">VALUES</h3>
+              <p className="text-muted-foreground">
+                "Transparency, Empathy, Learning and Listening, Parting knowledge and experience Belongingness, Eventual CHANGE"
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
