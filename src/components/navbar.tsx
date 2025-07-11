@@ -13,12 +13,12 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/our-team', label: 'Our Team' },
   { href: '/gallery', label: 'Gallery' },
+  { href: '/events', label: 'Events' },
   { href: '/self-diagnosis', label: 'Self Diagnosis' },
   { href: '/sadd', label: 'SADD' },
   { href: '/therapy', label: 'Therapy' },
   { href: '/training', label: 'Training' },
   { href: '/mosje', label: 'MoSJE' },
-  { href: '/contact-us', label: 'Contact Us' },
 ];
 
 export default function Navbar() {
@@ -29,9 +29,6 @@ export default function Navbar() {
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-x-8 md:flex">
-          <Link href="/">
-             <ConcernLogo className='text-2xl' />
-          </Link>
           <div className="flex items-center gap-x-4 text-sm font-medium">
             {navLinks.map((link) => (
                <Link
@@ -52,15 +49,12 @@ export default function Navbar() {
         <Button asChild className="hidden md:flex bg-accent text-accent-foreground hover:bg-accent/90">
           <Link href="/contact-us">
             <Send />
-            Enquire Now
+            Contact Us
           </Link>
         </Button>
 
         {/* Mobile Navigation */}
-        <div className="flex w-full items-center justify-between md:hidden">
-            <Link href="/">
-                <ConcernLogo className='text-2xl' />
-            </Link>
+        <div className="flex w-full items-center justify-end md:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
@@ -90,6 +84,14 @@ export default function Navbar() {
                     </Link>
                   </SheetClose>
                 ))}
+                 <SheetClose asChild>
+                    <Button asChild className="mt-4 bg-accent text-accent-foreground hover:bg-accent/90">
+                        <Link href="/contact-us">
+                            <Send />
+                            Contact Us
+                        </Link>
+                    </Button>
+                </SheetClose>
               </div>
             </SheetContent>
           </Sheet>
