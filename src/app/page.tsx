@@ -35,15 +35,15 @@ function SplashScreen({ onComplete }: { onComplete: () => void }) {
 }
 
 const facilities = [
-  'In-Patient / Out-Patient services',
-  'De-toxification, Psychotherapy, Group therapy',
-  'Individual, Family, child, and marital counselling',
-  'Community awareness programmes',
-  'Transit home and peer support',
-  'Free Drop-in counseling center for children and women of chemical dependants',
-  'Life style modifications',
-  'Guide to various related References',
-  'In house kitchen',
+  'In-Patient / Out-Patient Services',
+  'De-Toxification, Psychotherapy, Group Therapy',
+  'Individual, Family, Child, and Marital Counselling',
+  'Community Awareness Programmes',
+  'Transit Home and Peer Support',
+  'Free Drop-in Counseling Center for Children and Women of Chemical Dependants',
+  'Life Style Modifications',
+  'Guide to Various Related References',
+  'In House Kitchen',
   'Guide to Alcoholics Anonymous (AA), Narcotics Anonymous and Al-Anon',
   'Free Drop-In Counselling Centre for Children & Women of Chemical Dependants',
 ];
@@ -58,7 +58,9 @@ export default function Home() {
   }, []);
 
   const handleSplashComplete = () => {
-    sessionStorage.setItem('splashShownThisSession', 'true');
+    if (typeof window !== 'undefined') {
+        sessionStorage.setItem('splashShownThisSession', 'true');
+    }
     setShowSplash(false);
   };
 
@@ -77,7 +79,7 @@ export default function Home() {
                   We are a Non-Governmental Organisation (NGO) working in the field of addiction - rehabilitation. We wish to share the benefits with other suffering men and women and their families. Members of <span className="text-primary font-semibold">CONCERN</span> have enormous experience in dealing with addiction at various levels with both men and women. Equipped with academic, professional and practical experience in the area of addiction treatment. We made it our Mission to Share our Very Personal Experience and Success. At <span className="text-primary font-semibold">CONCERN</span> we perceive the grip of addiction as a specific disorder and treat them in simple, medical and psychological method with Holistic Approach.
                 </p>
                 <p className="mt-4 text-lg text-muted-foreground text-justify">
-                  <span className="text-primary font-semibold">Bhanu Suresh Babu</span> (Project Director) treats with a Dedicated Tailor Made Program to suit individuals' need and people of <span className="text-primary font-semibold">CONCERN</span> have practical experience with professional training and academics. We walk hand in hand with the clients exploring the problem areas and finding solutions to guide them in the process of recovery.
+                  <span className="font-semibold text-primary">Bhanu Suresh Babu</span> (Project Director) treats with a Dedicated Tailor Made Program to suit individuals' need and people of <span className="font-semibold text-primary">CONCERN</span> have practical experience with professional training and academics. We walk hand in hand with the clients exploring the problem areas and finding solutions to guide them in the process of recovery.
                 </p>
               </div>
               <div className="flex items-center justify-center">
@@ -114,19 +116,19 @@ export default function Home() {
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold">VISION</h3>
                 <p className="text-muted-foreground italic text-justify">
-                  "<span className="text-primary font-semibold">CONCERN’S</span> concern is to Identify, Explore and Guide to Change."
+                  <span className="text-primary font-semibold">CONCERN’S</span> concern is to Identify, Explore and Guide to Change.
                 </p>
               </div>
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold">MISSION</h3>
                 <p className="text-muted-foreground text-justify">
-                  "To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of <span className="text-primary font-semibold">CONCERN’S</span> concern in terms of Quality and Quantity."
+                  To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of <span className="text-primary font-semibold">CONCERN’S</span> concern in terms of Quality and Quantity.
                 </p>
               </div>
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold">VALUES</h3>
                 <p className="text-muted-foreground text-justify">
-                  "Transparency, Empathy, Learning and Listening, Parting knowledge and experience Belongingness, Eventual CHANGE"
+                  Transparency, Empathy, Learning and Listening, Parting knowledge and experience Belongingness, Eventual CHANGE
                 </p>
               </div>
             </div>
