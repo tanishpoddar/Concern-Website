@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Menu, Send } from 'lucide-react';
-import { ConcernLogo } from './logo';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -55,8 +54,7 @@ export default function Navbar() {
         </Button>
 
         {/* Mobile Navigation */}
-        <div className="flex w-full items-center justify-between lg:hidden">
-           <ConcernLogo className="text-2xl" />
+        <div className="flex w-full items-center justify-end lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
@@ -67,7 +65,7 @@ export default function Navbar() {
             <SheetContent side="left" className="w-[80vw] flex flex-col">
                 <SheetHeader className="mb-6 text-left border-b pb-4">
                   <SheetTitle>
-                    <ConcernLogo className="text-3xl" />
+                    Menu
                   </SheetTitle>
                 </SheetHeader>
                 <ScrollArea className="flex-grow">
