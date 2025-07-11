@@ -5,32 +5,30 @@ import {ConcernLogo} from '@/components/logo';
 import Image from 'next/image';
 
 function SplashScreen() {
-  const [hideSplash, setHideSplash] = useState(false);
+  const [isHiding, setIsHiding] = useState(false);
 
   useEffect(() => {
-    // Hide splash screen after 2.5 seconds
-    const hideTimer = setTimeout(() => {
-      setHideSplash(true);
-    }, 2500);
-    return () => {
-      clearTimeout(hideTimer);
-    };
+    const timer = setTimeout(() => {
+      setIsHiding(true);
+    }, 2500); // Start hiding after 2.5 seconds
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-1000 ${
-        hideSplash ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        isHiding ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      <Image
-        src="https://cijik.com/uploads/rehabs/1273.jpg"
-        alt="Concern Building"
-        layout="fill"
-        objectFit="cover"
-        className="transition-opacity duration-1000"
-        priority
-      />
+       <Image
+          src="https://cijik.com/uploads/rehabs/1273.jpg"
+          alt="Concern Building"
+          width={400}
+          height={100}
+          className="h-auto w-64 rounded-lg object-contain md:w-80"
+          priority
+        />
     </div>
   );
 }
@@ -54,11 +52,15 @@ export default function Home() {
 
   useEffect(() => {
     // Check session storage to see if splash has been shown
-    const splashShown = sessionStorage.getItem('splashShown');
-    if (splashShown) {
+    if (sessionStorage.getItem('splashShown')) {
       setShowSplash(false);
     } else {
       sessionStorage.setItem('splashShown', 'true');
+      // Hide the splash component from the DOM after the transition is complete
+      const timer = setTimeout(() => {
+        setShowSplash(false);
+      }, 3500); // This should be longer than the splash duration + transition
+      return () => clearTimeout(timer);
     }
   }, []);
 
