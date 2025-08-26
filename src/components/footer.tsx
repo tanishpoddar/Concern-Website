@@ -28,13 +28,13 @@ export default function Footer() {
               A Non-Governmental Organisation (NGO) working in the field of addiction - rehabilitation.
             </p>
              <div className="mt-4 flex justify-center space-x-4 md:justify-start">
-                <Link href="#" aria-label="Facebook page for CONCERN" className="text-muted-foreground hover:text-[#1877F2] transition-colors">
+                <Link href="https://www.facebook.com/share/1CeEcv2GzZ/" target="_blank" rel="noopener noreferrer" aria-label="Facebook page for CONCERN" className="text-muted-foreground hover:text-[#1877F2] transition-colors">
                   <Facebook />
                 </Link>
-                <Link href="#" aria-label="X page for CONCERN" className="text-muted-foreground hover:text-black transition-colors">
+                <Link href="https://x.com/ConcernRehab?t=ivclDgERWan4iWRvHqarwg&s=09" target="_blank" rel="noopener noreferrer" aria-label="X page for CONCERN" className="text-muted-foreground hover:text-black transition-colors">
                   <XLogo />
                 </Link>
-                <Link href="#" aria-label="Instagram page for CONCERN" className="text-muted-foreground hover:text-[#E4405F] transition-colors">
+                <Link href="https://www.instagram.com/sureshbabu_60?igsh=ejd0djdydW5jOHJ3" target="_blank" rel="noopener noreferrer" aria-label="Instagram page for CONCERN" className="text-muted-foreground hover:text-[#E4405F] transition-colors">
                   <Instagram />
                 </Link>
                 <Link href="#" aria-label="LinkedIn page for CONCERN" className="text-muted-foreground hover:text-[#0A66C2] transition-colors">
