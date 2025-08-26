@@ -9,8 +9,6 @@ const GALLERY_FOLDER_ID = process.env.GOOGLE_DRIVE_FOLDER_ID!;
 const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      // The private key is sensitive and should be stored in an environment variable.
-      // Make sure to replace the `\n` characters in the key with actual newlines.
       private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
     },
     scopes: ['https://www.googleapis.com/auth/drive.readonly'],
@@ -64,8 +62,7 @@ function slugToTitle(slug: string): string {
   return slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
-    .replace(/ And /g, ' & '); // Handle the '&' case
+    .join(' ');
 }
 
 export async function GET(

@@ -27,7 +27,7 @@ async function getImagesForAlbum(album: string): Promise<{ id: string; name: str
 // We need a title mapping here or fetch it from an API
 // For simplicity, we'll keep the static map but this could also be dynamic
 const albums: { [key: string]: { title: string; hint: string } } = {
-  'ministry-of-social-justice-empowerment': { title: 'Ministry of Social Justice & Empowerment', hint: 'government building' },
+  'ministry-of-social-justice-and-empowerment': { title: 'Ministry of Social Justice and Empowerment', hint: 'government building' },
   'synopsis': { title: 'Synopsis', hint: 'summary document' },
   'training-programmes': { title: 'Training Programmes', hint: 'training session' },
   'concern-premises': { title: 'Concern Premises', hint: 'office building' },
@@ -69,7 +69,6 @@ export default function AlbumPage() {
       setIsLoading(true);
       const fetchedImages = await getImagesForAlbum(albumSlug);
       setImages(fetchedImages);
-      // We set the total count here after fetching the images
       setCount(fetchedImages.length);
       setIsLoading(false);
     };
@@ -101,8 +100,9 @@ export default function AlbumPage() {
 
   const renderCarouselItems = () => {
     if (isLoading) {
-      // Show 5 skeleton loaders while fetching
-      return Array.from({ length: 5 }).map((_, index) => (
+      // Show skeleton loaders based on a default or a fetched count
+      const skeletonCount = count > 0 ? count : 5;
+      return Array.from({ length: skeletonCount }).map((_, index) => (
         <CarouselItem key={`skeleton-${index}`}>
           <Card className="overflow-hidden rounded-xl shadow-lg">
             <CardContent className="relative flex aspect-video items-center justify-center p-0">
@@ -152,7 +152,7 @@ export default function AlbumPage() {
           setApi={setApi}
           opts={{
             align: 'start',
-            loop: true,
+            loop: images.length > 1, // Only loop if there is more than one image
           }}
           className="w-full max-w-sm md:max-w-4xl"
         >
