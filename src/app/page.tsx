@@ -6,10 +6,10 @@ import { CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 
 const managementCommittee = [
-  { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust' },
-  { name: 'Mr. P. Suresh Babu, M.B.A., C.A.I.I.B., D.C.A.', role: 'Secretary, CONCERN Trust' },
-  { name: 'Mrs. Pavithra Chamraj, M.Sc., (Med. Bio Genetics)', role: 'Treasurer, CONCERN Trust' },
-  { name: 'Mrs. Asha Vinay, M.S.W., (Med Psy)., MPhil., B.Ed.', role: 'Trust Board Advisory member' },
+  { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust', imgSrc: '/images/committee/1.jpg' },
+  { name: 'Mr. P. Suresh Babu, M.B.A., C.A.I.I.B., D.C.A.', role: 'Secretary, CONCERN Trust', imgSrc: '/images/committee/2.jpg' },
+  { name: 'Mrs. Pavithra Chamraj, M.Sc., (Med. Bio Genetics)', role: 'Treasurer, CONCERN Trust', imgSrc: '/images/committee/3.jpg' },
+  { name: 'Mrs. Asha Vinay, M.S.W., (Med Psy)., MPhil., B.Ed.', role: 'Trust Board Advisory member', imgSrc: '/images/committee/4.jpg' },
 ];
 
 const facilities = [
@@ -63,19 +63,19 @@ export default function Home() {
             </div>
             <div className="space-y-6 flex flex-col justify-center">
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
-                <h3 className="mb-2 text-2xl font-bold">VISION</h3>
+                <h3 className="mb-2 text-2xl font-bold text-primary">VISION</h3>
                 <p className="text-muted-foreground italic text-justify">
                   <span className="font-semibold text-primary">CONCERN'S</span> concern is to Identify, Explore and Guide to Change.
                 </p>
               </div>
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
-                <h3 className="mb-2 text-2xl font-bold">MISSION</h3>
+                <h3 className="mb-2 text-2xl font-bold text-primary">MISSION</h3>
                 <p className="text-muted-foreground text-justify">
                   To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of <span className="font-semibold text-primary">CONCERN'S</span> concern in terms of Quality and Quantity.
                 </p>
               </div>
               <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
-                <h3 className="mb-2 text-2xl font-bold">VALUES</h3>
+                <h3 className="mb-2 text-2xl font-bold text-primary">VALUES</h3>
                 <p className="text-muted-foreground text-justify">
                   Transparency, Empathy, Learning and Listening, Parting knowledge and experience Belongingness, Eventual CHANGE
                 </p>
@@ -96,8 +96,8 @@ export default function Home() {
                 <Card key={index} className="text-center transition-shadow hover:shadow-xl">
                 <CardContent className="flex flex-col items-center pt-6">
                     <Avatar className="h-24 w-24 mb-4">
-                    <AvatarImage src={`https://picsum.photos/200/200?random=${index}`} alt={member.name} data-ai-hint="person professional" />
-                    <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+                    <AvatarImage src={member.imgSrc} alt={member.name} data-ai-hint="person professional" />
+                    <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                     </Avatar>
                     <p className="font-bold text-lg">{member.name}</p>
                     <p className="text-sm text-muted-foreground">{member.role}</p>
@@ -122,7 +122,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {facilities.map((facility, index) => (
-              <Card key={index} className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg">
+              <Card key={index} className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full">
                 <div className="flex items-start">
                     <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
                     <p className="text-base text-card-foreground">{facility}</p>
