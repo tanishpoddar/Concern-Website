@@ -6,18 +6,9 @@ import { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { ArrowPathIcon, CheckCircleIcon } from '@heroicons/react/24/solid'; // Using Heroicons for a slightly different style
-import type { Metadata } from 'next';
 import { Lightbulb } from "lucide-react";
+import { motion } from 'framer-motion';
 
-
-// Metadata cannot be exported from a client component. 
-// It should be moved to a parent layout or page if needed.
-// For now, we will keep it here but with the understanding it won't work in a 'use client' file as-is.
-// export const metadata: Metadata = {
-//   title: 'Self-Assessments for Alcoholism',
-//   description: 'Take confidential self-assessment tests for alcoholism, including the SADD questionnaire and a self-diagnosis test based on criteria from John Hopkins University Hospital.',
-// };
 
 const selfDiagnosisQuestions = [
   "Do you lose time from work due to drinking?",
@@ -137,24 +128,27 @@ export default function AssessmentsPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {selfDiagnosisQuestions.map((question, index) => (
-                    <div key={index} className="border-b pb-4 last:border-b-0">
-                      <p className="font-semibold">{`${index + 1}. ${question}`}</p>
-                      <RadioGroup
-                        onValueChange={(value) => handleSelfDiagnosisChange(index, value as 'yes' | 'no')}
-                        className="mt-3 flex space-x-6"
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="yes" id={`sd-yes-${index}`} />
-                          <Label htmlFor={`sd-yes-${index}`}>Yes</Label>
+                     <div key={index} className="rounded-lg border bg-card text-card-foreground p-4 transition-shadow hover:shadow-md">
+                        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4">
+                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">{index + 1}</span>
+                            <p className="font-semibold text-sm md:text-base flex-grow">{question}</p>
+                             <RadioGroup
+                                onValueChange={(value) => handleSelfDiagnosisChange(index, value as 'yes' | 'no')}
+                                className="flex space-x-6"
+                                >
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="yes" id={`sd-yes-${index}`} />
+                                    <Label htmlFor={`sd-yes-${index}`}>Yes</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="no" id={`sd-no-${index}`} />
+                                    <Label htmlFor={`sd-no-${index}`}>No</Label>
+                                </div>
+                            </RadioGroup>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="no" id={`sd-no-${index}`} />
-                          <Label htmlFor={`sd-no-${index}`}>No</Label>
-                        </div>
-                      </RadioGroup>
-                    </div>
+                     </div>
                   ))}
                 </div>
                  <Button onClick={calculateSelfDiagnosis} className="mt-8 w-full" disabled={!allSelfDiagnosisAnswered}>
@@ -164,21 +158,27 @@ export default function AssessmentsPage() {
             </Card>
 
             {selfDiagnosisResult && (
-                 <Card className="mt-6 bg-accent/20 shadow-md border-accent">
-                    <CardHeader>
-                        <CardTitle className="text-xl text-primary md:text-2xl flex items-center gap-2">
-                            <Lightbulb className="h-6 w-6"/>
-                            Your Result
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-lg font-semibold text-accent-foreground">{selfDiagnosisResult}</p>
-                        <p className="pt-4 text-xs text-muted-foreground text-justify">
-                            This is not a medical diagnosis. If you are concerned about your drinking, please consult with a healthcare professional.
-                            Courtesy and Reference - The above test questions are used by John Hopkins University Hospital, Baltimore.
-                        </p>
-                    </CardContent>
-                </Card>
+                 <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <Card className="mt-6 bg-accent/20 shadow-md border-accent">
+                        <CardHeader>
+                            <CardTitle className="text-xl text-primary md:text-2xl flex items-center gap-2">
+                                <Lightbulb className="h-6 w-6"/>
+                                Your Result
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-lg font-semibold text-accent-foreground">{selfDiagnosisResult}</p>
+                            <p className="pt-4 text-xs text-muted-foreground text-justify">
+                                This is not a medical diagnosis. If you are concerned about your drinking, please consult with a healthcare professional.
+                                Courtesy and Reference - The above test questions are used by John Hopkins University Hospital, Baltimore.
+                            </p>
+                        </CardContent>
+                    </Card>
+                 </motion.div>
             )}
           </TabsContent>
 
@@ -191,24 +191,27 @@ export default function AssessmentsPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-6">
+                <div className="space-y-4">
                   {saddQuestions.map((question, index) => (
-                    <li key={index} className="border-b pb-4 last:border-b-0">
-                      <p className="font-semibold">{`${index + 1}. ${question}`}</p>
-                      <RadioGroup
-                        onValueChange={(value) => handleSaddChange(index, value)}
-                        className="mt-3 grid grid-cols-2 gap-2 sm:flex sm:space-x-6"
-                      >
-                        {saddOptions.map((option) => (
-                          <div key={option.value} className="flex items-center space-x-2">
-                            <RadioGroupItem value={option.value.toString()} id={`sadd-${index}-${option.value}`} />
-                            <Label htmlFor={`sadd-${index}-${option.value}`}>{option.label}</Label>
-                          </div>
-                        ))}
-                      </RadioGroup>
-                    </li>
+                    <div key={index} className="rounded-lg border bg-card text-card-foreground p-4 transition-shadow hover:shadow-md">
+                        <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] items-center gap-4">
+                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold md:mb-0 mb-2">{index + 1}</span>
+                             <p className="font-semibold text-sm md:text-base flex-grow">{question}</p>
+                            <RadioGroup
+                                onValueChange={(value) => handleSaddChange(index, value)}
+                                className="grid grid-cols-2 gap-2 sm:flex sm:space-x-4 justify-start md:justify-end"
+                            >
+                                {saddOptions.map((option) => (
+                                <div key={option.value} className="flex items-center space-x-2">
+                                    <RadioGroupItem value={option.value.toString()} id={`sadd-${index}-${option.value}`} />
+                                    <Label htmlFor={`sadd-${index}-${option.value}`}>{option.label}</Label>
+                                </div>
+                                ))}
+                            </RadioGroup>
+                        </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
                 <Button onClick={calculateSadd} className="mt-8 w-full" disabled={!allSaddAnswered}>
                     Show My Result
                 </Button>
@@ -216,21 +219,27 @@ export default function AssessmentsPage() {
             </Card>
 
             {saddResult && (
-                 <Card className="mt-6 bg-accent/20 shadow-md border-accent">
-                    <CardHeader>
-                        <CardTitle className="text-xl text-primary md:text-2xl flex items-center gap-2">
-                           <Lightbulb className="h-6 w-6"/>
-                            Your Result
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-lg font-semibold text-accent-foreground">{saddResult}</p>
-                         <p className="pt-4 text-xs text-muted-foreground text-justify">
-                           This is not a medical diagnosis. If you are concerned about your drinking, please consult with a healthcare professional.
-                           Courtesy and Reference - Raistrick, Dunbar and R.Davidson. British Journal of addiction 78.pp. 89-95. 1983.
-                        </p>
-                    </CardContent>
-                </Card>
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <Card className="mt-6 bg-accent/20 shadow-md border-accent">
+                        <CardHeader>
+                            <CardTitle className="text-xl text-primary md:text-2xl flex items-center gap-2">
+                                <Lightbulb className="h-6 w-6"/>
+                                Your Result
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-lg font-semibold text-accent-foreground">{saddResult}</p>
+                            <p className="pt-4 text-xs text-muted-foreground text-justify">
+                                This is not a medical diagnosis. If you are concerned about your drinking, please consult with a healthcare professional.
+                                Courtesy and Reference - Raistrick, Dunbar and R.Davidson. British Journal of addiction 78.pp. 89-95. 1983.
+                            </p>
+                        </CardContent>
+                    </Card>
+                </motion.div>
             )}
           </TabsContent>
         </Tabs>
