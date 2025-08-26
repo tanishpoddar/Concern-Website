@@ -108,11 +108,10 @@ export default function Home() {
               </div>
               <div className="flex items-center justify-center">
                 <Image
-                  src="https://placehold.co/600x400.png"
-                  alt="A diverse group of people in a supportive therapy session"
+                  src="/images/About Us with Logo.jpg"
+                  alt="About CONCERN with their logo"
                   width={600}
                   height={400}
-                  data-ai-hint="community support group"
                   className="rounded-xl object-cover shadow-lg"
                 />
               </div>
