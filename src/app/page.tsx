@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* About Us & Vision/Mission Section */}
-      <section className="bg-secondary/50 py-8 md:py-12">
+      <section className="py-8 md:py-12">
         <div className="container px-4 md:px-6">
           <div className="grid gap-8 md:grid-cols-2 md:gap-16">
             <div className="flex flex-col justify-center space-y-4">
@@ -72,7 +72,7 @@ export default function Home() {
       </section>
       
       {/* Image Section */}
-      <section className="py-8 md:py-10">
+      <section className="py-4 md:py-5">
         <div className="container px-4 md:px-6">
            <div className="mx-auto max-w-5xl overflow-hidden rounded-xl shadow-lg">
             <Image
@@ -91,7 +91,7 @@ export default function Home() {
       {/* Management Committee Section */}
        <section className="py-8 md:py-12">
         <div className="container px-4 md:px-6">
-            <h2 className="text-center text-3xl font-bold text-primary md:text-4xl mb-12">
+            <h2 className="text-center text-3xl font-bold text-primary md:text-4xl mb-8">
             Meet Our Management Committee
             </h2>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -115,7 +115,7 @@ export default function Home() {
       {/* Facilities Section */}
       <section className="bg-secondary/50 py-8 md:py-12">
         <div className="container px-4 md:px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-primary md:text-4xl">
               Our Facilities
             </h2>
