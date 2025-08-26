@@ -37,7 +37,7 @@ export default function Footer() {
                 <Link href="https://www.instagram.com/sureshbabu_60?igsh=ejd0djdydW5jOHJ3" target="_blank" rel="noopener noreferrer" aria-label="Instagram page for CONCERN" className="text-muted-foreground hover:text-[#E4405F] transition-colors">
                   <Instagram />
                 </Link>
-                <Link href="#" aria-label="LinkedIn page for CONCERN" className="text-muted-foreground hover:text-[#0A66C2] transition-colors">
+                <Link href="https://www.linkedin.com/company/concern-rehab" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn page for CONCERN" className="text-muted-foreground hover:text-[#0A66C2] transition-colors">
                   <Linkedin />
                 </Link>
                  <Link href="https://www.youtube.com/@whereyoudiscoverchange" target="_blank" rel="noopener noreferrer" aria-label="Youtube channel for CONCERN" className="text-muted-foreground hover:text-[#FF0000] transition-colors">
