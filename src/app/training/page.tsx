@@ -95,7 +95,7 @@ export default function TrainingPage() {
         >
             <Card className="bg-secondary/50 shadow-md">
             <CardHeader>
-                <CardTitle className="text-xl md:text-2xl text-primary">If we can help you, please contact us.</CardTitle>
+                <CardTitle className="text-xl md:text-2xl text-primary">If We Can Help You, Please Contact Us.</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-muted-foreground">
                 <div className="flex flex-wrap gap-2">

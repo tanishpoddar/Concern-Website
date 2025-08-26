@@ -61,10 +61,10 @@ export default function Footer() {
               <p className="flex items-start text-left">
                 <span>CONCERN, Zonta Resource Centre, No.5, Manikam Nagar, Noothancheri, Madambakam, Chennai - 600 126.</span>
               </p>
-              <p className="flex items-baseline">
+              <a href="tel:04446865176" className="flex items-baseline hover:text-primary transition-colors">
                 <Phone className="mr-3 h-4 w-4 shrink-0 text-primary" />
                 <span>044 46865176</span>
-              </p>
+              </a>
             </address>
           </div>
           
@@ -75,10 +75,10 @@ export default function Footer() {
                   <Mail className="mr-3 h-4 w-4 shrink-0 text-primary" />
                   <span>concernrehab@gmail.com</span>
                 </a>
-                <p className="flex items-baseline">
+                <a href="tel:+919840800816" className="flex items-baseline hover:text-primary transition-colors">
                   <Phone className="mr-3 h-4 w-4 shrink-0 text-primary" />
                   <span>+91 9840800816</span>
-                </p>
+                </a>
               </div>
           </div>
 
