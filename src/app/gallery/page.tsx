@@ -42,8 +42,28 @@ const programmeIconMap: { [key: string]: React.ElementType } = {
 
 export default async function GalleryPage() {
   // Fetch albums dynamically from Google Drive
-  const programmeAlbums = await getAlbumsFromDrive('Programmes and Events');
+  const fetchedAlbums = await getAlbumsFromDrive('Programmes and Events');
   const yearAlbums = (await getAlbumsFromDrive('By Year')).sort((a,b) => b.title.localeCompare(a.title));
+
+  // Define the desired order for programme albums
+  const desiredOrder = [
+    'Ministry of Social Justice and Empowerment',
+    'Synopsis',
+    'Training Programmes',
+    'Concern Premises',
+    'Awareness Programmes',
+    'Award Recognitions',
+  ];
+
+  // Sort the fetched albums according to the desired order
+  const programmeAlbums = fetchedAlbums.sort((a, b) => {
+    const indexA = desiredOrder.indexOf(a.title);
+    const indexB = desiredOrder.indexOf(b.title);
+    // If an album is not in the desired order list, push it to the end.
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
 
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
