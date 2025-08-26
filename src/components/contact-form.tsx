@@ -23,9 +23,10 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Loader2, Send } from 'lucide-react';
+import { Loader2, Send, User, Phone, Mail } from 'lucide-react';
 import { sendContactEmail } from '@/app/contact-us/actions';
 import React from 'react';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -87,7 +88,7 @@ export default function ContactForm() {
           </p>
         </div>
 
-        <Card className="shadow-lg">
+        <Card className="shadow-lg transition-shadow hover:shadow-xl">
             <CardHeader>
                 <CardTitle>Enquiry Form</CardTitle>
                 <CardDescription>Please fill up and submit</CardDescription>
@@ -95,68 +96,83 @@ export default function ContactForm() {
             <CardContent>
                  <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                        <FormField
-                        control={form.control}
-                        name="title"
-                        render={({ field }) => (
-                            <FormItem>
-                            <FormLabel>Title</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
-                                <FormControl>
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Select a title" />
-                                </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                <SelectItem value="Mr">Mr</SelectItem>
-                                <SelectItem value="Mrs">Mrs</SelectItem>
-                                <SelectItem value="Miss">Miss</SelectItem>
-                                <SelectItem value="Ms">Ms</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                            </FormItem>
-                        )}
-                        />
-                        <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                            <FormLabel>Name</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Your Name" {...field} disabled={isPending}/>
-                            </FormControl>
-                            <FormMessage />
-                            </FormItem>
-                        )}
-                        />
-                        <FormField
-                        control={form.control}
-                        name="phone"
-                        render={({ field }) => (
-                            <FormItem>
-                            <FormLabel>Phone</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Your Phone Number" {...field} disabled={isPending}/>
-                            </FormControl>
-                            <FormMessage />
-                            </FormItem>
-                        )}
-                        />
-                        <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                            <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Your Email Address" {...field} disabled={isPending}/>
-                            </FormControl>
-                            <FormMessage />
-                            </FormItem>
-                        )}
-                        />
+                       <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+                            <FormField
+                            control={form.control}
+                            name="title"
+                            render={({ field }) => (
+                                <FormItem className="sm:col-span-1">
+                                <FormLabel>Title</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+                                    <FormControl>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select" />
+                                    </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                    <SelectItem value="Mr">Mr</SelectItem>
+                                    <SelectItem value="Mrs">Mrs</SelectItem>
+                                    <SelectItem value="Miss">Miss</SelectItem>
+                                    <SelectItem value="Ms">Ms</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                            />
+                            <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem className="sm:col-span-2">
+                                <FormLabel>Name</FormLabel>
+                                <div className="relative">
+                                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                    <FormControl>
+                                        <Input placeholder="Your Name" {...field} disabled={isPending} className="pl-10" />
+                                    </FormControl>
+                                </div>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                            />
+                       </div>
+
+                       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                            <FormField
+                                control={form.control}
+                                name="phone"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Phone</FormLabel>
+                                    <div className="relative">
+                                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                        <FormControl>
+                                            <Input placeholder="Your Phone Number" {...field} disabled={isPending} className="pl-10" />
+                                        </FormControl>
+                                    </div>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                             <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Email</FormLabel>
+                                    <div className="relative">
+                                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                        <FormControl>
+                                            <Input placeholder="Your Email Address" {...field} disabled={isPending} className="pl-10" />
+                                        </FormControl>
+                                    </div>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                       </div>
+                        
                         <FormField
                         control={form.control}
                         name="comments"
@@ -188,7 +204,7 @@ export default function ContactForm() {
             </CardContent>
         </Card>
 
-        <Card className="shadow-lg">
+        <Card className="shadow-lg transition-shadow hover:shadow-xl">
           <CardHeader>
             <CardTitle>Our Location</CardTitle>
             <CardDescription>Find us on the map</CardDescription>
