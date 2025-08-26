@@ -12,22 +12,22 @@ const reports = [
   {
     year: '2024-2025',
     description: 'Our latest report detailing activities, achievements, and financial overview for the fiscal year.',
-    fileUrl: '#',
+    fileUrl: '/pdfs/Annual Report 2024-2025.pdf',
   },
   {
     year: '2023-2024',
     description: 'A comprehensive summary of our work and progress throughout the 2023-2024 period.',
-    fileUrl: '#',
+    fileUrl: '/pdfs/Annual Report 2023-2024.pdf',
   },
   {
     year: '2022-2023',
     description: 'An overview of our initiatives, community outreach, and financial health from 2022-2023.',
-    fileUrl: '#',
+    fileUrl: '/pdfs/Annual Report 2022-2023.pdf',
   },
     {
     year: '2021-2022',
     description: 'Details on our programs and their impact during the 2021-2022 fiscal year.',
-    fileUrl: '#',
+    fileUrl: '/pdfs/Annual Report 2021-2022.pdf',
   },
 ];
 
@@ -53,7 +53,7 @@ export default function AnnualReportsPage() {
               </CardContent>
               <CardFooter>
                  <Button asChild className="w-full">
-                    <a href={report.fileUrl} download>
+                    <a href={report.fileUrl} download={`Annual Report ${report.year}.pdf`}>
                         <Download className="mr-2 h-4 w-4" />
                         Download PDF
                     </a>
