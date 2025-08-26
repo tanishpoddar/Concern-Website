@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, Youtube } from 'lucide-react';
 import { ConcernLogo } from './logo';
 
 const XLogo = () => (
@@ -39,6 +39,9 @@ export default function Footer() {
                 </Link>
                 <Link href="#" aria-label="LinkedIn page for CONCERN" className="text-muted-foreground hover:text-[#0A66C2] transition-colors">
                   <Linkedin />
+                </Link>
+                 <Link href="https://www.youtube.com/@whereyoudiscoverchange" target="_blank" rel="noopener noreferrer" aria-label="Youtube channel for CONCERN" className="text-muted-foreground hover:text-[#FF0000] transition-colors">
+                  <Youtube />
                 </Link>
             </div>
           </div>
