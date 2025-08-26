@@ -96,19 +96,33 @@ export async function GET(
         return NextResponse.json({ error: `Album folder '${albumInfo.name}' not found` }, { status: 404 });
     }
     
-    // 3. List images in the album folder
-    const imageRes = await drive.files.list({
-      q: `'${albumFolderId}' in parents and mimeType contains 'image/' and trashed=false`,
-      fields: 'files(id, name, webContentLink)', // webContentLink provides a direct download link
-      pageSize: 100, // Adjust as needed
-    });
+    // 3. List all images in the album folder with pagination
+    let images: { id: string; name: string; url: string; }[] = [];
+    let pageToken: string | undefined = undefined;
 
-    const images = imageRes.data.files?.map(file => ({
-      id: file.id!,
-      name: file.name!,
-      // The webContentLink is better for direct embedding in `<img>` tags.
-      url: file.webContentLink!.replace('&export=download', ''),
-    })) || [];
+    do {
+      const imageRes: any = await drive.files.list({
+        q: `'${albumFolderId}' in parents and mimeType contains 'image/' and trashed=false`,
+        fields: 'nextPageToken, files(id, name, webContentLink)',
+        pageSize: 1000, // Max page size
+        pageToken: pageToken,
+      });
+
+      const files = imageRes.data.files;
+      if (files && files.length > 0) {
+        const mappedImages = files.map((file: any) => ({
+          id: file.id!,
+          name: file.name!,
+          // The webContentLink is better for direct embedding in `<img>` tags.
+          url: file.webContentLink!.replace('&export=download', ''),
+        }));
+        images = images.concat(mappedImages);
+      }
+      
+      pageToken = imageRes.data.nextPageToken;
+
+    } while (pageToken);
+
 
     return NextResponse.json(images);
 
