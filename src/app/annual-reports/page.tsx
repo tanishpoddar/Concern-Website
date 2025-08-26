@@ -53,7 +53,7 @@ export default function AnnualReportsPage() {
               </CardContent>
               <CardFooter>
                  <Button asChild className="w-full">
-                    <a href={report.fileUrl} download={`Annual Report ${report.year}.pdf`}>
+                    <a href={report.fileUrl} target="_blank" rel="noopener noreferrer">
                         <Download className="mr-2 h-4 w-4" />
                         Download PDF
                     </a>
