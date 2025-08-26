@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
@@ -6,6 +7,7 @@ import { Inter } from 'next/font/google';
 import ClientNavbar from '@/components/client-navbar';
 import Footer from '@/components/footer';
 import BackToTop from '@/components/back-to-top';
+import PageTransition from '@/components/page-transition';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -57,7 +59,9 @@ export default function RootLayout({
         <Header />
         <ClientNavbar />
         <main className="flex-grow">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
         <Footer />
         <Toaster />
