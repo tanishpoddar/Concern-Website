@@ -147,7 +147,7 @@ export default function Home() {
                   <Card className="text-center transition-shadow hover:shadow-xl h-full">
                     <CardContent className="flex flex-col items-center pt-6">
                         <Avatar className="h-24 w-24 mb-4">
-                        <AvatarImage src={member.imgSrc} alt={member.name} data-ai-hint="person professional" />
+                        <AvatarImage src={member.imgSrc} alt={`${member.name}, ${member.role}`} />
                         <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                         </Avatar>
                         <p className="font-bold text-lg">{member.name}</p>
