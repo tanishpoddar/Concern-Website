@@ -1,3 +1,4 @@
+
 'use client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -29,23 +30,19 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[50vh] w-full">
-        <Image
-          src="/images/About Us with Logo.jpg"
-          alt="Community gathering"
-          fill
-          className="object-cover"
-          data-ai-hint="community support group"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
-          <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
-            Where You Discover Change
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-gray-200">
-            A Non-Governmental Organisation dedicated to addiction treatment and rehabilitation.
-          </p>
+      <section className="py-12 md:py-16">
+        <div className="container px-4 md:px-6">
+           <div className="mx-auto max-w-5xl overflow-hidden rounded-xl shadow-lg">
+            <Image
+              src="/images/About Us with Logo.jpg"
+              alt="CONCERN team and premises"
+              width={1200}
+              height={675}
+              className="h-auto w-full object-cover"
+              data-ai-hint="community support group"
+              priority
+            />
+          </div>
         </div>
       </section>
 
