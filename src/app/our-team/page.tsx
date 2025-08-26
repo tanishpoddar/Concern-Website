@@ -48,7 +48,7 @@ const pillarsOfStrength = [
     { name: 'Zonta Resource Center', role: 'Madambakkam, Chennai' },
     { name: 'Link Up Garments for CSR Activities', role: 'Erungattukottai, Chennai' },
     { name: 'Milestone Specialty Equipment P Ltd', role: '' },
-    { name 'Vastarakala Export P Ltd', role: 'Thirumuluzhi, Chennai' },
+    { name: 'Vastarakala Export P Ltd', role: 'Thirumuluzhi, Chennai' },
     { name: 'CGS Fashion P Ltd', role: 'Thiruvallur, Chennai' },
 ];
 
