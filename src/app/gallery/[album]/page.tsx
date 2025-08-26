@@ -63,30 +63,86 @@ export default function AlbumPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!api) return;
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api]);
-  
-  useEffect(() => {
     if (!albumSlug) return;
     
     const fetchImages = async () => {
       setIsLoading(true);
       const fetchedImages = await getImagesForAlbum(albumSlug);
       setImages(fetchedImages);
+      // We set the total count here after fetching the images
+      setCount(fetchedImages.length);
       setIsLoading(false);
     };
     fetchImages();
   }, [albumSlug]);
 
+  useEffect(() => {
+    if (!api) return;
+    
+    // Set initial state
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    // Listen for slide changes
+    const onSelect = () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    };
+    api.on("select", onSelect);
+    
+    // Cleanup listener on component unmount
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
 
   if (!albumDetails) {
     notFound();
   }
+
+  const renderCarouselItems = () => {
+    if (isLoading) {
+      // Show 5 skeleton loaders while fetching
+      return Array.from({ length: 5 }).map((_, index) => (
+        <CarouselItem key={`skeleton-${index}`}>
+          <Card className="overflow-hidden rounded-xl shadow-lg">
+            <CardContent className="relative flex aspect-video items-center justify-center p-0">
+              <Skeleton className="h-full w-full" />
+            </CardContent>
+          </Card>
+        </CarouselItem>
+      ));
+    }
+
+    if (images.length > 0) {
+      return images.map((image) => (
+        <CarouselItem key={image.id}>
+          <Card className="overflow-hidden rounded-xl shadow-lg">
+            <CardContent className="relative flex aspect-video items-center justify-center p-0">
+              <Image
+                src={image.url}
+                alt={image.name}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </CardContent>
+          </Card>
+        </CarouselItem>
+      ));
+    }
+
+    // This case handles after loading is finished and no images were found.
+    return (
+      <CarouselItem>
+         <Card>
+             <CardContent className="flex aspect-video items-center justify-center p-6">
+                 <p>No images found in this album.</p>
+             </CardContent>
+         </Card>
+      </CarouselItem>
+    );
+  };
+  
 
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
@@ -101,47 +157,17 @@ export default function AlbumPage() {
           className="w-full max-w-sm md:max-w-4xl"
         >
           <CarouselContent>
-            {isLoading ? (
-              Array.from({ length: 3 }).map((_, index) => (
-                <CarouselItem key={index}>
-                  <Card className="overflow-hidden rounded-xl shadow-lg">
-                    <CardContent className="relative flex aspect-video items-center justify-center p-0">
-                      <Skeleton className="h-full w-full" />
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              ))
-            ) : images.length > 0 ? (
-              images.map((image) => (
-                <CarouselItem key={image.id}>
-                  <Card className="overflow-hidden rounded-xl shadow-lg">
-                    <CardContent className="relative flex aspect-video items-center justify-center p-0">
-                      <Image
-                        src={image.url}
-                        alt={image.name}
-                        fill
-                        className="object-contain"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              ))
-            ) : (
-                 <CarouselItem>
-                    <Card>
-                        <CardContent className="flex aspect-video items-center justify-center p-6">
-                            <p>No images found in this album.</p>
-                        </CardContent>
-                    </Card>
-                 </CarouselItem>
-            )}
+            {renderCarouselItems()}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:inline-flex" />
-          <CarouselNext className="hidden md:inline-flex" />
+          {images.length > 1 && (
+            <>
+                <CarouselPrevious className="hidden md:inline-flex" />
+                <CarouselNext className="hidden md:inline-flex" />
+            </>
+          )}
         </Carousel>
       </div>
-      {!isLoading && images.length > 0 && (
+      {!isLoading && count > 0 && (
         <div className="py-4 text-center text-sm text-muted-foreground">
           Slide {current} of {count}
         </div>
