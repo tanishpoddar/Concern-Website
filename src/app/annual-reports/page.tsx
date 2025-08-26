@@ -17,17 +17,17 @@ const reports = [
   {
     year: '2023-2024',
     description: 'A comprehensive summary of our work and progress throughout the 2023-2024 period.',
-    fileUrl: '/pdfs/Annual Report 2023-2024.pdf',
+    fileUrl: '/pdfs/Annual Report 2023-24.pdf',
   },
   {
     year: '2022-2023',
     description: 'An overview of our initiatives, community outreach, and financial health from 2022-2023.',
-    fileUrl: '/pdfs/Annual Report 2022-2023.pdf',
+    fileUrl: '/pdfs/Annual Report 2022-23.pdf',
   },
     {
     year: '2021-2022',
     description: 'Details on our programs and their impact during the 2021-2022 fiscal year.',
-    fileUrl: '/pdfs/Annual Report 2021-2022.pdf',
+    fileUrl: '/pdfs/Annual Report 2021-22.pdf',
   },
 ];
 
