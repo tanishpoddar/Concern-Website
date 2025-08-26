@@ -1,13 +1,23 @@
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle2 } from "lucide-react";
-import Image from 'next/image';
+import { useState } from "react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { ArrowPathIcon, CheckCircleIcon } from '@heroicons/react/24/solid'; // Using Heroicons for a slightly different style
 import type { Metadata } from 'next';
+import { Lightbulb } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: 'Self-Assessments for Alcoholism',
-  description: 'Take confidential self-assessment tests for alcoholism, including the SADD questionnaire and a self-diagnosis test based on criteria from John Hopkins University Hospital.',
-};
+
+// Metadata cannot be exported from a client component. 
+// It should be moved to a parent layout or page if needed.
+// For now, we will keep it here but with the understanding it won't work in a 'use client' file as-is.
+// export const metadata: Metadata = {
+//   title: 'Self-Assessments for Alcoholism',
+//   description: 'Take confidential self-assessment tests for alcoholism, including the SADD questionnaire and a self-diagnosis test based on criteria from John Hopkins University Hospital.',
+// };
 
 const selfDiagnosisQuestions = [
   "Do you lose time from work due to drinking?",
@@ -50,9 +60,58 @@ const saddQuestions = [
   'Do you go drinking and the next day find that you have forgotten what happened the night before?',
 ];
 
-const saddOptions = ['Never', 'Sometimes', 'Often', 'Always'];
+const saddOptions = [
+    { label: 'Never', value: 0 },
+    { label: 'Sometimes', value: 1 },
+    { label: 'Often', value: 2 },
+    { label: 'Always', value: 3 },
+];
 
 export default function AssessmentsPage() {
+  const [selfDiagnosisAnswers, setSelfDiagnosisAnswers] = useState<{ [key: number]: string }>({});
+  const [saddAnswers, setSaddAnswers] = useState<{ [key: number]: number }>({});
+  const [selfDiagnosisResult, setSelfDiagnosisResult] = useState<string | null>(null);
+  const [saddResult, setSaddResult] = useState<string | null>(null);
+
+  const handleSelfDiagnosisChange = (index: number, value: 'yes' | 'no') => {
+    setSelfDiagnosisAnswers(prev => ({ ...prev, [index]: value }));
+    setSelfDiagnosisResult(null); // Reset result when an answer changes
+  };
+
+  const handleSaddChange = (index: number, value: string) => {
+    setSaddAnswers(prev => ({ ...prev, [index]: parseInt(value, 10) }));
+    setSaddResult(null); // Reset result when an answer changes
+  };
+
+  const calculateSelfDiagnosis = () => {
+    const yesCount = Object.values(selfDiagnosisAnswers).filter(ans => ans === 'yes').length;
+    if (yesCount >= 3) {
+      setSelfDiagnosisResult("You are definitely an alcoholic.");
+    } else if (yesCount === 2) {
+      setSelfDiagnosisResult("The chances are that you are an alcoholic.");
+    } else if (yesCount === 1) {
+      setSelfDiagnosisResult("There is a definite warning that you may be an alcoholic.");
+    } else {
+      setSelfDiagnosisResult("Your answers do not indicate signs of alcoholism. However, if you have any concerns, please consult a professional.");
+    }
+  };
+
+  const calculateSadd = () => {
+    const totalScore = Object.values(saddAnswers).reduce((sum, value) => sum + value, 0);
+    if (totalScore >= 20) {
+      setSaddResult(`Your score is ${totalScore}. This indicates a High level of alcohol dependence.`);
+    } else if (totalScore >= 10) {
+      setSaddResult(`Your score is ${totalScore}. This indicates a Medium level of alcohol dependence.`);
+    } else if (totalScore >= 1) {
+      setSaddResult(`Your score is ${totalScore}. This indicates a Low level of alcohol dependence.`);
+    } else {
+      setSaddResult(`Your score is ${totalScore}. This indicates an Absence of alcohol dependence.`);
+    }
+  };
+  
+  const allSelfDiagnosisAnswered = Object.keys(selfDiagnosisAnswers).length === selfDiagnosisQuestions.length;
+  const allSaddAnswered = Object.keys(saddAnswers).length === saddQuestions.length;
+
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-4xl space-y-10">
@@ -74,86 +133,105 @@ export default function AssessmentsPage() {
               <CardHeader>
                 <CardTitle className="text-xl text-primary md:text-2xl">Do You Border on Alcoholism?</CardTitle>
                 <CardDescription className="text-justify">
-                  To answer the above questions ask yourself the following test questions and answer them as honestly as you can. (If your answers are ‘NO’ to all the question re-answer them with the help of your spouse or the closest member of your family). Remember there are no right or wrong answers.
+                  Answer the following questions as honestly as you can. Your responses are confidential and will help you assess your relationship with alcohol.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-4">
+                <div className="space-y-6">
                   {selfDiagnosisQuestions.map((question, index) => (
-                    <li key={index} className="flex items-start">
-                      <CheckCircle2 className="mr-3 mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span>{question}</span>
-                    </li>
+                    <div key={index} className="border-b pb-4 last:border-b-0">
+                      <p className="font-semibold">{`${index + 1}. ${question}`}</p>
+                      <RadioGroup
+                        onValueChange={(value) => handleSelfDiagnosisChange(index, value as 'yes' | 'no')}
+                        className="mt-3 flex space-x-6"
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="yes" id={`sd-yes-${index}`} />
+                          <Label htmlFor={`sd-yes-${index}`}>Yes</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="no" id={`sd-no-${index}`} />
+                          <Label htmlFor={`sd-no-${index}`}>No</Label>
+                        </div>
+                      </RadioGroup>
+                    </div>
                   ))}
-                </ul>
+                </div>
+                 <Button onClick={calculateSelfDiagnosis} className="mt-8 w-full" disabled={!allSelfDiagnosisAnswered}>
+                    Show My Result
+                </Button>
               </CardContent>
             </Card>
 
-            <Card className="mt-6 bg-secondary/50 shadow-md">
-              <CardHeader>
-                <CardTitle className="text-xl text-primary md:text-2xl">Scoring Guide</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <p><span className="font-bold">If you have answered YES to any one of the questions,</span> there is a definite warning that you may be an alcoholic.</p>
-                <p><span className="font-bold">If you have answered YES to any two,</span> the chances are that you are an alcoholic.</p>
-                <p><span className="font-bold">If you have answered YES to any three or more,</span> you are definitely an alcoholic.</p>
-                <p className="pt-4 text-xs text-muted-foreground text-justify">
-                  Courtesy and Reference - The above test questions are used by John Hopkins University Hospital, Baltimore in deciding whether or not a patient is alcoholic.
-                </p>
-              </CardContent>
-            </Card>
+            {selfDiagnosisResult && (
+                 <Card className="mt-6 bg-accent/20 shadow-md border-accent">
+                    <CardHeader>
+                        <CardTitle className="text-xl text-primary md:text-2xl flex items-center gap-2">
+                            <Lightbulb className="h-6 w-6"/>
+                            Your Result
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-lg font-semibold text-accent-foreground">{selfDiagnosisResult}</p>
+                        <p className="pt-4 text-xs text-muted-foreground text-justify">
+                            This is not a medical diagnosis. If you are concerned about your drinking, please consult with a healthcare professional.
+                            Courtesy and Reference - The above test questions are used by John Hopkins University Hospital, Baltimore.
+                        </p>
+                    </CardContent>
+                </Card>
+            )}
           </TabsContent>
 
           <TabsContent value="sadd" className="mt-8">
-             <p className="text-center text-lg text-muted-foreground text-justify mb-6">
-              To measure physiological dependence and cognitive and behavior events. Respond yourself to the following test questions and answer them as honestly as you can. (If in the end you are unsure, re-answer them with the help of your spouse or the closest member of your family). Remember there is no right or wrong answers.
-            </p>
-            <Card className="shadow-md">
+             <Card className="shadow-md">
               <CardHeader>
                 <CardTitle className="text-xl text-primary md:text-2xl">SADD Questionnaire</CardTitle>
+                 <CardDescription className="text-justify">
+                    This questionnaire helps measure physiological dependence and cognitive/behavioral events related to alcohol. Please answer honestly.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-6">
                   {saddQuestions.map((question, index) => (
                     <li key={index} className="border-b pb-4 last:border-b-0">
                       <p className="font-semibold">{`${index + 1}. ${question}`}</p>
-                      <div className="mt-3 flex flex-col space-y-1 text-sm text-muted-foreground sm:flex-row sm:space-x-6 sm:space-y-0">
-                        {saddOptions.map((option, optIndex) => (
-                          <span key={optIndex}>{`${optIndex}) ${option}`}</span>
+                      <RadioGroup
+                        onValueChange={(value) => handleSaddChange(index, value)}
+                        className="mt-3 grid grid-cols-2 gap-2 sm:flex sm:space-x-6"
+                      >
+                        {saddOptions.map((option) => (
+                          <div key={option.value} className="flex items-center space-x-2">
+                            <RadioGroupItem value={option.value.toString()} id={`sadd-${index}-${option.value}`} />
+                            <Label htmlFor={`sadd-${index}-${option.value}`}>{option.label}</Label>
+                          </div>
                         ))}
-                      </div>
+                      </RadioGroup>
                     </li>
                   ))}
                 </ul>
+                <Button onClick={calculateSadd} className="mt-8 w-full" disabled={!allSaddAnswered}>
+                    Show My Result
+                </Button>
               </CardContent>
             </Card>
 
-            <Card className="mt-6 bg-secondary/50 shadow-md">
-              <CardHeader>
-                <CardTitle className="text-xl text-primary md:text-2xl">Scoring Stage of Addiction</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-2 sm:text-left">
-                  <div>
-                    <p className="font-semibold">Points per Answer</p>
-                    <p><span className="font-semibold">Never</span> - 0 points</p>
-                    <p><span className="font-semibold">Sometimes</span> - 1 point</p>
-                    <p><span className="font-semibold">Often</span> - 2 points</p>
-                    <p><span className="font-semibold">Always</span> - 3 points</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold">Dependence Level</p>
-                    <p><span className="font-semibold">Absence of alcohol dependence</span> - 0</p>
-                    <p><span className="font-semibold">Low level</span> - 1 to 9</p>
-                    <p><span className="font-semibold">Medium level</span> - 10 to 19</p>
-                    <p><span className="font-semibold">High level</span> - 20 to 45</p>
-                  </div>
-                </div>
-                <p className="pt-4 text-xs text-muted-foreground text-justify">
-                  Courtesy and Reference - Raistrick, Dunbar and R.Davidson. Questionnaire to measure alcohol dependence British Journal of addiction 78.pp. 89-95. 1983.
-                </p>
-              </CardContent>
-            </Card>
+            {saddResult && (
+                 <Card className="mt-6 bg-accent/20 shadow-md border-accent">
+                    <CardHeader>
+                        <CardTitle className="text-xl text-primary md:text-2xl flex items-center gap-2">
+                           <Lightbulb className="h-6 w-6"/>
+                            Your Result
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-lg font-semibold text-accent-foreground">{saddResult}</p>
+                         <p className="pt-4 text-xs text-muted-foreground text-justify">
+                           This is not a medical diagnosis. If you are concerned about your drinking, please consult with a healthcare professional.
+                           Courtesy and Reference - Raistrick, Dunbar and R.Davidson. British Journal of addiction 78.pp. 89-95. 1983.
+                        </p>
+                    </CardContent>
+                </Card>
+            )}
           </TabsContent>
         </Tabs>
       </div>
