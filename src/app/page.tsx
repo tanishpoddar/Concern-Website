@@ -8,7 +8,7 @@ import Image from 'next/image';
 const managementCommittee = [
   { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust', imgSrc: '/images/committee/1.jpg' },
   { name: 'Mr. P. Suresh Babu, M.B.A., C.A.I.I.B., D.C.A.', role: 'Secretary, CONCERN Trust', imgSrc: '/images/committee/2.jpg' },
-  { name: 'Mrs. Pavithra Chamraj, M.Sc., (Med. Bio Genetics)', role: 'Treasurer, CONCERN Trust', imgSrc: '/images/committee/3.jpg' },
+  { name: 'Mrs. Pavithra Chamraj, M.Sc., (Med. Bio Genetics), PhD* (Stem Cells)', role: 'Treasurer, CONCERN Trust', imgSrc: '/images/committee/3.jpg' },
   { name: 'Mrs. Asha Vinay, M.S.W., (Med Psy)., MPhil., B.Ed.', role: 'Trust Board Advisory member', imgSrc: '/images/committee/4.jpg' },
 ];
 
@@ -89,7 +89,7 @@ export default function Home() {
       </section>
 
       {/* Management Committee Section */}
-       <section className="pt-8 pb-12 md:pt-12 md:pb-24">
+       <section className="pt-8 pb-12 md:pt-6 md:pb-24">
         <div className="container px-4 md:px-6">
             <h2 className="text-center text-3xl font-bold text-primary md:text-4xl mb-12">
             Meet Our Management Committee
