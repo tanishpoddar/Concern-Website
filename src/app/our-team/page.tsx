@@ -39,9 +39,8 @@ const committeeOfSupporters = [
     { name: 'Mr. R. Vijayakrishnan, B.com., F.C.A.', role: 'Chartered Accountant' },
     { name: 'Mr. P.S. Kamalakara Rao, F.C.A.', role: 'Chartered Accountant' },
     { name: 'Dr. Benhur B.V.Sc.', role: 'Nutricon Bio-Science P Ltd' },
-    { name: 'Mr. Suresh', role: 'Kothagiri, Nilgiris' },
+    { name: 'Mr. Suresh Govindraj', role: 'Kothagiri, Nilgris District, Tamil Nadu' },
     { name: 'Mrs. Pavithra Sharath', role: 'Idea Guru, Media Partner' },
-    { name: 'Mr. Suresh Govindraj', role: '' },
 ];
 
 const pillarsOfStrength = [
