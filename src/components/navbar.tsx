@@ -14,7 +14,6 @@ const navLinks = [
   { href: '/our-team', label: 'Our Team' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/annual-reports', label: 'Annual Reports' },
-  { href: '/events', label: 'Events' },
   { href: '/assessments', label: 'Assessments' },
   { href: '/therapy', label: 'Therapy' },
   { href: '/training', label: 'Training' },
