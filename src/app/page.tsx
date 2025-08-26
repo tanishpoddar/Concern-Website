@@ -31,7 +31,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[50vh] w-full">
         <Image
-          src="https://picsum.photos/1200/800"
+          src="/images/About Us with Logo.jpg"
           alt="Community gathering"
           fill
           className="object-cover"
