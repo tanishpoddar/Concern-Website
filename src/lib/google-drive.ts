@@ -83,7 +83,31 @@ export const getAlbumsFromDrive = cache(async (parentFolderName: string) => {
             fields: 'files(id, name)',
             orderBy: 'name',
         });
-        return res.data.files ? res.data.files.map(f => ({ slug: f.name!.toLowerCase().replace(/ /g, '-').replace(/&/g, 'and'), title: f.name! })) : [];
+        const albums = res.data.files ? res.data.files.map(f => ({ slug: f.name!.toLowerCase().replace(/ /g, '-').replace(/&/g, 'and'), title: f.name! })) : [];
+
+        if (parentFolderName === 'Programmes and Events') {
+            const desiredOrder = [
+                'Ministry of Social Justice and Empowerment',
+                'Synopsis',
+                'Training Programmes',
+                'Concern Premises',
+                'Awareness Programmes',
+                'Award Recognitions',
+            ];
+            return albums.sort((a, b) => {
+                const indexA = desiredOrder.indexOf(a.title);
+                const indexB = desiredOrder.indexOf(b.title);
+                if (indexA === -1) return 1;
+                if (indexB === -1) return -1;
+                return indexA - indexB;
+            });
+        }
+        
+        if (parentFolderName === 'By Year') {
+            return albums.sort((a,b) => b.title.localeCompare(a.title));
+        }
+
+        return albums;
     } catch (error) {
         console.error(`Error fetching albums from "${parentFolderName}":`, error);
         return [];

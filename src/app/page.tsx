@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CheckCircle } from 'lucide-react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const managementCommittee = [
   { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust', imgSrc: '/images/committee/1.jpg' },
@@ -13,17 +14,36 @@ const managementCommittee = [
 ];
 
 const facilities = [
-  // Row 1
   'Community Awareness Programmes',
   'Transit Home And Peer Support',
   'In-Patient / Out-Patient Services',
-  // Row 2
   'De-Toxification, Psychotherapy, Group Therapy',
   'Individual, Family, Child, And Marital Counselling',
   'Guide To Alcoholics Anonymous (AA), Narcotics Anonymous And Al-Anon',
-  // Row 3
   'Free Drop-In Counselling Centre For Children & Women Of Chemical Dependants',
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
 export default function Home() {
   const row1Facilities = facilities.slice(0, 3);
@@ -36,7 +56,12 @@ export default function Home() {
       <section className="py-8 md:py-12">
         <div className="container px-4 md:px-6">
           <div className="grid gap-8 md:grid-cols-2 md:gap-16">
-            <div className="flex flex-col justify-center space-y-4">
+            <motion.div 
+              className="flex flex-col justify-center space-y-4"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
               <h2 className="text-3xl font-bold tracking-tight text-primary md:text-5xl">
                 About Us
               </h2>
@@ -46,33 +71,43 @@ export default function Home() {
               <p className="mt-4 text-lg text-muted-foreground text-justify">
                 <span className="font-semibold text-primary">Bhanu Suresh Babu</span> (Project Director) treats with a Dedicated Tailor Made Program to suit individuals' need and people of <span className="font-semibold text-primary">CONCERN</span> have practical experience with professional training and academics. We walk hand in hand with the clients exploring the problem areas and finding solutions to guide them in the process of recovery.
               </p>
-            </div>
-            <div className="space-y-6 flex flex-col justify-center">
-              <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
+            </motion.div>
+            <motion.div 
+              className="space-y-6 flex flex-col justify-center"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.div variants={itemVariants} className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold text-primary">VISION</h3>
                 <p className="text-muted-foreground italic text-justify">
                   <span className="font-semibold text-primary">CONCERN'S</span> concern is to Identify, Explore and Guide to Change.
                 </p>
-              </div>
-              <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
+              </motion.div>
+              <motion.div variants={itemVariants} className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold text-primary">MISSION</h3>
                 <p className="text-muted-foreground text-justify">
                   To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of <span className="font-semibold text-primary">CONCERN'S</span> concern in terms of Quality and Quantity.
                 </p>
-              </div>
-              <div className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
+              </motion.div>
+              <motion.div variants={itemVariants} className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold text-primary">VALUES</h3>
                 <p className="text-muted-foreground text-justify">
                   Transparency, Empathy, Learning and Listening, Parting knowledge and experience Belongingness, Eventual CHANGE
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
       
       {/* Image Section */}
-      <section className="py-4 md:py-5">
+      <motion.section 
+        className="py-4 md:py-5"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="container px-4 md:px-6">
            <div className="mx-auto max-w-5xl overflow-hidden rounded-xl shadow-lg">
             <Image
@@ -86,28 +121,42 @@ export default function Home() {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Management Committee Section */}
        <section className="py-8 md:py-12">
         <div className="container px-4 md:px-6">
-            <h2 className="text-center text-3xl font-bold text-primary md:text-4xl mb-8">
-            Meet Our Management Committee
-            </h2>
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <motion.h2 
+              className="text-center text-3xl font-bold text-primary md:text-4xl mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5 }}
+            >
+              Meet Our Management Committee
+            </motion.h2>
+            <motion.div 
+              className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
             {managementCommittee.map((member, index) => (
-                <Card key={index} className="text-center transition-shadow hover:shadow-xl">
-                <CardContent className="flex flex-col items-center pt-6">
-                    <Avatar className="h-24 w-24 mb-4">
-                    <AvatarImage src={member.imgSrc} alt={member.name} data-ai-hint="person professional" />
-                    <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                    </Avatar>
-                    <p className="font-bold text-lg">{member.name}</p>
-                    <p className="text-sm text-muted-foreground">{member.role}</p>
-                </CardContent>
-                </Card>
+                <motion.div key={index} variants={itemVariants}>
+                  <Card className="text-center transition-shadow hover:shadow-xl h-full">
+                    <CardContent className="flex flex-col items-center pt-6">
+                        <Avatar className="h-24 w-24 mb-4">
+                        <AvatarImage src={member.imgSrc} alt={member.name} data-ai-hint="person professional" />
+                        <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                        </Avatar>
+                        <p className="font-bold text-lg">{member.name}</p>
+                        <p className="text-sm text-muted-foreground">{member.role}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
             ))}
-            </div>
+            </motion.div>
         </div>
         </section>
 
@@ -115,42 +164,70 @@ export default function Home() {
       {/* Facilities Section */}
       <section className="bg-secondary/50 py-8 md:py-12">
         <div className="container px-4 md:px-6">
-          <div className="text-center mb-8">
+          <motion.div 
+            className="text-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5 }}
+          >
             <h2 className="text-3xl font-bold text-primary md:text-4xl">
               Our Facilities
             </h2>
              <p className="mt-2 text-lg text-muted-foreground max-w-3xl mx-auto text-justify">
                 The Comprehensive care with coping skills in our rehabilitation program guides the individual to cope up with the demands of daily living without addictive substance. The Holistic approach of our protocol is adapted to these special individuals' needs.
               </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          </motion.div>
+          <motion.div 
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {row1Facilities.map((facility, index) => (
-              <Card key={index} className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full">
-                <div className="flex items-start">
-                    <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
-                    <p className="text-base text-card-foreground">{facility}</p>
-                </div>
-              </Card>
+              <motion.div key={index} variants={itemVariants}>
+                <Card className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full">
+                  <div className="flex items-start">
+                      <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
+                      <p className="text-base text-card-foreground">{facility}</p>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+          </motion.div>
+          <motion.div 
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {row2Facilities.map((facility, index) => (
-              <Card key={index} className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full">
-                <div className="flex items-start">
-                    <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
-                    <p className="text-base text-card-foreground">{facility}</p>
-                </div>
-              </Card>
+              <motion.div key={index} variants={itemVariants}>
+                <Card className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full">
+                  <div className="flex items-start">
+                      <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
+                      <p className="text-base text-card-foreground">{facility}</p>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
-          </div>
-           <div className="grid grid-cols-1 gap-6 mt-6">
+          </motion.div>
+           <motion.div 
+            className="grid grid-cols-1 gap-6 mt-6"
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5 }}
+           >
               <Card key={row3Facility} className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full lg:col-span-3">
                 <div className="flex items-start">
                     <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
                     <p className="text-base text-card-foreground">{row3Facility}</p>
                 </div>
               </Card>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

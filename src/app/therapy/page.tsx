@@ -1,10 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Therapies We Offer',
-  description: 'Learn about the various therapies offered at CONCERN, including detoxification, psychotherapy, cognitive therapy, group therapy, and counseling for individuals, families, and children.',
-};
+'use client';
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { motion } from 'framer-motion';
 
 const therapies = [
   {
@@ -75,30 +73,65 @@ const therapies = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 export default function TherapyPage() {
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
-      <h1 className="mb-8 text-center text-3xl font-bold text-primary md:text-4xl">Therapies We Offer</h1>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 md:gap-8">
+      <motion.h1 
+        className="mb-8 text-center text-3xl font-bold text-primary md:text-4xl"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        Therapies We Offer
+      </motion.h1>
+      <motion.div 
+        className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 md:gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {therapies.map((therapy) => (
-          <Card key={therapy.title} className="flex flex-col shadow-md transition-shadow hover:shadow-xl">
-            <CardHeader>
-              <CardTitle className="text-xl md:text-2xl text-primary">{therapy.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              {therapy.description ? (
-                <p className="text-muted-foreground text-justify">{therapy.description}</p>
-              ) : (
-                <ul className="list-disc space-y-2 pl-5 text-muted-foreground text-justify">
-                  {therapy.points?.map((point, index) => (
-                    <li key={index}>{point}</li>
-                  ))}
-                </ul>
-              )}
-            </CardContent>
-          </Card>
+          <motion.div key={therapy.title} variants={itemVariants} className="flex">
+            <Card className="flex flex-col shadow-md transition-shadow hover:shadow-xl w-full">
+              <CardHeader>
+                <CardTitle className="text-xl md:text-2xl text-primary">{therapy.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                {therapy.description ? (
+                  <p className="text-muted-foreground text-justify">{therapy.description}</p>
+                ) : (
+                  <ul className="list-disc space-y-2 pl-5 text-muted-foreground text-justify">
+                    {therapy.points?.map((point, index) => (
+                      <li key={index}>{point}</li>
+                    ))}
+                  </ul>
+                )}
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

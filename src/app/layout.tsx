@@ -1,7 +1,6 @@
 
 'use client';
 
-import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/header';
@@ -11,16 +10,13 @@ import Footer from '@/components/footer';
 import BackToTop from '@/components/back-to-top';
 import { useEffect, useState } from 'react';
 import SplashScreen from '@/components/splash-screen';
+import PageTransition from '@/components/page-transition';
 
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
 });
-
-// This metadata can't be exported from a client component.
-// We will move it to a separate metadata export.
-// export const metadata: Metadata = { ... };
 
 export default function RootLayout({
   children,
@@ -41,7 +37,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`!scroll-smooth ${inter.variable}`} suppressHydrationWarning>
       <head>
-          {/* Metadata can be placed here or exported from the page/layout as a const */}
           <title>CONCERN | Where You Discover Change</title>
           <meta name="description" content="A Non-Governmental Organisation (NGO) working in the field of addiction treatment and rehabilitation. We offer detoxification, psychotherapy, counseling, and community awareness programs." />
           <meta name="keywords" content="rehabilitation center, addiction treatment, NGO, de-addiction, substance abuse, Chennai" />
@@ -67,7 +62,9 @@ export default function RootLayout({
         <Header />
         <ClientNavbar />
         <main className="flex-grow">
+          <PageTransition>
             {children}
+          </PageTransition>
         </main>
         <Footer />
         <Toaster />
