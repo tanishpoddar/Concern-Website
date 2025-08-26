@@ -1,25 +1,18 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Stethoscope, Briefcase, Wrench } from 'lucide-react';
+import { Stethoscope, Briefcase, Wrench } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Our Team',
-  description: 'Meet the dedicated team behind CONCERN, including our management committee, medical professionals, staff, and technical supporters.',
+  description: 'Meet the dedicated team behind CONCERN, including our medical professionals, staff, and technical supporters.',
 };
-
-const managementCommittee = [
-  { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust' },
-  { name: 'Mr. P. Suresh Babu, M.B.A., C.A.I.I.B., D.C.A.', role: 'Secretary, CONCERN Trust' },
-  { name: 'Mrs. Pavithra Chamraj, M.Sc., PhD.* (Stem Cells)', role: 'Treasurer, CONCERN Trust' },
-  { name: 'Mrs. Asha Vinay, M.S.W., (Med Psy)., MPhil., B.Ed.', role: 'Trust Board Advisory member' },
-];
 
 const medicalTeam = [
   { name: 'Dr. Mohamed Nidhal S, M.D., FNR., PGDHM.', role: 'Medical Officer' },
   { name: 'Dr. Sathish Kumar, M.B.B.S., D.P.M., D.N.B.', role: 'Consultant Psychiatrist' },
   { name: 'Dr. G. Manjari, B.D.S., M.P.H.', role: 'Psychologist and Counsellor' },
-  { name: 'Mrs. Kavitha, Phd.', role: 'Psychologist and Counsellor' },
+  { name: 'Mr. M. Kabilan, M.Sc. (Applied Psychology)', role: 'Psychologist and Counsellor' },
   { name: 'Nurses and Ward boys', role: '' },
 ];
 
@@ -34,7 +27,7 @@ const managementStaff = [
 
 const technicalSupporters = [
   { name: 'Arch. Chamraj Suresh Babu, M.L.A.', role: 'Design Consultant' },
-  { name: 'Mr. Tanish Poddar, B.Tech CSE (SRMIST)', role: 'Web Developer' },
+  { name: 'Mr. Tanish Poddar, B.Tech.', role: 'Web Developer' },
   { name: 'Mr. Madhavan', role: 'Web Designer' },
 ];
 
@@ -61,8 +54,7 @@ export default function OurTeamPage() {
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
       <h1 className="mb-8 text-center text-3xl font-bold text-primary md:text-4xl">Our Team</h1>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <TeamCard title="Management Committee" members={managementCommittee} icon={Users} />
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <TeamCard title="Medical Team" members={medicalTeam} icon={Stethoscope} />
         <TeamCard title="Management Staff" members={managementStaff} icon={Briefcase} />
         <TeamCard title="Technical Supporters" members={technicalSupporters} icon={Wrench} />
