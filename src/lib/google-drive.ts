@@ -1,3 +1,4 @@
+
 // src/lib/google-drive.ts
 import { google } from 'googleapis';
 import { cache } from 'react';
@@ -24,10 +25,10 @@ interface DriveFile {
 }
 
 // Helper to get the ID of a subfolder (album) by its name
-const getFolderId = cache(async (folderName: string): Promise<string | null> => {
+const getFolderId = cache(async (folderName: string, parentId: string): Promise<string | null> => {
   try {
     const res = await drive.files.list({
-      q: `'${MAIN_FOLDER_ID}' in parents and mimeType='application/vnd.google-apps.folder' and name='${folderName}' and trashed=false`,
+      q: `'${parentId}' in parents and mimeType='application/vnd.google-apps.folder' and name='${folderName}' and trashed=false`,
       fields: 'files(id)',
       pageSize: 1,
     });
@@ -40,7 +41,7 @@ const getFolderId = cache(async (folderName: string): Promise<string | null> => 
 
 // Fetches a list of images from a specific folder ID
 export const getImagesFromDrive = cache(async (folderName: string): Promise<DriveFile[]> => {
-  const albumFolderId = await getFolderId(folderName);
+  const albumFolderId = await getFolderId(folderName, MAIN_FOLDER_ID);
   
   if (!albumFolderId) {
     console.log(`Album folder "${folderName}" not found.`);
@@ -70,7 +71,7 @@ export const getImagesFromDrive = cache(async (folderName: string): Promise<Driv
 
 // Fetches all album folders
 export const getAlbumsFromDrive = cache(async (parentFolderName: string) => {
-    const parentFolderId = await getFolderId(parentFolderName);
+    const parentFolderId = await getFolderId(parentFolderName, MAIN_FOLDER_ID);
     if (!parentFolderId) {
         console.log(`Parent folder "${parentFolderName}" not found.`);
         return [];
@@ -82,7 +83,7 @@ export const getAlbumsFromDrive = cache(async (parentFolderName: string) => {
             fields: 'files(id, name)',
             orderBy: 'name',
         });
-        return res.data.files ? res.data.files.map(f => ({ slug: f.name!.toLowerCase().replace(/ /g, '-'), title: f.name! })) : [];
+        return res.data.files ? res.data.files.map(f => ({ slug: f.name!.toLowerCase().replace(/ /g, '-').replace(/&/g, 'and'), title: f.name! })) : [];
     } catch (error) {
         console.error(`Error fetching albums from "${parentFolderName}":`, error);
         return [];
