@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server';
 import { google } from 'googleapis';
 
 // This is the parent folder where 'by year' and 'programmes and events' folders are located.
-// You must get this ID from the URL of your main "gallery" folder in Google Drive.
 const GALLERY_FOLDER_ID = process.env.GOOGLE_DRIVE_FOLDER_ID!;
 
 const auth = new google.auth.GoogleAuth({
@@ -31,72 +30,66 @@ async function getFolderId(folderName: string, parentId: string): Promise<string
     try {
         const res = await drive.files.list({
             q: `'${parentId}' in parents and mimeType='application/vnd.google-apps.folder' and name='${folderName}' and trashed=false`,
-            fields: 'files(id)',
+            fields: 'files(id, name)', // We only need id and name
             pageSize: 1,
         });
-        const folderId = res.data.files?.[0]?.id || null;
-        if (folderId) {
-            folderIdCache.set(cacheKey, folderId);
+        const folder = res.data.files?.[0];
+        if (folder?.id) {
+            folderIdCache.set(cacheKey, folder.id);
+            return folder.id;
         }
-        return folderId;
+        return null;
     } catch (error) {
         console.error(`Error fetching ID for folder "${folderName}":`, error);
         return null;
     }
 }
 
+// Function to find an album folder ID by its name within a list of possible parent folders.
+async function findAlbumFolderId(albumName: string, parentFolderNames: string[]): Promise<string | null> {
+    for (const parentName of parentFolderNames) {
+        const parentFolderId = await getFolderId(parentName, GALLERY_FOLDER_ID);
+        if (parentFolderId) {
+            const albumFolderId = await getFolderId(albumName, parentFolderId);
+            if (albumFolderId) {
+                return albumFolderId;
+            }
+        }
+    }
+    return null;
+}
 
-// A map to convert URL slugs to the actual folder names in Google Drive.
-const slugToFolderNameMap: { [key: string]: { name: string, parent: string } } = {
-  'ministry-of-social-justice-empowerment': { name: 'Ministry of Social Justice & Empowerment', parent: 'Programmes and Events' },
-  'synopsis': { name: 'Synopsis', parent: 'Programmes and Events' },
-  'training-programmes': { name: 'Training Programmes', parent: 'Programmes and Events' },
-  'concern-premises': { name: 'Concern Premises', parent: 'Programmes and Events' },
-  'awareness-programmes': { name: 'Awareness Programmes', parent: 'Programmes and Events' },
-  'award-recognitions': { name: 'Award Recognitions', parent: 'Programmes and Events' },
-  '2025': { name: '2025', parent: 'By Year' },
-  '2024': { name: '2024', parent: 'By Year' },
-  '2023': { name: '2023', parent: 'By Year' },
-  '2022': { name: '2022', parent: 'By Year' },
-  '2021': { name: '2021', parent: 'By Year' },
-  '2020': { name: '2020', parent: 'By Year' },
-  '2019': { name: '2019', parent: 'By Year' },
-  '2018': { name: '2018', parent: 'By Year' },
-  '2017': { name: '2017', parent: 'By Year' },
-  '2016': { name: '2016', parent: 'By Year' },
-  '2014': { name: '2014', parent: 'By Year' },
-  '2013': { name: '2013', parent: 'By Year' },
-  '2012': { name: '2012', parent: 'By Year' },
-  '2011': { name: '2011', parent: 'By Year' },
-  '2009': { name: '2009', parent: 'By Year' },
-};
-
+// Helper to convert a slug back to a title case name.
+function slugToTitle(slug: string): string {
+  return slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+    .replace(/ And /g, ' & '); // Handle the '&' case
+}
 
 export async function GET(
   request: Request,
   { params }: { params: { album: string } }
 ) {
   const albumSlug = params.album;
-  const albumInfo = slugToFolderNameMap[albumSlug];
-
-  if (!albumInfo) {
-    return NextResponse.json({ error: 'Album not found' }, { status: 404 });
+  
+  if (!albumSlug) {
+      return NextResponse.json({ error: 'Album slug is required' }, { status: 400 });
   }
 
+  // Convert slug to a potential folder name.
+  const albumName = slugToTitle(albumSlug);
+  
   try {
-    // 1. Find the parent folder ('Programmes and Events' or 'By Year')
-    const parentFolderId = await getFolderId(albumInfo.parent, GALLERY_FOLDER_ID);
-    if (!parentFolderId) {
-        return NextResponse.json({ error: `Parent folder '${albumInfo.parent}' not found` }, { status: 404 });
-    }
+    // Search for the album folder in both possible parent directories.
+    const albumFolderId = await findAlbumFolderId(albumName, ['Programmes and Events', 'By Year']);
 
-    // 2. Find the specific album folder inside the parent folder
-    const albumFolderId = await getFolderId(albumInfo.name, parentFolderId);
     if (!albumFolderId) {
-        return NextResponse.json({ error: `Album folder '${albumInfo.name}' not found` }, { status: 404 });
+        return NextResponse.json({ error: `Album folder '${albumName}' not found` }, { status: 404 });
     }
     
-    // 3. List all images in the album folder with pagination
+    // List all images in the album folder with pagination.
     let images: { id: string; name: string; url: string; }[] = [];
     let pageToken: string | undefined = undefined;
 
