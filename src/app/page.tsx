@@ -23,11 +23,6 @@ const facilities = [
   'Guide To Alcoholics Anonymous (AA), Narcotics Anonymous And Al-Anon',
   // Row 3
   'Free Drop-In Counselling Centre For Children & Women Of Chemical Dependants',
-  // Other items - will not be displayed with the new logic but kept for reference
-  'Life Style Modifications',
-  'Guide To Various Related References',
-  'In House Kitchen',
-  'Free Drop-In Counseling Center For Children And Women Of Chemical Dependants',
 ];
 
 export default function Home() {
@@ -94,7 +89,7 @@ export default function Home() {
       </section>
 
       {/* Management Committee Section */}
-       <section className="py-12 md:py-24">
+       <section className="pt-8 pb-12 md:pt-12 md:pb-24">
         <div className="container px-4 md:px-6">
             <h2 className="text-center text-3xl font-bold text-primary md:text-4xl mb-12">
             Meet Our Management Committee
