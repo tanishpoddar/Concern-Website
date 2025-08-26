@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const medicalTeam = [
   { name: 'Dr. Mohamed Nidhal S, M.D., FNR., PGDHM.', role: 'Medical Officer' },
   { name: 'Dr. Sathish Kumar, M.B.B.S., D.P.M., D.N.B.', role: 'Consultant Psychiatrist' },
+  { name: 'Dr. Thiruvikraman, M.B.B.S., D.P.M.,', role: 'Visiting Consultant Neuro Psychiatrist' },
   { name: 'Dr. G. Manjari, B.D.S., M.P.H.', role: 'Psychologist and Counsellor' },
   { name: 'Mr. M. Kabilan, M.Sc. (Applied Psychology)', role: 'Psychologist and Counsellor' },
   { name: 'Nurses and Ward boys', role: '' },
