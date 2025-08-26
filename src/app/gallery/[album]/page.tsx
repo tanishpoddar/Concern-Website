@@ -11,8 +11,20 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import type { CarouselApi } from "@/components/ui/carousel";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
+// This is a client-side action to fetch images for a specific album
+async function getImagesForAlbum(album: string): Promise<{ id: string; name: string; url: string }[]> {
+  const res = await fetch(`/api/gallery/${album}`);
+  if (!res.ok) {
+    return [];
+  }
+  return res.json();
+}
+
+// We need a title mapping here or fetch it from an API
+// For simplicity, we'll keep the static map but this could also be dynamic
 const albums: { [key: string]: { title: string; hint: string } } = {
   'ministry-of-social-justice-empowerment': { title: 'Ministry of Social Justice & Empowerment', hint: 'government building' },
   'synopsis': { title: 'Synopsis', hint: 'summary document' },
@@ -37,30 +49,38 @@ const albums: { [key: string]: { title: string; hint: string } } = {
   '2009': { title: '2009', hint: 'archive photo' },
 };
 
+
 export default function AlbumPage({ params }: { params: { album: string } }) {
   const albumDetails = albums[params.album];
-  const [api, setApi] = React.useState<CarouselApi>()
-  const [current, setCurrent] = React.useState(0)
-  const [count, setCount] = React.useState(0)
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+  const [images, setImages] = useState<{ id: string; name: string; url: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  React.useEffect(() => {
-    if (!api) {
-      return
-    }
-
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap() + 1)
-
+  useEffect(() => {
+    if (!api) return;
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
     api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1)
-    })
-  }, [api])
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+  
+  useEffect(() => {
+    const fetchImages = async () => {
+      setIsLoading(true);
+      const fetchedImages = await getImagesForAlbum(params.album);
+      setImages(fetchedImages);
+      setIsLoading(false);
+    };
+    fetchImages();
+  }, [params.album]);
+
 
   if (!albumDetails) {
     notFound();
   }
-
-  const images = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
@@ -75,30 +95,51 @@ export default function AlbumPage({ params }: { params: { album: string } }) {
           className="w-full max-w-sm md:max-w-4xl"
         >
           <CarouselContent>
-            {images.map((index) => (
-              <CarouselItem key={index}>
-                <Card className="overflow-hidden rounded-xl shadow-lg">
-                  <CardContent className="relative flex aspect-video items-center justify-center p-0">
-                     <Image
-                        src={`https://placehold.co/1280x720.png`}
-                        alt={`Image ${index} for ${albumDetails.title}`}
-                        width={1280}
-                        height={720}
-                        data-ai-hint={albumDetails.hint}
-                        className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+            {isLoading ? (
+              Array.from({ length: 3 }).map((_, index) => (
+                <CarouselItem key={index}>
+                  <Card className="overflow-hidden rounded-xl shadow-lg">
+                    <CardContent className="relative flex aspect-video items-center justify-center p-0">
+                      <Skeleton className="h-full w-full" />
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))
+            ) : images.length > 0 ? (
+              images.map((image) => (
+                <CarouselItem key={image.id}>
+                  <Card className="overflow-hidden rounded-xl shadow-lg">
+                    <CardContent className="relative flex aspect-video items-center justify-center p-0">
+                      <Image
+                        src={image.url}
+                        alt={image.name}
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            ))}
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))
+            ) : (
+                 <CarouselItem>
+                    <Card>
+                        <CardContent className="flex aspect-video items-center justify-center p-6">
+                            <p>No images found in this album.</p>
+                        </CardContent>
+                    </Card>
+                 </CarouselItem>
+            )}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:inline-flex"/>
-          <CarouselNext className="hidden md:inline-flex"/>
+          <CarouselPrevious className="hidden md:inline-flex" />
+          <CarouselNext className="hidden md:inline-flex" />
         </Carousel>
       </div>
-       <div className="py-4 text-center text-sm text-muted-foreground">
+      {!isLoading && images.length > 0 && (
+        <div className="py-4 text-center text-sm text-muted-foreground">
           Slide {current} of {count}
         </div>
+      )}
     </div>
   );
 }
