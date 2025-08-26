@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const managementCommittee = [
   { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust' },
   { name: 'Mr. P. Suresh Babu, M.B.A., C.A.I.I.B., D.C.A.', role: 'Secretary, CONCERN Trust' },
-  { name: 'Mrs. Pavithra Chamraj, M.Sc., (Med. Bio Genetics), PhD* (Stem Cells)', role: 'Treasurer, CONCERN Trust' },
+  { name: 'Mrs. Pavithra Chamraj, M.Sc., PhD.* (Stem Cells)', role: 'Treasurer, CONCERN Trust' },
   { name: 'Mrs. Asha Vinay, M.S.W., (Med Psy)., MPhil., B.Ed.', role: 'Trust Board Advisory member' },
 ];
 

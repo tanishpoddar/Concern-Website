@@ -8,7 +8,7 @@ import Image from 'next/image';
 const managementCommittee = [
   { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust', imgSrc: '/images/committee/1.jpg' },
   { name: 'Mr. P. Suresh Babu, M.B.A., C.A.I.I.B., D.C.A.', role: 'Secretary, CONCERN Trust', imgSrc: '/images/committee/2.jpg' },
-  { name: 'Mrs. Pavithra Chamraj, M.Sc., (Med. Bio Genetics), PhD* (Stem Cells)', role: 'Treasurer, CONCERN Trust', imgSrc: '/images/committee/3.jpg' },
+  { name: 'Mrs. Pavithra Chamraj, M.Sc., PhD.* (Stem Cells)', role: 'Treasurer, CONCERN Trust', imgSrc: '/images/committee/3.jpg' },
   { name: 'Mrs. Asha Vinay, M.S.W., (Med Psy)., MPhil., B.Ed.', role: 'Trust Board Advisory member', imgSrc: '/images/committee/4.jpg' },
 ];
 
