@@ -45,6 +45,7 @@ const committeeOfSupporters = [
 
 const pillarsOfStrength = [
     { name: 'Ministry of Social Justice and Empowerment (MoSJE)', role: 'Govt. Of India, New Delhi' },
+    { name: 'National Institue of Social Defence', role: 'New Delhi'},
     { name: 'State Bank of India', role: 'Head Office, Chennai' },
     { name: 'Centre for Social Initiative and Management (CSIM)', role: 'Alapakkam, Chennai' },
     { name: 'Zonta Resource Center', role: 'Madambakkam, Chennai' },
