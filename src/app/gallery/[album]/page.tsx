@@ -2,7 +2,7 @@
 'use client';
 
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
@@ -51,8 +51,11 @@ const albums: { [key: string]: { title: string; hint: string } } = {
 };
 
 
-export default function AlbumPage({ params }: { params: { album: string } }) {
-  const albumDetails = albums[params.album];
+export default function AlbumPage() {
+  const params = useParams();
+  const albumSlug = typeof params.album === 'string' ? params.album : '';
+  const albumDetails = albums[albumSlug];
+  
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -69,14 +72,16 @@ export default function AlbumPage({ params }: { params: { album: string } }) {
   }, [api]);
   
   useEffect(() => {
+    if (!albumSlug) return;
+    
     const fetchImages = async () => {
       setIsLoading(true);
-      const fetchedImages = await getImagesForAlbum(params.album);
+      const fetchedImages = await getImagesForAlbum(albumSlug);
       setImages(fetchedImages);
       setIsLoading(false);
     };
     fetchImages();
-  }, [params.album]);
+  }, [albumSlug]);
 
 
   if (!albumDetails) {
