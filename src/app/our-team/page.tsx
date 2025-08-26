@@ -58,9 +58,9 @@ const pillarsOfStrength = [
 
 const TeamCard = ({ title, members, icon: Icon }: { title: string; members: { name: string; role: string }[]; icon: React.ElementType }) => (
   <Card className="shadow-md transition-shadow hover:shadow-xl flex flex-col">
-    <CardHeader className="flex flex-row items-center gap-4">
+    <CardHeader className="flex flex-row items-start gap-4">
       <Icon className="h-8 w-8 text-primary" />
-      <CardTitle className="text-xl md:text-2xl text-primary">{title}</CardTitle>
+      <CardTitle className="text-xl md:text-2xl text-primary mt-1">{title}</CardTitle>
     </CardHeader>
     <CardContent className="flex-grow">
       <ul className="space-y-4">
