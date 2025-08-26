@@ -44,14 +44,14 @@ const committeeOfSupporters = [
 ];
 
 const pillarsOfStrength = [
-    { name: 'Ministry of Social Justice and Empowerment (MSJE)', role: '' },
-    { name: 'State Bank of India', role: '' },
-    { name: 'Centre for Social Initiative and Management (CSIM)', role: '' },
-    { name: 'Zonta Resource center', role: '' },
-    { name: 'Link up garments for CSR activities', role: '' },
+    { name: 'Ministry of Social Justice and Empowerment (MoSJE)', role: 'Govt. Of India, New Delhi' },
+    { name: 'State Bank of India', role: 'Head Office, Chennai' },
+    { name: 'Centre for Social Initiative and Management (CSIM)', role: 'Alapakkam, Chennai' },
+    { name: 'Zonta Resource Center', role: 'Madambakkam, Chennai' },
+    { name: 'Link Up Garments for CSR Activities', role: 'Erungattukottai, Chennai' },
     { name: 'Milestone Specialty Equipment P Ltd', role: '' },
-    { name: 'Vastarakala Export P Ltd', role: '' },
-    { name: 'CGS Fashion P Ltd', role: '' },
+    { name: 'Vastarakala Export P Ltd', role: 'Thirumuluzhi, Chennai' },
+    { name: 'CGS Fashion P Ltd', role: 'Thiruvallur, Chennai' },
 ];
 
 
