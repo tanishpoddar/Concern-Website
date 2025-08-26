@@ -22,7 +22,7 @@ const managementStaff = [
   { name: 'Mrs. P Lanthangi, B.A., M.Sc. (Yoga)', role: 'Project Coordinator' },
   { name: 'Mr. J. Ethuraj, D.P.T.', role: 'Project Coordinator' },
   { name: 'Honorary Volunteers', role: '' },
-  { name: 'Trainer cum supervisors, Outreach Workers, Peer Educators, Cook, House-keepers And Chowkidars', role: '' },
+  { name: 'Trainer cum supervisors, Outreach Workers, Peer Educators, Cooks, House-keepers & Chowkidars', role: '' },
 ];
 
 const technicalSupporters = [

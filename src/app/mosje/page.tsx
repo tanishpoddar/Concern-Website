@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'MoSJE - NAPDDR Scheme',
@@ -78,6 +79,12 @@ export default function MosjePage() {
           <p className="pt-6 font-semibold text-red-600">
             Avail these facilities to prevent and treat substance abusers. Guide and show the way to
             your known people who are affected by addiction.
+          </p>
+        </div>
+
+        <div className="mt-10 text-center">
+          <p className="text-xl font-bold text-primary">
+            Kindly visit <Link href="/gallery" className="underline text-accent-foreground hover:text-accent transition-colors">Gallery</Link> for more activities of MoSJE.
           </p>
         </div>
       </div>
