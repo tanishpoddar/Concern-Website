@@ -43,8 +43,7 @@ export default function MosjePage() {
             </div>
             <p>
               DDAC comprises of Integrated Rehabilitation Centre for Addicts (IRCA), Out-Reach Drop-in
-              Centre (ODIC) and Community based Peer Led Intervention (CPLI). All the three facilities
-              are free of any cost.
+              Centre (ODIC) and Community based Peer Led Intervention (CPLI). <strong className="font-bold text-red-600">All the three facilities are free of cost.</strong>
             </p>
 
             <div className="space-y-4 pt-4">
