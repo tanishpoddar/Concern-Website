@@ -13,39 +13,30 @@ const managementCommittee = [
 ];
 
 const facilities = [
-  'In-Patient / Out-Patient Services',
-  'De-Toxification, Psychotherapy, Group Therapy',
-  'Individual, Family, Child, And Marital Counselling',
+  // Row 1
   'Community Awareness Programmes',
   'Transit Home And Peer Support',
-  'Free Drop-In Counseling Center For Children And Women Of Chemical Dependants',
+  'In-Patient / Out-Patient Services',
+  // Row 2
+  'De-Toxification, Psychotherapy, Group Therapy',
+  'Individual, Family, Child, And Marital Counselling',
+  'Guide To Alcoholics Anonymous (AA), Narcotics Anonymous And Al-Anon',
+  // Row 3
+  'Free Drop-In Counselling Centre For Children & Women Of Chemical Dependants',
+  // Other items - will not be displayed with the new logic but kept for reference
   'Life Style Modifications',
   'Guide To Various Related References',
   'In House Kitchen',
-  'Guide To Alcoholics Anonymous (AA), Narcotics Anonymous And Al-Anon',
-  'Free Drop-In Counselling Centre For Children & Women Of Chemical Dependants',
+  'Free Drop-In Counseling Center For Children And Women Of Chemical Dependants',
 ];
 
 export default function Home() {
+  const row1Facilities = facilities.slice(0, 3);
+  const row2Facilities = facilities.slice(3, 6);
+  const row3Facility = facilities[6];
+
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="py-12 md:py-16">
-        <div className="container px-4 md:px-6">
-           <div className="mx-auto max-w-5xl overflow-hidden rounded-xl shadow-lg">
-            <Image
-              src="/images/About Us with Logo.jpg"
-              alt="CONCERN team and premises"
-              width={1200}
-              height={675}
-              className="h-auto w-full object-cover"
-              data-ai-hint="community support group"
-              priority
-            />
-          </div>
-        </div>
-      </section>
-
       {/* About Us & Vision/Mission Section */}
       <section className="bg-secondary/50 py-12 md:py-24">
         <div className="container px-4 md:px-6">
@@ -81,6 +72,23 @@ export default function Home() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Image Section */}
+      <section className="py-12 md:py-16">
+        <div className="container px-4 md:px-6">
+           <div className="mx-auto max-w-5xl overflow-hidden rounded-xl shadow-lg">
+            <Image
+              src="/images/About Us with Logo.jpg"
+              alt="CONCERN team and premises"
+              width={1200}
+              height={675}
+              className="h-auto w-full object-cover"
+              data-ai-hint="community support group"
+              priority
+            />
           </div>
         </div>
       </section>
@@ -121,7 +129,7 @@ export default function Home() {
               </p>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {facilities.map((facility, index) => (
+            {row1Facilities.map((facility, index) => (
               <Card key={index} className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full">
                 <div className="flex items-start">
                     <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
@@ -129,6 +137,24 @@ export default function Home() {
                 </div>
               </Card>
             ))}
+          </div>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+            {row2Facilities.map((facility, index) => (
+              <Card key={index} className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full">
+                <div className="flex items-start">
+                    <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
+                    <p className="text-base text-card-foreground">{facility}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+           <div className="grid grid-cols-1 gap-6 mt-6">
+              <Card key={row3Facility} className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full lg:col-span-3">
+                <div className="flex items-start">
+                    <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
+                    <p className="text-base text-card-foreground">{row3Facility}</p>
+                </div>
+              </Card>
           </div>
         </div>
       </section>
