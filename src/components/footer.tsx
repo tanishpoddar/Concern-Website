@@ -54,9 +54,13 @@ export default function Footer() {
 
           <div className="flex flex-col items-center md:items-start">
             <h3 className="mb-2 font-semibold text-foreground uppercase tracking-wider">Rehab Centre</h3>
-            <address className="space-y-1 not-italic text-sm">
+            <address className="space-y-2 not-italic text-sm">
               <p className="flex items-start text-left">
                 <span>CONCERN, Zonta Resource Centre, No.5, Manikam Nagar, Noothancheri, Madambakam, Chennai - 600 126.</span>
+              </p>
+              <p className="flex items-center">
+                <Phone className="mr-3 h-4 w-4 text-primary" />
+                <span>044 46865176</span>
               </p>
             </address>
           </div>
