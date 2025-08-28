@@ -105,10 +105,10 @@ export default function TrainingPage() {
             </CardHeader>
             <CardContent className="space-y-2 text-muted-foreground">
                 <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary">Registered Trust No. 628 / 08</Badge>
-                <Badge variant="secondary">IMH License No. RII-1645 Dt. 08/09/2023</Badge>
-                <Badge variant="secondary">ISO 9001 : 2008 Certified</Badge>
-                <Badge variant="secondary">Social Audit Network - United Kingdom</Badge>
+                <Badge variant="default">Registered Trust No. 628 / 08</Badge>
+                <Badge variant="default">IMH License No. RII-1645 Dt. 08/09/2023</Badge>
+                <Badge variant="default">ISO 9001 : 2008 Certified</Badge>
+                <Badge variant="default">Social Audit Network - United Kingdom</Badge>
                 </div>
                 <p className="pt-2 text-sm text-justify">
                 (Donations are IT Exempted U/S 80G of IT Act 1961 Vide Approval No. AAATC9995QF20210 Dt. 24.09.2021)
