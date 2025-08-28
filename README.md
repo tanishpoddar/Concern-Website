@@ -20,4 +20,4 @@ This repository contains the source code for the official website of **CONCERN**
 
 This repository is maintained to ensure **transparency and accessibility** of CONCERN’s digital presence.
 
-See the [LICENSE](./LICENSE) file for usage restrictions.
+See the [LICENSE](LICENSE) file for usage restrictions.
