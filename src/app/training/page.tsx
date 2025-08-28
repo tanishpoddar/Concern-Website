@@ -90,7 +90,7 @@ export default function TrainingPage() {
 
         <div className="text-center">
             <p className="text-xl font-bold text-primary">
-                Visit our <Link href="/gallery/training-programmes" className="underline text-accent-foreground hover:text-accent transition-colors">Gallery</Link> to view all training activities conducted.
+                Kindly Visit <Link href="/gallery/training-programmes" className="underline text-accent-foreground hover:text-accent transition-colors">Gallery</Link> for all activities of training.
             </p>
         </div>
 
