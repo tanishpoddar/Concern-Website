@@ -88,6 +88,12 @@ export default function TrainingPage() {
           ))}
         </motion.div>
 
+        <div className="text-center">
+            <p className="text-xl font-bold text-primary">
+                Kindly visit <Link href="/gallery/training-programmes" className="underline text-accent-foreground hover:text-accent transition-colors">Gallery</Link> for all activities of training.
+            </p>
+        </div>
+
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
