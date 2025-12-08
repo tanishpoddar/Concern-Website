@@ -19,9 +19,9 @@ const drive = google.drive({ version: 'v3', auth });
 interface DriveFile {
   id: string;
   name: string;
-  thumbnailLink?: string | null;
-  webViewLink: string | null;
-  webContentLink: string | null;
+  thumbnailLink?: string | null | undefined;
+  webViewLink: string | null | undefined;
+  webContentLink: string | null | undefined;
 }
 
 // Helper to get the ID of a subfolder (album) by its name

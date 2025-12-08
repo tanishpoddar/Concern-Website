@@ -67,9 +67,9 @@ function slugToTitle(slug: string): string {
 
 export async function GET(
   request: Request,
-  { params }: { params: { album: string } }
+  { params }: { params: Promise<{ album: string }> }
 ) {
-  const albumSlug = params.album;
+  const { album: albumSlug } = await params;
   
   if (!albumSlug) {
       return NextResponse.json({ error: 'Album slug is required' }, { status: 400 });
