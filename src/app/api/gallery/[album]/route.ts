@@ -93,7 +93,7 @@ export async function GET(
     do {
       const imageRes: any = await drive.files.list({
         q: `'${albumFolderId}' in parents and mimeType contains 'image/' and trashed=false`,
-        fields: 'nextPageToken, files(id, name, webContentLink)',
+        fields: 'nextPageToken, files(id, name)',
         pageSize: 1000, // Max page size
         pageToken: pageToken,
       });
@@ -103,8 +103,8 @@ export async function GET(
         const mappedImages = files.map((file: any) => ({
           id: file.id!,
           name: file.name!,
-          // The webContentLink is better for direct embedding in `<img>` tags.
-          url: file.webContentLink!.replace('&export=download', ''),
+          // Use our proxy API endpoint to serve images
+          url: `/api/image/${file.id}`,
         }));
         images = images.concat(mappedImages);
       }

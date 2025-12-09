@@ -51,7 +51,7 @@ export const getImagesFromDrive = cache(async (folderName: string): Promise<Driv
   try {
     const res = await drive.files.list({
       q: `'${albumFolderId}' in parents and mimeType contains 'image/' and trashed=false`,
-      fields: 'files(id, name, thumbnailLink, webViewLink, webContentLink)',
+      fields: 'files(id, name)',
       pageSize: 50, // Adjust as needed
     });
 
@@ -59,9 +59,9 @@ export const getImagesFromDrive = cache(async (folderName: string): Promise<Driv
     return res.data.files ? res.data.files.map(file => ({
         id: file.id!,
         name: file.name!,
-        thumbnailLink: file.thumbnailLink,
-        webViewLink: file.webViewLink,
-        webContentLink: file.webContentLink,
+        thumbnailLink: `https://drive.google.com/thumbnail?id=${file.id}&sz=w400`,
+        webViewLink: `https://drive.google.com/file/d/${file.id}/view`,
+        webContentLink: `https://drive.google.com/thumbnail?id=${file.id}&sz=w2000`,
     })) : [];
   } catch (error) {
     console.error(`Error fetching images from folder "${folderName}":`, error);
