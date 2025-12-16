@@ -80,7 +80,7 @@ const staticProgrammeAlbums: Album[] = [
     { slug: 'training-programmes', title: 'Training Programmes' },
     { slug: 'concern-premises', title: 'Concern Premises' },
     { slug: 'awareness-programmes', title: 'Awareness Programmes' },
-    { slug: 'award-recognitions', title: 'Award Recognitions' },
+    { slug: 'award-recognitions', title: 'Awards & Recognitions' },
 ];
 
 const staticYearAlbums: Album[] = [

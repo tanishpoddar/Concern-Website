@@ -32,7 +32,7 @@ const albums: { [key: string]: { title: string; hint: string } } = {
   'training-programmes': { title: 'Training Programmes', hint: 'training session' },
   'concern-premises': { title: 'Concern Premises', hint: 'office building' },
   'awareness-programmes': { title: 'Awareness Programmes', hint: 'community event' },
-  'award-recognitions': { title: 'Award Recognitions', hint: 'award ceremony' },
+  'award-recognitions': { title: 'Awards & Recognitions', hint: 'award ceremony' },
   '2025': { title: '2025', hint: 'future event' },
   '2024': { title: '2024', hint: 'event' },
   '2023': { title: '2023', hint: 'celebration' },

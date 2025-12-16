@@ -44,7 +44,6 @@ export const getImagesFromDrive = cache(async (folderName: string): Promise<Driv
   const albumFolderId = await getFolderId(folderName, MAIN_FOLDER_ID);
   
   if (!albumFolderId) {
-    console.log(`Album folder "${folderName}" not found.`);
     return [];
   }
 
@@ -73,7 +72,6 @@ export const getImagesFromDrive = cache(async (folderName: string): Promise<Driv
 export const getAlbumsFromDrive = cache(async (parentFolderName: string) => {
     const parentFolderId = await getFolderId(parentFolderName, MAIN_FOLDER_ID);
     if (!parentFolderId) {
-        console.log(`Parent folder "${parentFolderName}" not found.`);
         return [];
     }
 
@@ -92,7 +90,7 @@ export const getAlbumsFromDrive = cache(async (parentFolderName: string) => {
                 'Training Programmes',
                 'Concern Premises',
                 'Awareness Programmes',
-                'Award Recognitions',
+                'Awards & Recognitions',
             ];
             return albums.sort((a, b) => {
                 const indexA = desiredOrder.indexOf(a.title);

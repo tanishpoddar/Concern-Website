@@ -59,6 +59,23 @@ async function findAlbumFolderId(albumName: string, parentFolderNames: string[])
 
 // Helper to convert a slug back to a title case name.
 function slugToTitle(slug: string): string {
+  // Handle specific mappings first
+  const specificMappings: { [key: string]: string } = {
+    'ministry-of-social-justice-and-empowerment': 'Ministry of Social Justice and Empowerment',
+    'synopsis': 'Synopsis',
+    'training-programmes': 'Training Programmes',
+    'concern-premises': 'Concern Premises',
+    'awareness-programmes': 'Awareness Programmes',
+    'award-recognitions': 'Awards & Recognitions', // Updated to match new folder name
+    'awards-recognitions': 'Awards & Recognitions', // Alternative slug mapping
+  };
+
+  // Check if we have a specific mapping
+  if (specificMappings[slug]) {
+    return specificMappings[slug];
+  }
+
+  // Default conversion for years and other albums
   return slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -77,6 +94,7 @@ export async function GET(
 
   // Convert slug to a potential folder name.
   const albumName = slugToTitle(albumSlug);
+  
   
   try {
     // Search for the album folder in both possible parent directories.

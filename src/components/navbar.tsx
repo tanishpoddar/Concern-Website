@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Menu, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -68,6 +68,9 @@ export default function Navbar() {
                   <SheetTitle>
                     Menu
                   </SheetTitle>
+                  <SheetDescription>
+                    Navigate through the website sections
+                  </SheetDescription>
                 </SheetHeader>
                 <ScrollArea className="flex-grow">
                   <div className="flex flex-col gap-2 pr-4">
