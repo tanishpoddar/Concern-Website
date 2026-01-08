@@ -80,11 +80,12 @@ const staticProgrammeAlbums: Album[] = [
     { slug: 'ministry-of-social-justice-and-empowerment', title: 'Ministry of Social Justice and Empowerment' },
     { slug: 'synopsis', title: 'Synopsis' },
     { slug: 'training-programmes', title: 'Training Programmes' },
-    { slug: 'video-clips', title: 'Video Clips' },
     { slug: 'concern-premises', title: 'Concern Premises' },
     { slug: 'awareness-programmes', title: 'Awareness Programmes' },
     { slug: 'award-recognitions', title: 'Awards & Recognitions' },
 ];
+
+const videoClipsAlbum: Album = { slug: 'video-clips', title: 'Video Clips' };
 
 const staticYearAlbums: Album[] = [
     { "slug": "2025", "title": "2025" },
@@ -153,6 +154,27 @@ export default function GalleryPage() {
                 </motion.div>
             );
           })}
+        </motion.div>
+
+        {/* Video Clips - Centered in its own row */}
+        <motion.div 
+            className="mt-6 flex justify-center"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+        >
+            <motion.div variants={itemVariants} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
+                <Link href={`/gallery/${videoClipsAlbum.slug}`} className="group">
+                    <Card className="flex h-full transform flex-col items-center justify-center text-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
+                        <CardHeader>
+                            <Video className="mx-auto h-10 w-10 text-primary transition-colors duration-300 group-hover:text-accent md:h-12 md:w-12" />
+                        </CardHeader>
+                        <CardContent>
+                            <p className="font-semibold text-sm md:text-base">{videoClipsAlbum.title}</p>
+                        </CardContent>
+                    </Card>
+                </Link>
+            </motion.div>
         </motion.div>
       </section>
 

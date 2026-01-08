@@ -96,7 +96,6 @@ export async function GET(
   // Convert slug to a potential folder name.
   const albumName = slugToTitle(albumSlug);
   
-  
   try {
     // Search for the album folder in both possible parent directories.
     const albumFolderId = await findAlbumFolderId(albumName, ['Programmes and Events', 'By Year']);
@@ -136,7 +135,6 @@ export async function GET(
       pageToken = mediaRes.data.nextPageToken;
 
     } while (pageToken);
-
 
     return NextResponse.json(media);
 
