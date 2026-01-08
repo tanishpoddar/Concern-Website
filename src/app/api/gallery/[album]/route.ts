@@ -64,6 +64,7 @@ function slugToTitle(slug: string): string {
     'ministry-of-social-justice-and-empowerment': 'Ministry of Social Justice and Empowerment',
     'synopsis': 'Synopsis',
     'training-programmes': 'Training Programmes',
+    'video-clips': 'Video Clips',
     'concern-premises': 'Concern Premises',
     'awareness-programmes': 'Awareness Programmes',
     'award-recognitions': 'Awards & Recognitions', // Updated to match new folder name
@@ -104,35 +105,40 @@ export async function GET(
         return NextResponse.json({ error: `Album folder '${albumName}' not found` }, { status: 404 });
     }
     
-    // List all images in the album folder with pagination.
-    let images: { id: string; name: string; url: string; }[] = [];
+    // List all images and videos in the album folder with pagination.
+    let media: { id: string; name: string; url: string; isVideo: boolean; mimeType: string; }[] = [];
     let pageToken: string | undefined = undefined;
 
     do {
-      const imageRes: any = await drive.files.list({
-        q: `'${albumFolderId}' in parents and mimeType contains 'image/' and trashed=false`,
-        fields: 'nextPageToken, files(id, name)',
+      const mediaRes: any = await drive.files.list({
+        q: `'${albumFolderId}' in parents and (mimeType contains 'image/' or mimeType contains 'video/') and trashed=false`,
+        fields: 'nextPageToken, files(id, name, mimeType)',
         pageSize: 1000, // Max page size
         pageToken: pageToken,
       });
 
-      const files = imageRes.data.files;
+      const files = mediaRes.data.files;
       if (files && files.length > 0) {
-        const mappedImages = files.map((file: any) => ({
-          id: file.id!,
-          name: file.name!,
-          // Use our proxy API endpoint to serve images
-          url: `/api/image/${file.id}`,
-        }));
-        images = images.concat(mappedImages);
+        const mappedMedia = files.map((file: any) => {
+          const isVideo = file.mimeType?.startsWith('video/') || false;
+          return {
+            id: file.id!,
+            name: file.name!,
+            mimeType: file.mimeType!,
+            isVideo,
+            // Use our proxy API endpoint to serve media
+            url: isVideo ? `/api/video/${file.id}` : `/api/image/${file.id}`,
+          };
+        });
+        media = media.concat(mappedMedia);
       }
       
-      pageToken = imageRes.data.nextPageToken;
+      pageToken = mediaRes.data.nextPageToken;
 
     } while (pageToken);
 
 
-    return NextResponse.json(images);
+    return NextResponse.json(media);
 
   } catch (error) {
     console.error('Google Drive API Error:', error);

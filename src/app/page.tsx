@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const managementCommittee = [
-  { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'President, CONCERN Trust', imgSrc: '/images/committee/1.jpg' },
+  { name: 'Mrs. Bhanu Suresh Babu, M.A., (M.Phil.) (Psy)', role: 'Founder & President, CONCERN Trust', imgSrc: '/images/committee/1.jpg' },
   { name: 'Mr. P. Suresh Babu, M.B.A., C.A.I.I.B., D.C.A.', role: 'Secretary, CONCERN Trust', imgSrc: '/images/committee/2.jpg' },
   { name: 'Mrs. Pavithra Chamraj, M.Sc., PhD.* (Stem Cells)', role: 'Treasurer, CONCERN Trust', imgSrc: '/images/committee/3.jpg' },
   { name: 'Mrs. Asha Vinay, M.S.W., (Med Psy), MPhil., B.Ed.', role: 'Trust Board Advisory member', imgSrc: '/images/committee/4.jpg' },
@@ -17,10 +17,12 @@ const facilities = [
   'Community Awareness Programmes',
   'Transit Home And Peer Support',
   'In-Patient / Out-Patient Services',
+  'In-House Kitchen',
   'De-Toxification, Psychotherapy, Group Therapy',
   'Individual, Family, Child, And Marital Counselling',
   'Guide To Alcoholics Anonymous (AA), Narcotics Anonymous And Al-Anon',
   'Free Drop-In Counselling Centre For Children & Women Of Chemical Dependants',
+  'Large Open Land For Outdoor Activities & Games.',
 ];
 
 const containerVariants = {
@@ -48,7 +50,7 @@ const itemVariants = {
 export default function Home() {
   const row1Facilities = facilities.slice(0, 3);
   const row2Facilities = facilities.slice(3, 6);
-  const row3Facility = facilities[6];
+  const row3Facilities = facilities.slice(6, 9);
 
   return (
     <div className="flex flex-col">
@@ -80,14 +82,14 @@ export default function Home() {
             >
               <motion.div variants={itemVariants} className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold text-primary">VISION</h3>
-                <p className="text-muted-foreground italic text-justify">
+                <p className="text-muted-foreground text-justify">
                   <span className="font-semibold text-primary">CONCERN'S</span> concern is to Identify, Explore and Guide to Change.
                 </p>
               </motion.div>
               <motion.div variants={itemVariants} className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
                 <h3 className="mb-2 text-2xl font-bold text-primary">MISSION</h3>
                 <p className="text-muted-foreground text-justify">
-                  To address the perils of alcoholism as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of <span className="font-semibold text-primary">CONCERN'S</span> concern in terms of Quality and Quantity.
+                  To address the perils of addiction as a disease and not condemn. Suggest studied CHANGE Plan for sustained recovery. Growing and expanding for wider reach of <span className="font-semibold text-primary">CONCERN'S</span> concern in terms of Quality and Quantity.
                 </p>
               </motion.div>
               <motion.div variants={itemVariants} className="rounded-xl border bg-card p-6 shadow-md transition-shadow hover:shadow-lg">
@@ -215,18 +217,22 @@ export default function Home() {
             ))}
           </motion.div>
            <motion.div 
-            className="grid grid-cols-1 gap-6 mt-6"
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
            >
-              <Card key={row3Facility} className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full lg:col-span-3">
-                <div className="flex items-start">
-                    <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
-                    <p className="text-base text-card-foreground">{row3Facility}</p>
-                </div>
-              </Card>
+              {row3Facilities.map((facility, index) => (
+                <motion.div key={index} variants={itemVariants}>
+                  <Card className="flex flex-col p-6 shadow-md transition-shadow hover:shadow-lg h-full">
+                    <div className="flex items-start">
+                        <CheckCircle className="mr-4 mt-1 h-6 w-6 flex-shrink-0 text-primary" />
+                        <p className="text-base text-card-foreground">{facility}</p>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
           </motion.div>
         </div>
       </section>

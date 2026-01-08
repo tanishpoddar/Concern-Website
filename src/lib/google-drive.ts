@@ -22,6 +22,8 @@ interface DriveFile {
   thumbnailLink?: string | null | undefined;
   webViewLink: string | null | undefined;
   webContentLink: string | null | undefined;
+  mimeType?: string;
+  isVideo?: boolean;
 }
 
 // Helper to get the ID of a subfolder (album) by its name
@@ -39,7 +41,45 @@ const getFolderId = cache(async (folderName: string, parentId: string): Promise<
   }
 });
 
-// Fetches a list of images from a specific folder ID
+// Fetches a list of images and videos from a specific folder ID
+export const getMediaFromDrive = cache(async (folderName: string): Promise<DriveFile[]> => {
+  const albumFolderId = await getFolderId(folderName, MAIN_FOLDER_ID);
+  
+  if (!albumFolderId) {
+    return [];
+  }
+
+  try {
+    const res = await drive.files.list({
+      q: `'${albumFolderId}' in parents and (mimeType contains 'image/' or mimeType contains 'video/') and trashed=false`,
+      fields: 'files(id, name, mimeType)',
+      pageSize: 100, // Increased to handle more files
+    });
+
+    // We must return plain objects, not complex class instances
+    return res.data.files ? res.data.files.map(file => {
+        const isVideo = file.mimeType?.startsWith('video/') || false;
+        return {
+            id: file.id!,
+            name: file.name!,
+            mimeType: file.mimeType!,
+            isVideo,
+            thumbnailLink: isVideo 
+                ? `https://drive.google.com/thumbnail?id=${file.id}&sz=w400` 
+                : `https://drive.google.com/thumbnail?id=${file.id}&sz=w400`,
+            webViewLink: `https://drive.google.com/file/d/${file.id}/view`,
+            webContentLink: isVideo 
+                ? `https://drive.google.com/file/d/${file.id}/preview`
+                : `https://drive.google.com/thumbnail?id=${file.id}&sz=w2000`,
+        };
+    }) : [];
+  } catch (error) {
+    console.error(`Error fetching media from folder "${folderName}":`, error);
+    return [];
+  }
+});
+
+// Keep the original function for backward compatibility
 export const getImagesFromDrive = cache(async (folderName: string): Promise<DriveFile[]> => {
   const albumFolderId = await getFolderId(folderName, MAIN_FOLDER_ID);
   
@@ -88,6 +128,7 @@ export const getAlbumsFromDrive = cache(async (parentFolderName: string) => {
                 'Ministry of Social Justice and Empowerment',
                 'Synopsis',
                 'Training Programmes',
+                'Video Clips',
                 'Concern Premises',
                 'Awareness Programmes',
                 'Awards & Recognitions',

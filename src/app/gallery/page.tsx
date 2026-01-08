@@ -11,7 +11,8 @@ import {
   Users, 
   Megaphone, 
   Award, 
-  CalendarDays 
+  CalendarDays,
+  Video
 } from 'lucide-react';
 import type { Metadata } from 'next';
 import { motion } from 'framer-motion';
@@ -34,6 +35,7 @@ const programmeIconMap: { [key: string]: React.ElementType } = {
   'ministry-of-social-justice-and-empowerment': EmblemOfIndia,
   'synopsis': FileText,
   'training-programmes': ClipboardCheck,
+  'video-clips': Video,
   'concern-premises': Building2,
   'awareness-programmes': Megaphone,
   'award-recognitions': Award,
@@ -78,6 +80,7 @@ const staticProgrammeAlbums: Album[] = [
     { slug: 'ministry-of-social-justice-and-empowerment', title: 'Ministry of Social Justice and Empowerment' },
     { slug: 'synopsis', title: 'Synopsis' },
     { slug: 'training-programmes', title: 'Training Programmes' },
+    { slug: 'video-clips', title: 'Video Clips' },
     { slug: 'concern-premises', title: 'Concern Premises' },
     { slug: 'awareness-programmes', title: 'Awareness Programmes' },
     { slug: 'award-recognitions', title: 'Awards & Recognitions' },
@@ -115,7 +118,7 @@ export default function GalleryPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Photo Gallery
+        Photo & Video Gallery
       </motion.h1>
       
       <section>

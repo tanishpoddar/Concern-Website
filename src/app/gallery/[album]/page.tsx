@@ -15,8 +15,8 @@ import type { CarouselApi } from "@/components/ui/carousel";
 import React, { useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 
-// This is a client-side action to fetch images for a specific album
-async function getImagesForAlbum(album: string): Promise<{ id: string; name: string; url: string }[]> {
+// This is a client-side action to fetch media (images and videos) for a specific album
+async function getMediaForAlbum(album: string): Promise<{ id: string; name: string; url: string; isVideo: boolean; mimeType: string }[]> {
   const res = await fetch(`/api/gallery/${album}`);
   if (!res.ok) {
     return [];
@@ -30,6 +30,7 @@ const albums: { [key: string]: { title: string; hint: string } } = {
   'ministry-of-social-justice-and-empowerment': { title: 'Ministry of Social Justice and Empowerment', hint: 'government building' },
   'synopsis': { title: 'Synopsis', hint: 'summary document' },
   'training-programmes': { title: 'Training Programmes', hint: 'training session' },
+  'video-clips': { title: 'Video Clips', hint: 'video content' },
   'concern-premises': { title: 'Concern Premises', hint: 'office building' },
   'awareness-programmes': { title: 'Awareness Programmes', hint: 'community event' },
   'award-recognitions': { title: 'Awards & Recognitions', hint: 'award ceremony' },
@@ -59,20 +60,20 @@ export default function AlbumPage() {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
-  const [images, setImages] = useState<{ id: string; name: string; url: string }[]>([]);
+  const [media, setMedia] = useState<{ id: string; name: string; url: string; isVideo: boolean; mimeType: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!albumSlug) return;
     
-    const fetchImages = async () => {
+    const fetchMedia = async () => {
       setIsLoading(true);
-      const fetchedImages = await getImagesForAlbum(albumSlug);
-      setImages(fetchedImages);
-      setCount(fetchedImages.length);
+      const fetchedMedia = await getMediaForAlbum(albumSlug);
+      setMedia(fetchedMedia);
+      setCount(fetchedMedia.length);
       setIsLoading(false);
     };
-    fetchImages();
+    fetchMedia();
   }, [albumSlug]);
 
   useEffect(() => {
@@ -113,30 +114,41 @@ export default function AlbumPage() {
       ));
     }
 
-    if (images.length > 0) {
-      return images.map((image) => (
-        <CarouselItem key={image.id}>
+    if (media.length > 0) {
+      return media.map((item) => (
+        <CarouselItem key={item.id}>
           <Card className="overflow-hidden rounded-xl shadow-lg">
             <CardContent className="relative flex aspect-video items-center justify-center p-0">
-              <Image
-                src={image.url}
-                alt={image.name}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+              {item.isVideo ? (
+                <video
+                  controls
+                  className="h-full w-full object-contain"
+                  preload="metadata"
+                >
+                  <source src={item.url} type={item.mimeType} />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <Image
+                  src={item.url}
+                  alt={item.name}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              )}
             </CardContent>
           </Card>
         </CarouselItem>
       ));
     }
 
-    // This case handles after loading is finished and no images were found.
+    // This case handles after loading is finished and no media was found.
     return (
       <CarouselItem>
          <Card>
              <CardContent className="flex aspect-video items-center justify-center p-6">
-                 <p>No images found in this album.</p>
+                 <p>No images or videos found in this album.</p>
              </CardContent>
          </Card>
       </CarouselItem>
@@ -152,14 +164,14 @@ export default function AlbumPage() {
           setApi={setApi}
           opts={{
             align: 'start',
-            loop: images.length > 1, // Only loop if there is more than one image
+            loop: media.length > 1, // Only loop if there is more than one item
           }}
           className="w-full max-w-sm md:max-w-4xl"
         >
           <CarouselContent>
             {renderCarouselItems()}
           </CarouselContent>
-          {images.length > 1 && (
+          {media.length > 1 && (
             <>
                 <CarouselPrevious className="hidden md:inline-flex" />
                 <CarouselNext className="hidden md:inline-flex" />

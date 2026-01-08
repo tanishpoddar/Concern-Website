@@ -59,7 +59,7 @@ export default function Footer() {
             <h3 className="mb-2 font-semibold text-foreground uppercase tracking-wider">Rehab Centre</h3>
             <address className="space-y-2 not-italic text-sm">
               <p className="flex items-start text-left">
-                <span>CONCERN, Zonta Resource Centre, No.5, Manikam Nagar, Noothancheri, Madambakam, Chennai - 600 126.</span>
+                <span>CONCERN, Zonta Resource Centre, No.5, 3rd Street, Manikam Nagar, Noothancheri, Madambakam, Chennai - 600 126.</span>
               </p>
               <a href="tel:04446865176" className="flex items-baseline hover:text-primary transition-colors">
                 <Phone className="mr-3 h-4 w-4 shrink-0 text-primary" />

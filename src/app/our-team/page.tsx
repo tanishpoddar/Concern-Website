@@ -6,7 +6,7 @@ import { Stethoscope, Briefcase, Wrench, Handshake, Shield } from 'lucide-react'
 import { motion } from 'framer-motion';
 
 const medicalTeam = [
-  { name: 'Dr. Mohamed Nidhal S, M.D., FNR., PGDHM.', role: 'Medical Officer' },
+  { name: 'Dr. Mohamed Nidhal S, M.D., FNR., PGDHM.', role: 'Medical Officer - Neurorehabilitation' },
   { name: 'Dr. Sathish Kumar, M.B.B.S., D.P.M., D.N.B.', role: 'Consultant Psychiatrist' },
   { name: 'Dr. Thiruvikraman, M.B.B.S., D.P.M.', role: 'Visiting Consultant Neuro Psychiatrist' },
   { name: 'Dr. G. Manjari, B.D.S., M.P.H.', role: 'Psychologist and Counsellor' },
@@ -16,7 +16,6 @@ const medicalTeam = [
 
 const managementStaff = [
   { name: 'Mr. T. Rajesh, M.S.W.', role: 'Manager cum In-charge' },
-  { name: 'Mr. V. Subramani', role: 'Manager' },
   { name: 'Mrs. P Lanthangi, B.A., M.Sc. (Yoga)', role: 'Project Coordinator' },
   { name: 'Mr. J. Ethuraj, D.P.T.', role: 'Project Coordinator' },
   { name: 'Honorary Volunteers', role: '' },
@@ -32,6 +31,7 @@ const technicalSupporters = [
 const committeeOfSupporters = [
     { name: 'Ar. Kalpana. S.', role: 'Trustee, Zonta Resource Centre' },
     { name: 'Ms. Latha Suresh', role: 'Director SAN INDIA Social Auditor' },
+    { name: 'Mr. P. Bhojaraj, M.Com', role: 'BR Logistics' },
     { name: 'Ms. Marie Banu', role: 'Director CSIM' },
     { name: 'Mr. R. Vijayakrishnan, B.com., F.C.A.', role: 'Chartered Accountant' },
     { name: 'Mr. P.S. Kamalakara Rao, F.C.A.', role: 'Chartered Accountant' },
@@ -49,7 +49,6 @@ const pillarsOfStrength = [
     { name: 'Link Up Garments for CSR Activities', role: 'Erungattukottai, Chennai' },
     { name: 'Milestone Specialty Equipment P Ltd', role: '' },
     { name: 'Vastarakala Export P Ltd', role: 'Thirumuluzhi, Chennai' },
-    { name: 'CGS Fashion P Ltd', role: 'Thiruvallur, Chennai' },
 ];
 
 const containerVariants = {

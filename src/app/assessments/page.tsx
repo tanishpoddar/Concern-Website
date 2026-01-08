@@ -81,7 +81,7 @@ export default function AssessmentsPage() {
     } else if (yesCount === 2) {
       setSelfDiagnosisResult("The chances are that you are an alcoholic.");
     } else if (yesCount === 1) {
-      setSelfDiagnosisResult("There is a definite warning that you may be an alcoholic.");
+      setSelfDiagnosisResult("There is a definite warning that you may have an addiction.");
     } else {
       setSelfDiagnosisResult("Your answers do not indicate signs of alcoholism. However, if you have any concerns, please consult a professional.");
     }
@@ -122,7 +122,7 @@ export default function AssessmentsPage() {
           <TabsContent value="self-diagnosis" className="mt-8">
             <Card className="shadow-md">
               <CardHeader>
-                <CardTitle className="text-xl text-primary md:text-2xl">Do You Border on Alcoholism?</CardTitle>
+                <CardTitle className="text-xl text-primary md:text-2xl">Do You Border on Addiction?</CardTitle>
                 <CardDescription className="text-justify">
                   Answer the following questions as honestly as you can. Your responses are confidential and will help you assess your relationship with alcohol.
                 </CardDescription>

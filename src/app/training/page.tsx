@@ -65,7 +65,7 @@ export default function TrainingPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
         >
-          CONCERN in association with CSIM (Centre for Social Initiative and Management) conduct twice in a year "Certificate Programme in Social Entrepreneurship with De-Addiction treatment techniques".
+          CONCERN in association with CSIM (Centre for Social Initiative and Management) conduct twice in a year "RehabVenture and Social entrepreneurship".
         </motion.p>
 
         <motion.div 
@@ -106,7 +106,7 @@ export default function TrainingPage() {
             <CardContent className="space-y-2 text-muted-foreground">
                 <div className="flex flex-wrap gap-2">
                 <Badge variant="default">Registered Trust No. 628 / 08</Badge>
-                <Badge variant="default">IMH License No. RII-1645 Dt. 08/09/2023</Badge>
+                <Badge variant="default">IMH License No. RIV 135 dated 09.10.2025</Badge>
                 <Badge variant="default">ISO 9001 : 2008 Certified</Badge>
                 <Badge variant="default">Social Audit Network - United Kingdom</Badge>
                 </div>
